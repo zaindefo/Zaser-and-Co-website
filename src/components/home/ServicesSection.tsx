@@ -254,7 +254,6 @@ export function ServicesSection() {
                 position: 'absolute', inset: 0,
                 display: 'flex', alignItems: 'center',
                 padding: '0 8vw',
-                opacity: isFirst ? 1 : 0,
                 pointerEvents: 'none',
               }}
             >
