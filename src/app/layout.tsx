@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { GlobalEffects } from '@/components/layout/GlobalEffects'
 import { TransitionWrapper } from '@/components/layout/TransitionWrapper'
+import { ClientLoader } from '@/components/ClientLoader'
 
 export const metadata: Metadata = {
   title: {
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" dir="ltr">
       <body className="bg-linen text-obsidian-ink font-twk-lausanne antialiased relative">
+        <ClientLoader />
         <GlobalEffects />
         <Navbar />
         <div className="relative z-10">

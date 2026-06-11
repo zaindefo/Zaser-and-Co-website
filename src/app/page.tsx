@@ -1,6 +1,6 @@
 import { Hero } from '@/components/home/Hero'
 import { BlindGrowth } from '@/components/home/BlindGrowth'
-import { Services } from '@/components/home/Services'
+import { ServicesSection } from '@/components/home/ServicesSection'
 import { HowWeWork } from '@/components/home/HowWeWork'
 import { PainStories } from '@/components/home/PainStories'
 import { ClarityScore } from '@/components/home/ClarityScore'
@@ -17,7 +17,7 @@ export default function Home() {
       <Hero />
       <SectionDivider type="line" />
       <BlindGrowth />
-      <Services />
+      <ServicesSection />
       <SectionDivider type="line" />
       <HowWeWork />
       <SectionDivider type="grid" />
