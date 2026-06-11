@@ -146,12 +146,13 @@ export function BlindGrowth() {
       >
         <div className="relative z-10 max-w-4xl mx-auto px-6 w-full">
           <div className="text-center mb-12">
-            <p className="text-z-chrome font-mono text-xs uppercase tracking-widest mb-3">
+            <p className="text-sage font-mono text-xs uppercase tracking-widest mb-3">
               Monthly Revenue
             </p>
             <span
               ref={numberRef}
-              className="font-mono text-5xl md:text-7xl font-medium text-z-profit"
+              className="font-mono text-5xl md:text-7xl font-medium"
+              style={{ color: 'var(--z-profit)' }}
             >
               ৳8,00,000
             </span>
