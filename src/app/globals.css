@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* NewForm Editorial Palette */
+  --color-linen: #fafffa;
+  --color-obsidian-ink: #121613;
+  --color-pure-black: #000000;
+  --color-bark: #232924;
+  --color-sage: #516254;
+  --color-mist: #c8d2c8;
+  --color-voltage: #2bee4b;
+  --color-moss-glow: #93b799;
+  --color-pollen: #c4e4c9;
+
+  /* Typography — Font Families */
+  --font-twk-lausanne: 'TWK Lausanne', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-editorial-new: 'Editorial New', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-pp-mondwest: 'PP Mondwest', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-times: 'Times', ui-serif, Georgia, serif;
+  --font-bengali: 'Noto Serif Bengali', serif;
+
+  /* Spacing */
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-10: 10px;
+  --spacing-15: 15px;
+  --spacing-20: 20px;
+  --spacing-25: 25px;
+  --spacing-30: 30px;
+  --spacing-32: 32px;
+  --spacing-35: 35px;
+  --spacing-40: 40px;
+  --spacing-45: 45px;
+  --spacing-50: 50px;
+  --spacing-55: 55px;
+  --spacing-60: 60px;
+  --spacing-120: 120px;
+  --spacing-190: 190px;
+
+  /* Border Radius */
+  --radius-sm: 5px;
+  --radius-btn: 10px;
+  --radius-card: 14px;
+
+  /* Shadows */
+  --shadow-voltage-lg: rgba(16, 94, 29, 0.45) 1px 8px 20px 0px;
+  --shadow-voltage-lg-2: rgba(18, 146, 39, 0.25) 1px 8px 20px 0px;
+
+  /* Functional Colors (for data visualization) */
+  --z-profit: #1a8a3e;
+  --z-loss: #c53030;
+  --z-caution: #b7791f;
+  --z-accent: #2bee4b;
+  --z-chrome: #516254;
+
+  /* Layout */
+  --max-width-page: 1440px;
+  --section-gap: 80px;
+}
+
+@layer base {
+  body {
+    @apply bg-linen text-obsidian-ink font-twk-lausanne;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-twk-lausanne);
+  }
+
+  /* Caption: 11px TWK Lausanne 550 */
+  .text-caption {
+    font-family: var(--font-twk-lausanne);
+    font-size: 11px;
+    font-weight: 550;
+    line-height: 1.4;
+    letter-spacing: 0.11px;
+  }
+
+  /* Body Small: 14px TWK Lausanne 200 */
+  .text-body-sm {
+    font-family: var(--font-twk-lausanne);
+    font-size: 14px;
+    font-weight: 200;
+    line-height: 1.4;
+    letter-spacing: -0.28px;
+  }
+
+  /* Body Small 2: 14px TWK Lausanne 350 */
+  .text-body-sm-2 {
+    font-family: var(--font-twk-lausanne);
+    font-size: 14px;
+    font-weight: 350 !important;
+    line-height: 1.1;
+  }
+
+  /* Body: 16px Times 400 (or TWK Lausanne 400) */
+  .text-body {
+    font-family: var(--font-times);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: -0.32px;
+  }
+
+  /* Body 2: 16px TWK Lausanne 550 */
+  .text-body-2 {
+    font-family: var(--font-twk-lausanne);
+    font-size: 16px;
+    font-weight: 550;
+    line-height: 1.4;
+  }
+
+  /* Body 3: 16px TWK Lausanne 200 */
+  .text-body-3 {
+    font-family: var(--font-twk-lausanne);
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 1.4;
+  }
+
+  /* Subheading: 18px TWK Lausanne 200 */
+  .text-subheading {
+    font-family: var(--font-twk-lausanne);
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 1.0;
+    letter-spacing: -0.36px;
+  }
+
+  /* Subheading 2: 18px TWK Lausanne 550 */
+  .text-subheading-2 {
+    font-family: var(--font-twk-lausanne);
+    font-size: 18px;
+    font-weight: 550 !important;
+    line-height: 1.0;
+  }
+
+  /* Heading Small: 60px PP Mondwest 400 */
+  .text-heading-sm {
+    font-family: var(--font-pp-mondwest);
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -1.2px;
+  }
+
+  /* Heading Small 2: 60px Editorial New 300 */
+  .text-heading-sm-2 {
+    font-family: var(--font-editorial-new);
+    font-size: 60px;
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -1.2px;
+  }
+
+  /* Heading: 72px TWK Lausanne 550 */
+  .text-heading {
+    font-family: var(--font-twk-lausanne);
+    font-size: 72px;
+    font-weight: 550;
+    line-height: 1.1;
+  }
+
+  /* Heading Large: 96px TWK Lausanne 550 */
+  .text-heading-lg {
+    font-family: var(--font-twk-lausanne);
+    font-size: 96px;
+    font-weight: 550;
+    line-height: 1.0;
+    letter-spacing: -1.92px;
+  }
+
+  /* Display: 140px Editorial New 300 */
+  .text-display {
+    font-family: var(--font-editorial-new);
+    font-size: 140px;
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -1.4px;
+  }
+
+  /* Display Medium: 155px TWK Lausanne 550 */
+  .text-display-md {
+    font-family: var(--font-twk-lausanne);
+    font-size: 155px;
+    font-weight: 550;
+    line-height: 1.0;
+  }
+
+  /* Display Large: 165px PP Mondwest 400 */
+  .text-display-lg {
+    font-family: var(--font-pp-mondwest);
+    font-size: 165px;
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -1.32px;
+  }
+
+  /* Display XL: 240px Editorial New 300 */
+  .text-display-xl {
+    font-family: var(--font-editorial-new);
+    font-size: 240px;
+    font-weight: 300;
+    line-height: 0.9;
+    letter-spacing: -4.8px;
+  }
+
+  /* Display XXL: 295px PP Mondwest 400 */
+  .text-display-xxl {
+    font-family: var(--font-pp-mondwest);
+    font-size: 295px;
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -4.7px;
+  }
+}
+
+@layer components {
+  /* Section Padding — Editorial spacing */
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-20 py-20 md:py-32 lg:py-40;
+  }
+
+  /* Page Container */
+  .page-container {
+    @apply max-w-page mx-auto;
+  }
+
+  /* Card — Light surface with border radius, no shadow */
+  .card {
+    @apply bg-linen border border-mist rounded-card p-20;
+    transition: border-color 0.3s;
+  }
+
+  .card:hover {
+    @apply border-obsidian-ink;
+  }
+
+  /* Image Tile — B&W editorial photograph */
+  .image-tile {
+    @apply rounded-card overflow-hidden;
+    aspect-ratio: auto;
+  }
+
+  /* Voltage CTA Button — Primary action */
+  .btn-voltage {
+    @apply bg-voltage text-pure-black px-50 py-20 rounded-btn font-twk-lausanne text-body-sm uppercase tracking-widest;
+    font-weight: 550;
+    box-shadow: var(--shadow-voltage-lg), var(--shadow-voltage-lg-2);
+    transition: opacity 0.2s;
+  }
+
+  .btn-voltage:hover {
+    @apply opacity-90;
+  }
+
+  .btn-voltage:focus {
+    @apply outline-none ring-2 ring-voltage ring-offset-4 ring-offset-linen;
+  }
+
+  /* Ghost Link Button — Secondary navigation */
+  .btn-ghost {
+    @apply text-obsidian-ink px-0 py-0 font-twk-lausanne text-body-sm underline-offset-2;
+    font-weight: 350;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    @apply underline text-voltage;
+  }
+
+  /* Display Headline — Editorial impact */
+  .headline {
+    @apply text-obsidian-ink leading-none;
+  }
+
+  .headline-display {
+    @apply text-display text-obsidian-ink;
+  }
+
+  .headline-display-lg {
+    @apply text-display-xl text-obsidian-ink;
+  }
+
+  /* Accent Tick Mark — Decorative punctuation */
+  .accent-tick {
+    @apply bg-voltage h-1 w-12;
+  }
+
+  /* Body Copy */
+  .copy {
+    @apply text-obsidian-ink font-twk-lausanne text-body leading-relaxed;
+    font-weight: 350;
+  }
+
+  /* Muted Text */
+  .text-muted {
+    @apply text-sage;
+  }
+
+  /* Section Divider — Via whitespace only */
+  .section-divider {
+    /* No visible line — spacing handles division */
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
