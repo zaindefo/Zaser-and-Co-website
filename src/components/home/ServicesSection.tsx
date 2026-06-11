@@ -44,39 +44,37 @@ export function ServicesSection() {
       const inBullets = inEl.querySelectorAll<HTMLElement>('.svc-bullet')
       const inCnt     = inEl.querySelector<HTMLElement>('.svc-cnt')
 
-      // Exit: number + counter — explicit FROM prevents lazy-capture reading the wrong GSAP cache state
+      // EXIT — all elements use opacity so there is no yPercent cache conflict
       const exitTargets = [outNum, outCnt].filter(Boolean) as HTMLElement[]
       if (exitTargets.length) {
         masterTl.fromTo(exitTargets,
-          { opacity: 1, yPercent: 0, immediateRender: false },
-          { opacity: 0, yPercent: -50, duration: dur * 0.18 },
+          { opacity: 1, y: 0, immediateRender: false },
+          { opacity: 0, y: -20, duration: dur * 0.18 },
           ts
         )
       }
-      // Exit: heading lines — immediateRender:false so we don't override the enter fromTo's initial yPercent:110
       masterTl.fromTo(outHeads,
-        { yPercent: 0, immediateRender: false },
-        { yPercent: -110, stagger: 0.04, duration: dur * 0.28 },
+        { opacity: 1, y: 0, immediateRender: false },
+        { opacity: 0, y: -30, stagger: 0.03, duration: dur * 0.22 },
         ts + 0.04
       )
-      // Exit: body text — explicit FROM:1, no immediate render
       masterTl.fromTo(outBody,
         { opacity: 1, y: 0, immediateRender: false },
-        { opacity: 0, y: -18, duration: dur * 0.2 },
-        ts + 0.08
+        { opacity: 0, y: -16, duration: dur * 0.18 },
+        ts + 0.06
       )
 
       // Chrome flash at midpoint
       if (flash) {
-        masterTl.to(flash, { opacity: 1, duration: 0.001 }, ts + dur * 0.44)
-        masterTl.to(flash, { opacity: 0, duration: 0.001 }, ts + dur * 0.56)
+        masterTl.to(flash, { opacity: 1, duration: 0.001 }, ts + dur * 0.42)
+        masterTl.to(flash, { opacity: 0, duration: 0.001 }, ts + dur * 0.52)
       }
 
-      // Enter: number + counter
+      // ENTER
       if (inNum) {
         masterTl.fromTo(inNum,
-          { opacity: 0, yPercent: 50 },
-          { opacity: 1, yPercent: 0, duration: dur * 0.22 },
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: dur * 0.22 },
           ts + dur * 0.34
         )
       }
@@ -84,34 +82,32 @@ export function ServicesSection() {
         masterTl.fromTo(inCnt,
           { opacity: 0 },
           { opacity: 1, duration: dur * 0.18 },
-          ts + dur * 0.40
+          ts + dur * 0.38
         )
       }
-      // Enter: heading lines slide up from below clip
       masterTl.fromTo(inHeads,
-        { yPercent: 110 },
-        { yPercent: 0, stagger: 0.045, duration: dur * 0.38, ease: 'power3.out' },
-        ts + dur * 0.38
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, stagger: 0.05, duration: dur * 0.38, ease: 'power3.out' },
+        ts + dur * 0.36
       )
-      // Enter: tagline, desc, bullets
       if (inTagline) {
         masterTl.fromTo(inTagline,
           { opacity: 0, y: 22 },
           { opacity: 1, y: 0, duration: dur * 0.28 },
-          ts + dur * 0.60
+          ts + dur * 0.58
         )
       }
       if (inDesc) {
         masterTl.fromTo(inDesc,
           { opacity: 0, y: 22 },
           { opacity: 1, y: 0, duration: dur * 0.28 },
-          ts + dur * 0.68
+          ts + dur * 0.66
         )
       }
       masterTl.fromTo(inBullets,
         { opacity: 0, x: -12 },
         { opacity: 1, x: 0, stagger: 0.06, duration: dur * 0.22 },
-        ts + dur * 0.75
+        ts + dur * 0.73
       )
     })
 
@@ -121,26 +117,20 @@ export function ServicesSection() {
       masterTl.fromTo(fill, { scaleY: 0 }, { scaleY: 1, duration: 4, ease: 'none' }, 0)
     }
 
-    const pin = ScrollTrigger.create({
+    // Single ScrollTrigger handles both pin and scrub — split triggers cause timing conflicts
+    const st = ScrollTrigger.create({
       trigger: section,
       start: 'top top',
       end: '+=500vh',
       pin: true,
       pinSpacing: true,
       anticipatePin: 1,
-    })
-
-    const scrub = ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: '+=500vh',
       scrub: 1.5,
       animation: masterTl,
     })
 
     return () => {
-      pin.kill()
-      scrub.kill()
+      st.kill()
       masterTl.kill()
     }
   }, [])
@@ -298,10 +288,10 @@ export function ServicesSection() {
                   </div>
                 </div>
 
-                {/* Heading — each line clipped for translateY reveal */}
+                {/* Heading lines */}
                 <div style={{ marginBottom: '28px' }}>
                   {lines.map((line, li) => (
-                    <div key={li} style={{ overflow: 'hidden', lineHeight: 1 }}>
+                    <div key={li}>
                       <div
                         className="svc-head"
                         style={{
@@ -309,8 +299,7 @@ export function ServicesSection() {
                           fontSize: 'clamp(44px, 5.2vw, 82px)',
                           color: '#fafffa', lineHeight: 1.0,
                           letterSpacing: '-0.03em',
-                          transform: isFirst ? 'translateY(0%)' : 'translateY(110%)',
-                          paddingBottom: '4px',
+                          opacity: isFirst ? 1 : 0,
                         }}
                       >
                         {line}
