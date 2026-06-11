@@ -29,7 +29,7 @@ export function ContactInline() {
     setSubmitting(true)
     setSubmitError(false)
     try {
-      const res = await fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
+      const res = await fetch('https://formspree.io/f/xojznlpv', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
