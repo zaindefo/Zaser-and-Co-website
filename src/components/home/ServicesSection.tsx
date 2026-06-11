@@ -44,15 +44,27 @@ export function ServicesSection() {
       const inBullets = inEl.querySelectorAll<HTMLElement>('.svc-bullet')
       const inCnt     = inEl.querySelector<HTMLElement>('.svc-cnt')
 
-      // Exit: number + counter fade up
+      // Exit: number + counter — explicit FROM prevents lazy-capture reading the wrong GSAP cache state
       const exitTargets = [outNum, outCnt].filter(Boolean) as HTMLElement[]
       if (exitTargets.length) {
-        masterTl.to(exitTargets, { opacity: 0, yPercent: -50, duration: dur * 0.18 }, ts)
+        masterTl.fromTo(exitTargets,
+          { opacity: 1, yPercent: 0, immediateRender: false },
+          { opacity: 0, yPercent: -50, duration: dur * 0.18 },
+          ts
+        )
       }
-      // Exit: heading lines slide up out of overflow clip
-      masterTl.to(outHeads, { yPercent: -110, stagger: 0.04, duration: dur * 0.28 }, ts + 0.04)
-      // Exit: body text fades
-      masterTl.to(outBody, { opacity: 0, y: -18, duration: dur * 0.2 }, ts + 0.08)
+      // Exit: heading lines — immediateRender:false so we don't override the enter fromTo's initial yPercent:110
+      masterTl.fromTo(outHeads,
+        { yPercent: 0, immediateRender: false },
+        { yPercent: -110, stagger: 0.04, duration: dur * 0.28 },
+        ts + 0.04
+      )
+      // Exit: body text — explicit FROM:1, no immediate render
+      masterTl.fromTo(outBody,
+        { opacity: 1, y: 0, immediateRender: false },
+        { opacity: 0, y: -18, duration: dur * 0.2 },
+        ts + 0.08
+      )
 
       // Chrome flash at midpoint
       if (flash) {
