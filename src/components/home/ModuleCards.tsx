@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { MagneticButton } from '@/components/shared/MagneticButton'
 import { BREAKPOINT_MODULE, STOCKPULSE_MODULE } from '@/lib/constants'
 
-function ModuleCard({ module, href, flip = false }: { module: any; href: string; flip?: boolean }) {
+function ModuleCard({ module, href, imageUrl, flip = false }: { module: any; href: string; imageUrl: string; flip?: boolean }) {
   return (
     <div className={`grid lg:grid-cols-2 gap-60 items-center py-60 ${flip ? 'lg:[direction:rtl]' : ''}`}>
       <motion.div
@@ -39,7 +39,10 @@ function ModuleCard({ module, href, flip = false }: { module: any; href: string;
         transition={{ duration: 0.6, delay: 0.1 }}
         className="hidden lg:flex items-center justify-center"
       >
-        <div className="w-full aspect-square bg-obsidian-ink rounded-card" />
+        <div className="w-full aspect-square rounded-card overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={imageUrl} alt="" className="w-full h-full object-cover" style={{ filter: 'grayscale(1)' }} />
+        </div>
       </motion.div>
     </div>
   )
@@ -49,9 +52,18 @@ export function ModuleCards() {
   return (
     <section className="section-padding bg-linen border-t border-mist">
       <div className="page-container">
-        <ModuleCard module={BREAKPOINT_MODULE} href="/breakpoint" />
+        <ModuleCard
+          module={BREAKPOINT_MODULE}
+          href="/breakpoint"
+          imageUrl="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=800&fit=crop&q=85"
+        />
         <div className="my-60 border-t border-mist" />
-        <ModuleCard module={STOCKPULSE_MODULE} href="/stockpulse" flip />
+        <ModuleCard
+          module={STOCKPULSE_MODULE}
+          href="/stockpulse"
+          flip
+          imageUrl="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=800&h=800&fit=crop&q=85"
+        />
       </div>
     </section>
   )

@@ -37,7 +37,7 @@ export function ClarityScore() {
         </div>
 
         <ScrollReveal>
-          <div className="card p-8 max-w-3xl mx-auto" style={{ borderColor: 'var(--z-chrome-dim)' }}>
+          <div className="card p-8 max-w-3xl mx-auto" style={{ borderColor: 'var(--z-border)' }}>
             <p className="text-sage text-[10px] font-mono tracking-widest uppercase mb-4 text-center">
               The five dimensions
             </p>

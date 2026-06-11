@@ -27,7 +27,7 @@ export function Founder() {
         </div>
 
         <ScrollReveal delay={0.3}>
-          <div className="mt-12 card p-8 text-center" style={{ borderColor: 'var(--z-chrome-dim)' }}>
+          <div className="mt-12 card p-8 text-center" style={{ borderColor: 'var(--z-border)' }}>
             <p className="text-voltage font-twk-lausanne text-lg italic leading-relaxed">
               &ldquo;Advisory that builds.&rdquo;
             </p>

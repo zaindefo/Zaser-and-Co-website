@@ -40,7 +40,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.2} className="mt-12">
-            <div className="card p-8" style={{ borderColor: 'var(--z-chrome-dim)' }}>
+            <div className="card p-8" style={{ borderColor: 'var(--z-border)' }}>
               <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">What makes us different</h2>
               <p className="text-obsidian-ink text-lg leading-relaxed font-twk-lausanne">
                 Most consultancies advise — they produce a report, present a deck, and leave.
@@ -96,7 +96,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.4} className="mt-12">
-            <div className="card p-8" style={{ borderColor: 'var(--z-chrome-dim)' }}>
+            <div className="card p-8" style={{ borderColor: 'var(--z-border)' }}>
               <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">The brand promise</h2>
               <p className="text-voltage text-xl leading-relaxed font-twk-lausanne italic text-center">
                 &ldquo;We don&apos;t just tell you what&apos;s wrong.<br />
