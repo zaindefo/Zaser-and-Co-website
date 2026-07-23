@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import { GlobalEffects } from '@/components/layout/GlobalEffects'
 import { TransitionWrapper } from '@/components/layout/TransitionWrapper'
 import { ClientLoader } from '@/components/ClientLoader'
+import { GoogleTagManager, GoogleTagManagerNoscript, GoogleAnalytics, RouteChangeTracker } from '@/components/GoogleTagManager'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://zaserandco.com'),
@@ -18,6 +19,8 @@ export const metadata: Metadata = {
     'strategic consultancy Bangladesh',
     'management consultancy Dhaka',
     'business consultancy SME',
+    'business consultant Bangladesh',
+    'business consultant Dhaka',
     'financial clarity',
     'AI implementation',
     'operational improvement',
@@ -25,6 +28,8 @@ export const metadata: Metadata = {
     'break-even analysis',
     'margin improvement',
     'business strategy Bangladesh',
+    'SME consulting Bangladesh',
+    'free business audit Bangladesh',
   ],
   authors: [{ name: 'Zaser & Co', url: 'https://zaserandco.com' }],
   creator: 'Zaser & Co',
@@ -43,6 +48,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://zaserandco.com',
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+  },
   openGraph: {
     title: 'Zaser & Co — Strategic & Management Consultancy',
     description:
@@ -51,12 +59,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://zaserandco.com',
     siteName: 'Zaser & Co',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: 'Zaser & Co — Strategic & Management Consultancy for Growing Businesses',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Zaser & Co — Strategic & Management Consultancy',
     description:
       'Strategic and management consultancy for growing businesses. Financial clarity, operational strategy, AI implementation, and management frameworks.',
+    images: ['/opengraph-image'],
   },
 }
 
@@ -86,6 +103,13 @@ const organizationJsonLd = {
     'Operational Improvement',
   ],
   priceRange: 'Free initial consultation',
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'hello@zaserandco.com',
+    contactType: 'customer service',
+    availableLanguage: ['English', 'Bengali'],
+    url: 'https://zaserandco.com/contact',
+  },
   sameAs: ['https://linkedin.com/company/zaserandco'],
 }
 
@@ -105,6 +129,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" dir="ltr">
       <head>
+        <GoogleTagManager />
+        <GoogleAnalytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
@@ -115,6 +141,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-linen text-obsidian-ink font-twk-lausanne antialiased relative">
+        <GoogleTagManagerNoscript />
+        <RouteChangeTracker />
         <ClientLoader />
         <GlobalEffects />
         <Navbar />

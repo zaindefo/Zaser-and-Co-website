@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
 import { MagneticButton } from '@/components/shared/MagneticButton'
 import { TopoWaveField } from '@/components/shared/TopoWaveField'
+import { trackEvent, SEO_EVENTS } from '@/lib/tracking'
 
 interface ContactForm {
   name: string
@@ -34,6 +35,8 @@ export default function ContactPage() {
       })
       if (res.ok) {
         setSubmitted(true)
+        trackEvent(SEO_EVENTS.CONTACT_FORM_SUBMIT, { form_location: 'contact_page' })
+        trackEvent(SEO_EVENTS.LEAD_FORM_SUBMIT, { form_location: 'contact_page' })
       } else {
         setSubmitError(true)
       }

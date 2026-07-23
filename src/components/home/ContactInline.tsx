@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react'
 import { gsap } from '@/lib/gsap'
 import { MagneticButton } from '@/components/shared/MagneticButton'
 import { ParticleField } from '@/components/shared/ParticleField'
+import { trackEvent, SEO_EVENTS } from '@/lib/tracking'
 
 interface ContactForm {
   name: string
@@ -48,8 +49,11 @@ export function ContactInline() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       })
-      if (res.ok) setSubmitted(true)
-      else setSubmitError(true)
+      if (res.ok) {
+        setSubmitted(true)
+        trackEvent(SEO_EVENTS.LEAD_FORM_SUBMIT, { form_location: 'homepage_inline' })
+        trackEvent(SEO_EVENTS.CONTACT_FORM_SUBMIT, { form_location: 'homepage_inline' })
+      } else setSubmitError(true)
     } catch {
       setSubmitError(true)
     } finally {
