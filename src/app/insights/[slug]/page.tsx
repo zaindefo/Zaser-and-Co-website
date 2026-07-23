@@ -438,7 +438,8 @@ export default async function InsightArticle({
               <p style={{
                 fontFamily: 'var(--font-dm-mono)',
                 fontSize: '11px',
-                color: 'var(--z-chrome-dark, #5A5B66)',
+                fontWeight: 500,
+                color: '#516254',
                 letterSpacing: '0.15em',
                 textTransform: 'uppercase',
                 marginBottom: '24px',
@@ -452,12 +453,12 @@ export default async function InsightArticle({
                     href={`/insights/${r.id}`}
                     style={{
                       display: 'block',
-                      background: 'rgba(15,18,53,0.025)',
-                      border: '1px solid rgba(15,18,53,0.08)',
-                      borderRadius: '12px',
+                      background: '#FFFDF8',
+                      border: '1px solid rgba(18,22,19,0.1)',
+                      borderRadius: '14px',
                       padding: '24px',
                       textDecoration: 'none',
-                      transition: 'border-color 0.3s',
+                      transition: 'border-color 0.3s, box-shadow 0.3s',
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
@@ -469,7 +470,7 @@ export default async function InsightArticle({
                         textTransform: 'uppercase',
                         color: '#1a8a3e',
                         background: 'rgba(26,138,62,0.08)',
-                        padding: '3px 8px',
+                        padding: '4px 10px',
                         borderRadius: '4px',
                       }}>
                         {r.category}
@@ -477,29 +478,33 @@ export default async function InsightArticle({
                       <span style={{
                         fontFamily: 'var(--font-dm-mono)',
                         fontSize: '10px',
-                        color: 'var(--z-chrome-dark, #5A5B66)',
+                        fontWeight: 500,
+                        color: '#93b799',
                       }}>
                         {r.readTime}
                       </span>
                     </div>
                     <h3 style={{
                       fontFamily: 'var(--font-editorial-new)',
-                      fontSize: '18px',
+                      fontSize: '20px',
                       fontWeight: 400,
-                      color: '#0F1235',
-                      lineHeight: 1.3,
-                      marginBottom: '8px',
+                      color: '#121613',
+                      lineHeight: 1.25,
+                      marginBottom: '10px',
                       whiteSpace: 'pre-line',
                     }}>
                       {r.headline}
                     </h3>
                     <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
                       fontFamily: 'var(--font-twk-lausanne)',
                       fontSize: '13px',
-                      fontWeight: 500,
-                      color: '#1a8a3e',
+                      fontWeight: 550,
+                      color: '#2bee4b',
                     }}>
-                      Read →
+                      Read article →
                     </span>
                   </Link>
                 ))}
