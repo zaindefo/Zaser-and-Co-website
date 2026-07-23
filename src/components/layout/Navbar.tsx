@@ -3,7 +3,22 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { NAV_LINKS } from '@/lib/constants'
+
+const NAV_LINKS = [
+  { label: 'Services', href: '/#services', hasDropdown: true },
+  { label: 'BreakPoint', href: '/breakpoint' },
+  { label: 'StockPulse', href: '/stockpulse' },
+  { label: 'Insights', href: '/insights' },
+]
+
+const SERVICES_DROPDOWN = [
+  { label: 'Financial Clarity', href: '/services/financial-clarity', desc: 'Know your real profit and break-even point.' },
+  { label: 'Margin & Operations', href: '/services/margin-operations', desc: 'Find cost leaks and improve margins.' },
+  { label: 'AI Audit & Implementation', href: '/services/ai-audit-implementation', desc: 'Automate what matters first.' },
+  { label: 'Content Generation', href: '/services/content-generation', desc: 'AI-powered content systems.' },
+  { label: 'HR & AI Training', href: '/services/hr-ai-training', desc: 'Build a team that runs without you.' },
+  { label: 'Process Improvement', href: '/services/business-process-improvement', desc: 'Systems that scale with you.' },
+]
 
 const PRODUCT_LINKS: Record<string, { dot: string; desc: string }> = {
   '/breakpoint': { dot: 'var(--z-profit)', desc: 'Break-even intelligence for online businesses.' },
@@ -14,8 +29,10 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [hoveredProduct, setHoveredProduct] = useState<string | null>(null)
+  const [servicesOpen, setServicesOpen] = useState(false)
   const pathname = usePathname()
   const navRef = useRef<HTMLElement>(null)
+  const servicesTimeout = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -26,7 +43,16 @@ export function Navbar() {
 
   const isActive = (href: string) => {
     if (href.startsWith('/#')) return pathname === '/'
-    return pathname === href
+    return pathname === href || pathname.startsWith(href + '/')
+  }
+
+  const handleServicesEnter = () => {
+    if (servicesTimeout.current) clearTimeout(servicesTimeout.current)
+    setServicesOpen(true)
+  }
+
+  const handleServicesLeave = () => {
+    servicesTimeout.current = setTimeout(() => setServicesOpen(false), 150)
   }
 
   return (
@@ -51,7 +77,7 @@ export function Navbar() {
         maxWidth: '1440px', width: '100%', margin: '0 auto',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
-        {/* Logo — navy "Zaser" + rust "& Co" + scroll tagline */}
+        {/* Logo */}
         <Link href="/" className="nav-logo" style={{ textDecoration: 'none', display: 'flex', flexDirection: 'column' }}>
           <div>
             <span style={{
@@ -81,13 +107,13 @@ export function Navbar() {
             fontFamily: 'var(--font-dm-mono)',
             fontSize: '9px',
             fontWeight: 500,
-            color: 'var(--z-chrome-dark, #5A5B66)',
+            color: scrolled ? 'rgba(246,239,228,0.5)' : 'rgba(107,56,40,0.5)',
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
             opacity: scrolled ? 1 : 0,
             maxHeight: scrolled ? '14px' : '0',
             overflow: 'hidden',
-            transition: 'opacity 0.4s ease, max-height 0.4s ease',
+            transition: 'opacity 0.4s ease, max-height 0.4s ease, color 0.4s ease',
             marginTop: '2px',
           }}>
             Strategic &amp; Management Consultancy
@@ -100,13 +126,20 @@ export function Navbar() {
             const product = PRODUCT_LINKS[link.href]
             const isInsights = link.label === 'Insights'
             const active = isActive(link.href)
+            const isServices = link.hasDropdown
 
             return (
               <div
                 key={link.href}
                 style={{ position: 'relative' }}
-                onMouseEnter={() => product && setHoveredProduct(link.href)}
-                onMouseLeave={() => setHoveredProduct(null)}
+                onMouseEnter={() => {
+                  if (product) setHoveredProduct(link.href)
+                  if (isServices) handleServicesEnter()
+                }}
+                onMouseLeave={() => {
+                  setHoveredProduct(null)
+                  if (isServices) handleServicesLeave()
+                }}
               >
                 <Link
                   href={link.href}
@@ -140,6 +173,11 @@ export function Navbar() {
                       animation: 'pulse-dot 2s ease-in-out infinite',
                     }} />
                   )}
+                  {isServices && (
+                    <svg width="8" height="5" viewBox="0 0 8 5" fill="none" style={{ marginLeft: '2px', opacity: 0.5 }}>
+                      <path d="M1 1L4 4L7 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+                    </svg>
+                  )}
                   {active && (
                     <motion.div
                       layoutId="nav-underline"
@@ -154,7 +192,70 @@ export function Navbar() {
                   )}
                 </Link>
 
-                {/* Floating preview card for product links */}
+                {/* Services dropdown */}
+                <AnimatePresence>
+                  {isServices && servicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                      style={{
+                        position: 'absolute',
+                        top: 'calc(100% + 12px)',
+                        left: '-16px',
+                        width: '320px',
+                        background: scrolled ? '#131419' : '#FFFDF8',
+                        border: scrolled ? '1px solid rgba(200,202,208,0.18)' : '1px solid rgba(18,22,19,0.12)',
+                        borderRadius: '12px',
+                        padding: '8px',
+                        zIndex: 200,
+                        boxShadow: scrolled ? '0 24px 48px rgba(0,0,0,0.4)' : '0 16px 40px rgba(0,0,0,0.08)',
+                      }}
+                    >
+                      {SERVICES_DROPDOWN.map((svc) => (
+                        <Link
+                          key={svc.href}
+                          href={svc.href}
+                          style={{
+                            display: 'block',
+                            padding: '10px 14px',
+                            borderRadius: '8px',
+                            textDecoration: 'none',
+                            transition: 'background 0.15s',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = scrolled ? 'rgba(246,239,228,0.06)' : 'rgba(15,18,53,0.04)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = 'transparent'
+                          }}
+                        >
+                          <p style={{
+                            fontFamily: 'var(--font-twk-lausanne)',
+                            fontSize: '13px',
+                            fontWeight: 600,
+                            color: scrolled ? '#F6EFE4' : '#0F1235',
+                            marginBottom: '2px',
+                          }}>
+                            {svc.label}
+                          </p>
+                          <p style={{
+                            fontFamily: 'var(--font-twk-lausanne)',
+                            fontSize: '11px',
+                            fontWeight: 350,
+                            color: scrolled ? 'rgba(246,239,228,0.5)' : '#6B3828',
+                            lineHeight: 1.4,
+                          }}>
+                            {svc.desc}
+                          </p>
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Product hover card */}
                 <AnimatePresence>
                   {product && hoveredProduct === link.href && (
                     <motion.div
@@ -179,7 +280,7 @@ export function Navbar() {
                       <p style={{
                         fontFamily: 'var(--font-dm-mono)',
                         fontSize: '10px',
-                        color: 'var(--z-chrome-dark, #5A5B66)',
+                        color: 'rgba(200,202,208,0.45)',
                         letterSpacing: '0.15em',
                         textTransform: 'uppercase',
                         marginBottom: '8px',
@@ -189,7 +290,7 @@ export function Navbar() {
                       <p style={{
                         fontFamily: 'var(--font-bebas)',
                         fontSize: '22px',
-                        color: 'var(--z-chrome-peak, #E2E4E9)',
+                        color: '#E2E4E9',
                         lineHeight: 1,
                         marginBottom: '8px',
                       }}>
@@ -199,7 +300,7 @@ export function Navbar() {
                         fontFamily: 'var(--font-twk-lausanne)',
                         fontSize: '12px',
                         fontWeight: 300,
-                        color: 'var(--z-chrome-dark, #5A5B66)',
+                        color: 'rgba(200,202,208,0.45)',
                         lineHeight: 1.5,
                         marginBottom: '10px',
                       }}>
@@ -209,7 +310,7 @@ export function Navbar() {
                         fontFamily: 'var(--font-twk-lausanne)',
                         fontSize: '11px',
                         fontWeight: 500,
-                        color: 'var(--z-chrome, #8B8D97)',
+                        color: 'rgba(200,202,208,0.6)',
                         letterSpacing: '0.04em',
                       }}>
                         Explore →
@@ -224,7 +325,7 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <Link
-          href="/contact"
+          href="/free-business-audit"
           className="hidden md:block"
           style={{
             fontFamily: 'var(--font-twk-lausanne)',
@@ -325,8 +426,30 @@ export function Navbar() {
                   </Link>
                 </motion.div>
               ))}
+
+              {/* Mobile services sub-links */}
+              <div style={{ paddingLeft: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {SERVICES_DROPDOWN.map((svc) => (
+                  <Link
+                    key={svc.href}
+                    href={svc.href}
+                    onClick={() => setOpen(false)}
+                    style={{
+                      fontFamily: 'var(--font-twk-lausanne)',
+                      fontWeight: 400,
+                      fontSize: '13px',
+                      color: 'rgba(246,239,228,0.6)',
+                      textDecoration: 'none',
+                      display: 'block',
+                    }}
+                  >
+                    {svc.label}
+                  </Link>
+                ))}
+              </div>
+
               <Link
-                href="/contact"
+                href="/free-business-audit"
                 onClick={() => setOpen(false)}
                 style={{
                   fontFamily: 'var(--font-twk-lausanne)',

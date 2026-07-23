@@ -410,3 +410,483 @@ export const FAQ_ITEMS = [
     a: 'Yes. We\'re based in Dhaka but we partner with online businesses everywhere. Our systems and frameworks work in any language and on any platform. If your business runs online, we can work with you — wherever you are.',
   },
 ]
+
+// ─── SEO: Service Page Data ────────────────────────────────────────────────────
+
+export const SERVICE_PAGES = [
+  {
+    slug: 'financial-clarity',
+    title: 'Financial Clarity',
+    seoTitle: 'Financial Clarity for Growing Businesses',
+    metaDescription:
+      'Know your real profit, break-even point, and cash flow. Financial strategy consulting for SMEs in Bangladesh. Includes BreakPoint™ dashboard. Free audit.',
+    h1: 'Financial Clarity — Know What You Actually Keep',
+    heroSubtitle:
+      'Most business owners know their revenue. Almost none know their real take-home. We bring financial visibility, break-even intelligence, and profit tracking so every decision you make is backed by real numbers.',
+    problem: {
+      headline: 'The problem this solves',
+      points: [
+        'You make decisions based on revenue, not profit — because you don\'t know your real profit',
+        'You\'re not sure when you break even each month, so every big decision feels like a gamble',
+        'You want a financial strategy, not just a spreadsheet or an accountant\'s summary',
+      ],
+    },
+    approach: {
+      headline: 'How we bring financial clarity',
+      steps: [
+        { title: 'Real numbers, not estimates', description: 'We sit with your actual data — every cost, every channel, every line item — and show you what you really keep from each sale.' },
+        { title: 'Zero Day tracking', description: 'We set up your break-even point and track it in real time using BreakPoint™, so you always know where you stand this month.' },
+        { title: 'Decision-ready dashboards', description: 'Before you spend on ads, hire someone, or launch a product — you run the numbers first. We build the tools that make that possible.' },
+        { title: 'Monthly financial narrative', description: 'Not just numbers — a plain-language explanation of what happened, why your profit went up or down, and what to change.' },
+      ],
+    },
+    deliverables: {
+      headline: 'What you get',
+      items: [
+        'Complete cost-per-order analysis across all channels',
+        'BreakPoint™ dashboard — real-time break-even tracking',
+        'Zero Day alerts via WhatsApp when you cross from loss to profit',
+        'Monthly financial narrative with AI-powered insights',
+        'Scenario modeling for hiring, pricing, and ad spend decisions',
+        'Burn Calendar™ showing 3-month cash projection',
+      ],
+    },
+    audience: 'Business owners doing ৳2L–50L/month who want to understand their real margins and make better financial decisions.',
+    relatedServices: ['margin-operations', 'ai-audit-implementation', 'business-process-improvement'],
+    faq: [
+      { q: 'Do I need an accountant before working with you?', a: 'No. We work with whatever data you have — bank statements, order records, invoices. We build the financial picture from scratch if needed.' },
+      { q: 'How is this different from hiring an accountant?', a: 'An accountant records what happened. We help you understand what it means and what to do about it. We\'re strategic advisors, not bookkeepers.' },
+      { q: 'What is BreakPoint™?', a: 'Our proprietary break-even intelligence dashboard. It tracks your costs and revenue in real time and tells you the exact day each month when you stop losing money and start making it — your Zero Day.' },
+    ],
+    ctaText: 'See What You Actually Keep',
+    ctaHref: '/free-business-audit',
+  },
+  {
+    slug: 'margin-operations',
+    title: 'Margin & Operations',
+    seoTitle: 'Margin & Operations Improvement',
+    metaDescription:
+      'Find hidden cost leaks and improve profit margins. Operational strategy consulting for small businesses. Pricing, process, and resource optimization.',
+    h1: 'Margin & Operations — Stop Growth from Eating Your Profit',
+    heroSubtitle:
+      'Your sales doubled. Your profit didn\'t. That\'s not a growth problem — it\'s an operations problem. We diagnose your cost structure, find the leaks, and implement the changes that turn revenue growth into actual profit.',
+    problem: {
+      headline: 'The problem this solves',
+      points: [
+        'Your costs are rising but you don\'t have a clear strategy to control them',
+        'You need someone to look at your operations objectively and tell you what to restructure',
+        'Revenue is growing but your margin is shrinking — and you\'re not sure why',
+      ],
+    },
+    approach: {
+      headline: 'How we improve your margins',
+      steps: [
+        { title: 'Cost structure audit', description: 'We go through every cost line — COGS, delivery, ads, platform fees, salaries — and identify where margin is being lost.' },
+        { title: 'Product-level profitability', description: 'Not every product makes money. We find the ones that are secretly costing you and the ones worth doubling down on.' },
+        { title: 'Pricing strategy', description: 'We model your pricing against real costs and competitor positioning to find the price points that maximize profit, not just sales.' },
+        { title: 'Operational restructuring', description: 'We implement the changes — renegotiating vendor contracts, restructuring ad spend, optimizing delivery, and fixing resource allocation.' },
+      ],
+    },
+    deliverables: {
+      headline: 'What you get',
+      items: [
+        'Complete cost structure breakdown with margin analysis',
+        'Product-level profitability report',
+        'Pricing strategy with scenario modeling',
+        'Vendor and partner renegotiation support',
+        'Monthly margin tracking and improvement roadmap',
+        'Burn Calendar™ showing cash flow projection',
+      ],
+    },
+    audience: 'Businesses experiencing growth but declining margins. Founders who feel like they\'re working harder but keeping less.',
+    relatedServices: ['financial-clarity', 'business-process-improvement', 'ai-audit-implementation'],
+    faq: [
+      { q: 'How quickly will I see results?', a: 'Most businesses see measurable margin improvement within 60–90 days. Quick wins like vendor renegotiation and pricing fixes often land within the first month.' },
+      { q: 'Will you help implement changes or just advise?', a: 'We implement. We renegotiate contracts, restructure ad spend, and build the tracking systems. We don\'t hand you a report and leave.' },
+      { q: 'What if my business is still small?', a: 'Margin problems compound. Fixing them early means every future sale is more profitable. This is even more important for smaller businesses.' },
+    ],
+    ctaText: 'Find Your Hidden Cost Leaks',
+    ctaHref: '/free-business-audit',
+  },
+  {
+    slug: 'ai-audit-implementation',
+    title: 'AI Audit & Implementation',
+    seoTitle: 'AI Audit & Implementation for SMEs',
+    metaDescription:
+      'Identify what to automate first and get it implemented. AI workflow audit, automation setup, and team training for small businesses in Bangladesh.',
+    h1: 'AI Audit & Implementation — Automate What Matters First',
+    heroSubtitle:
+      'AI adoption without strategy is wasted budget. We assess your business, identify the highest-impact automation opportunities, and build working systems — not recommendations to implement yourself.',
+    problem: {
+      headline: 'The problem this solves',
+      points: [
+        'You know AI can help but don\'t know where to start',
+        'You\'ve tried tools but nothing has stuck — the problem isn\'t the technology, it\'s the translation',
+        'You need someone to do the implementation, not just tell you what\'s possible',
+      ],
+    },
+    approach: {
+      headline: 'How we implement AI in your business',
+      steps: [
+        { title: 'Time audit', description: 'We spend an hour going through your typical week and find the 3–5 tasks that eat the most time and repeat the most often.' },
+        { title: 'Impact ranking', description: 'We rank every automation opportunity by hours saved, cost reduced, and ease of implementation — then we start with the biggest win.' },
+        { title: 'Build and configure', description: 'We set up the automation together — customer replies, expense sorting, content generation, inventory alerts — so it works before we leave.' },
+        { title: 'Train and expand', description: 'We train your team until using AI tools feels natural, then move to the next automation on the list.' },
+      ],
+    },
+    deliverables: {
+      headline: 'What you get',
+      items: [
+        'AI readiness assessment across 5 business dimensions',
+        'Prioritized automation roadmap ranked by impact',
+        'Working automation systems configured for your business',
+        'Team training on all implemented tools',
+        'Automated customer reply systems',
+        'AI-powered financial reporting and alerts',
+      ],
+    },
+    audience: 'Business owners spending 15+ hours per week on tasks a computer could handle. Founders who want AI to work, not just to try it.',
+    relatedServices: ['content-generation', 'hr-ai-training', 'financial-clarity'],
+    faq: [
+      { q: 'Do I need technical knowledge?', a: 'No. We handle all the setup and configuration. You just need to know your business — we translate that into automation.' },
+      { q: 'What tools do you use?', a: 'We use whatever works best for your business — ChatGPT, custom automation, AI APIs, workflow tools. The tool is secondary to the outcome.' },
+      { q: 'How long does implementation take?', a: 'The first automation is typically working within 1–2 weeks. A full automation suite builds out over 2–3 months as we add systems one at a time.' },
+    ],
+    ctaText: 'Find Your First Automation',
+    ctaHref: '/free-ai-audit',
+  },
+  {
+    slug: 'content-generation',
+    title: 'Content Generation',
+    seoTitle: 'Content Generation Systems for Businesses',
+    metaDescription:
+      'AI-powered content systems aligned to your brand. Product copy, social content, ad campaigns, and customer communications — consistent and on-brand.',
+    h1: 'Content Generation — Systems That Produce, Not One-Time Batches',
+    heroSubtitle:
+      'Content without strategy is noise. We build AI-powered content systems aligned to your brand positioning, audience, and conversion goals — producing product copy, social content, ad campaigns, and customer communications with the consistency of a full marketing department.',
+    problem: {
+      headline: 'The problem this solves',
+      points: [
+        'You need content regularly but can\'t afford a full marketing team',
+        'Your content isn\'t aligned with a strategy — it\'s reactive and inconsistent',
+        'You want a system that produces consistently, not a one-time batch that runs out',
+      ],
+    },
+    approach: {
+      headline: 'How we build your content system',
+      steps: [
+        { title: 'Brand voice audit', description: 'We define your brand positioning, tone, and messaging framework so every piece of content sounds like your business.' },
+        { title: 'Content architecture', description: 'We map content types to business goals — product copy, social posts, email campaigns, ad creative — and build a production calendar.' },
+        { title: 'AI content engine', description: 'We configure AI tools with your brand voice, product data, and audience insights so they produce on-brand content consistently.' },
+        { title: 'Review and refine', description: 'We review output quality weekly and refine the system until it produces content you\'d publish without editing.' },
+      ],
+    },
+    deliverables: {
+      headline: 'What you get',
+      items: [
+        'Brand voice and messaging framework',
+        'AI-powered content production system',
+        'Product copy templates and generators',
+        'Social media content calendar and production',
+        'Ad campaign copy and creative briefs',
+        'Email and customer communication templates',
+      ],
+    },
+    audience: 'Businesses that need consistent content but can\'t justify a full marketing team. Brands that want to sound professional without spending like a corporation.',
+    relatedServices: ['ai-audit-implementation', 'hr-ai-training', 'margin-operations'],
+    faq: [
+      { q: 'Will the content sound like AI?', a: 'No. We train the system on your brand voice, review output quality, and refine until it sounds like you. The goal is content that\'s indistinguishable from human-written.' },
+      { q: 'What platforms do you cover?', a: 'Facebook, Instagram, LinkedIn, email, website copy, product descriptions, ad campaigns — whatever your business needs.' },
+      { q: 'Do I still need to review the content?', a: 'Initially, yes. But over time we refine the system until it produces content you\'re comfortable publishing with minimal review.' },
+    ],
+    ctaText: 'Build Your Content System',
+    ctaHref: '/free-business-audit',
+  },
+  {
+    slug: 'hr-ai-training',
+    title: 'HR & AI Training',
+    seoTitle: 'HR Systems & AI Training for Teams',
+    metaDescription:
+      'Build management infrastructure that scales. SOPs, onboarding frameworks, performance systems, and AI training for growing teams.',
+    h1: 'HR & AI Training — Build a Team That Runs Without You',
+    heroSubtitle:
+      'Your team is the execution layer of every strategy. We build the management infrastructure — SOPs, onboarding, performance frameworks, AI training — that turns individuals into a scalable, self-sufficient operation.',
+    problem: {
+      headline: 'The problem this solves',
+      points: [
+        'You need management structure, not just HR documents',
+        'New hires take too long to become productive because there\'s no onboarding system',
+        'You want your team trained on AI tools but don\'t know how to start',
+      ],
+    },
+    approach: {
+      headline: 'How we build your team infrastructure',
+      steps: [
+        { title: 'Operations audit', description: 'We document every process, identify what\'s missing, and map the gaps between how your team works now and how it should work at scale.' },
+        { title: 'SOP development', description: 'We write clear, actionable SOPs for every critical process — not generic templates, procedures specific to your business.' },
+        { title: 'Onboarding framework', description: 'We build a structured onboarding system so new hires are productive in days, not months.' },
+        { title: 'AI training program', description: 'We train your team on the specific AI tools your business uses — hands-on sessions, not theoretical overviews.' },
+      ],
+    },
+    deliverables: {
+      headline: 'What you get',
+      items: [
+        'Complete SOP library for critical business processes',
+        'Structured employee onboarding framework',
+        'Performance tracking and management system',
+        'AI tools training program for your team',
+        'Role-specific workflow documentation',
+        'Team capability assessment and development plan',
+      ],
+    },
+    audience: 'Founders managing 3–20 people who want their business to run on systems, not personal attention. Teams ready to adopt AI tools.',
+    relatedServices: ['business-process-improvement', 'ai-audit-implementation', 'content-generation'],
+    faq: [
+      { q: 'How many employees do I need for this to be useful?', a: 'Even 2–3 employees benefit from documented processes and clear SOPs. The earlier you build this infrastructure, the easier every future hire becomes.' },
+      { q: 'What kind of AI training do you provide?', a: 'Practical, hands-on training on the specific tools your business uses. Not theory — your team walks away able to use the tools independently.' },
+      { q: 'Do you write the SOPs yourself?', a: 'Yes. We document your processes, identify improvements, and write complete SOPs. We don\'t give you templates to fill in.' },
+    ],
+    ctaText: 'Build Your Team Systems',
+    ctaHref: '/free-business-audit',
+  },
+  {
+    slug: 'business-process-improvement',
+    title: 'Business Process Improvement',
+    seoTitle: 'Business Process Improvement Consulting',
+    metaDescription:
+      'Streamline operations, reduce manual work, and build systems that scale. Process improvement consulting for small and medium businesses.',
+    h1: 'Business Process Improvement — Systems That Scale With You',
+    heroSubtitle:
+      'Messy operations don\'t just slow you down — they cap your growth. We streamline workflows, eliminate bottlenecks, and build operational systems that keep working as your business gets bigger.',
+    problem: {
+      headline: 'The problem this solves',
+      points: [
+        'Your operations are held together by memory and manual effort, not systems',
+        'Things fall through the cracks as you grow — orders, follow-ups, handoffs',
+        'You want to scale but your current processes won\'t survive 2x the volume',
+      ],
+    },
+    approach: {
+      headline: 'How we improve your processes',
+      steps: [
+        { title: 'Process mapping', description: 'We document every workflow end-to-end — order fulfillment, customer service, inventory, finance — and identify where things break.' },
+        { title: 'Bottleneck analysis', description: 'We find the 3–5 process bottlenecks that are costing you the most time and money, and we prioritize fixing them.' },
+        { title: 'System design', description: 'We design streamlined workflows with clear handoffs, automation triggers, and quality checks built in.' },
+        { title: 'Implementation', description: 'We build and configure the tools, train your team, and monitor the new processes until they\'re running smoothly.' },
+      ],
+    },
+    deliverables: {
+      headline: 'What you get',
+      items: [
+        'Complete process map of your operations',
+        'Bottleneck analysis with prioritized fix list',
+        'Redesigned workflows with automation',
+        'Tool configuration and integration',
+        'Team training on new processes',
+        'Process performance tracking dashboard',
+      ],
+    },
+    audience: 'Businesses doing ৳5L–50L/month that feel operationally messy. Founders who know their processes won\'t survive the next stage of growth.',
+    relatedServices: ['margin-operations', 'ai-audit-implementation', 'hr-ai-training'],
+    faq: [
+      { q: 'What kind of processes do you improve?', a: 'Order fulfillment, customer service, inventory management, financial reporting, content production, team coordination — any process that repeats and can be systematized.' },
+      { q: 'Do you use specific tools?', a: 'We use whatever fits your business — Notion, Airtable, Google Workspace, custom automation. The tool is secondary to the process design.' },
+      { q: 'How long does a process improvement project take?', a: 'Quick wins land in 2–4 weeks. A full operational overhaul takes 2–3 months. We prioritize the highest-impact changes first.' },
+    ],
+    ctaText: 'Get a Systems Diagnostic',
+    ctaHref: '/free-business-audit',
+  },
+]
+
+// ─── SEO: Industry Page Data ───────────────────────────────────────────────────
+
+export const INDUSTRY_PAGES = [
+  {
+    slug: 'ecommerce',
+    title: 'E-Commerce Businesses',
+    seoTitle: 'Consulting for E-Commerce Businesses',
+    metaDescription:
+      'Strategy, margin improvement, and AI automation for online stores and DTC brands in Bangladesh. Inventory, pricing, and break-even intelligence.',
+    h1: 'Strategic Consulting for E-Commerce Businesses',
+    heroSubtitle:
+      'Online stores face unique challenges — ad costs that eat margins, inventory that ties up cash, and logistics that break at scale. We help e-commerce founders build the financial clarity, operational systems, and AI automation that turn volume into real profit.',
+    challenges: [
+      { title: 'Margin erosion', description: 'Ad costs, delivery charges, returns, and platform fees quietly eat your profit. Most e-commerce founders don\'t know their real margin per order.' },
+      { title: 'Inventory cash trap', description: '15–25% of your inventory capital is locked in products with near-zero velocity. That\'s cash you can\'t use for growth.' },
+      { title: 'Scale without systems', description: 'Manual order processing, customer service, and inventory tracking break at 100+ orders/day. You need automation, not more staff.' },
+    ],
+    services: ['financial-clarity', 'margin-operations', 'ai-audit-implementation', 'content-generation'],
+    stats: [
+      { figure: '4.7%', label: 'Average net margin when all costs are counted' },
+      { figure: '15–25%', label: 'Inventory capital locked in dead stock' },
+      { figure: '15+ hrs', label: 'Weekly hours recoverable through automation' },
+    ],
+  },
+  {
+    slug: 'education-businesses',
+    title: 'Education Businesses',
+    seoTitle: 'Consulting for Education Businesses',
+    metaDescription:
+      'Strategic consulting for edtech platforms, online courses, and coaching businesses. Financial clarity, content systems, and operational scaling.',
+    h1: 'Strategic Consulting for Education Businesses',
+    heroSubtitle:
+      'Education businesses — online courses, coaching platforms, edtech startups — have high upfront content costs and complex student lifecycle economics. We help education founders understand their unit economics, build content systems that scale, and automate the operations that limit growth.',
+    challenges: [
+      { title: 'Content production bottleneck', description: 'Course creation is time-intensive. Without a content system, your growth is limited by how fast you can produce.' },
+      { title: 'Student economics blind spot', description: 'Acquisition cost, completion rates, and lifetime value per student — most education businesses don\'t track these clearly.' },
+      { title: 'Manual student management', description: 'Enrollment, support, follow-ups, and community management consume 20+ hours/week that could be automated.' },
+    ],
+    services: ['financial-clarity', 'content-generation', 'ai-audit-implementation', 'hr-ai-training'],
+    stats: [
+      { figure: '20+ hrs', label: 'Weekly hours spent on student management' },
+      { figure: '3x', label: 'Content production speed with AI systems' },
+      { figure: '40%', label: 'Improvement in student retention with proper systems' },
+    ],
+  },
+  {
+    slug: 'service-businesses',
+    title: 'Service Businesses',
+    seoTitle: 'Consulting for Service Businesses',
+    metaDescription:
+      'Strategy and management consulting for agencies, freelancers, and service companies. Pricing strategy, AI automation, and operational structure.',
+    h1: 'Strategic Consulting for Service Businesses',
+    heroSubtitle:
+      'Agencies, freelancers, and service companies trade time for money. We help service business founders build pricing strategies that reflect their value, operational systems that create leverage, and AI tools that multiply their capacity without hiring.',
+    challenges: [
+      { title: 'Pricing without strategy', description: 'Most service businesses price based on competition, not value or cost. That leaves money on the table every single project.' },
+      { title: 'Founder dependency', description: 'The business can\'t run without you. Every client needs your attention, every decision needs your input. That\'s a job, not a business.' },
+      { title: 'Scope creep and delivery chaos', description: 'Without clear SOPs and project frameworks, every engagement bleeds time and margin beyond the original scope.' },
+    ],
+    services: ['margin-operations', 'business-process-improvement', 'ai-audit-implementation', 'hr-ai-training'],
+    stats: [
+      { figure: '30–50%', label: 'Revenue increase from strategic repricing' },
+      { figure: '10+ hrs', label: 'Weekly hours freed from admin with automation' },
+      { figure: '2–3x', label: 'Project capacity with proper systems in place' },
+    ],
+  },
+  {
+    slug: 'retail-businesses',
+    title: 'Retail Businesses',
+    seoTitle: 'Consulting for Retail Businesses',
+    metaDescription:
+      'Strategy consulting for retail businesses in Bangladesh. Inventory intelligence, margin optimization, and operational systems for physical and online retail.',
+    h1: 'Strategic Consulting for Retail Businesses',
+    heroSubtitle:
+      'Retail is thin-margin by nature. We help retail business owners understand their real costs, optimize inventory with StockPulse™ intelligence, and build the operational systems that make every square foot and every taka of stock work harder.',
+    challenges: [
+      { title: 'Thin margins, thick costs', description: 'Rent, staff, inventory holding costs, and shrinkage eat into already-slim retail margins. Without visibility, you\'re flying blind.' },
+      { title: 'Inventory mismanagement', description: 'Overstocking ties up cash. Stockouts lose sales. Without velocity data, every reorder decision is a guess.' },
+      { title: 'Online + offline complexity', description: 'Running both physical and online channels doubles the operational complexity without doubling the systems to manage it.' },
+    ],
+    services: ['financial-clarity', 'margin-operations', 'business-process-improvement', 'ai-audit-implementation'],
+    stats: [
+      { figure: '৳47K→৳1.82L', label: 'Profit improvement from financial clarity' },
+      { figure: '15–25%', label: 'Cash freed from dead inventory' },
+      { figure: '11%→19%', label: 'Margin recovery in 6 months' },
+    ],
+  },
+]
+
+// ─── SEO: Audit Landing Pages ──────────────────────────────────────────────────
+
+export const AUDIT_PAGES = {
+  'business-audit': {
+    slug: 'free-business-audit',
+    seoTitle: 'Free Business Audit — Zaser & Co',
+    metaDescription:
+      'Get a free 30-minute strategic assessment across 5 business dimensions. Identify gaps in finance, operations, AI readiness, and growth. No cost, no commitment.',
+    h1: 'Free Business Audit',
+    subtitle: 'A 30-minute strategic assessment that shows you exactly where the gaps are.',
+    description:
+      'The Clarity Score™ is a free, structured diagnostic across five dimensions of your business: financial visibility, operational efficiency, AI readiness, growth trajectory, and team capability. You walk away knowing exactly what to fix first — even if you never work with us.',
+    dimensions: [
+      { title: 'Financial Visibility', description: 'Do you know your real margin, break-even point, and cost per order? We assess your financial clarity.' },
+      { title: 'Operational Efficiency', description: 'Are your processes scalable, or will they break at 2x volume? We map your operational gaps.' },
+      { title: 'AI Readiness', description: 'Which tasks should you automate first? We identify the highest-impact AI opportunities.' },
+      { title: 'Growth Trajectory', description: 'Is your growth sustainable? We evaluate your pricing, channel mix, and unit economics.' },
+      { title: 'Team Capability', description: 'Can your team execute at the next level? We assess SOPs, training, and management infrastructure.' },
+    ],
+    process: [
+      'Book a free 30-minute session via the form below',
+      'We assess your business across all five dimensions',
+      'You receive your Clarity Score™ with a prioritized action plan',
+      'You decide what to do next — no pressure, no obligation',
+    ],
+    ctaText: 'Book Your Free Business Audit',
+  },
+  'ai-audit': {
+    slug: 'free-ai-audit',
+    seoTitle: 'Free AI Audit for Your Business',
+    metaDescription:
+      'Find out which tasks to automate first and how much time you\'ll save. Free AI readiness assessment for small businesses. No cost, no commitment.',
+    h1: 'Free AI Audit',
+    subtitle: 'Find your first automation — and see how much time you\'ll get back.',
+    description:
+      'The AI Readiness Assessment is a free diagnostic that maps your daily operations, identifies the tasks that consume the most time, and shows you exactly where automation will have the biggest impact. No technical knowledge required. No cost. No commitment.',
+    dimensions: [
+      { title: 'Customer Communication', description: 'How much time do you spend on repetitive customer queries? We identify what can be automated.' },
+      { title: 'Financial Reporting', description: 'Are you manually sorting expenses and tracking revenue? We show you what AI can handle.' },
+      { title: 'Content Production', description: 'How much of your content workflow is manual? We map the automation opportunities.' },
+      { title: 'Inventory & Operations', description: 'Are reorder decisions, stock tracking, and supplier comms manual? We find the quick wins.' },
+      { title: 'Team Workflows', description: 'Where are the handoff gaps, data entry bottlenecks, and manual reporting tasks? We identify what to fix first.' },
+    ],
+    process: [
+      'Book a free AI audit session via the form below',
+      'We walk through your typical week and identify the biggest time sinks',
+      'You receive a prioritized automation roadmap ranked by hours saved',
+      'We show you exactly how the top automation would work in your business',
+    ],
+    ctaText: 'Book Your Free AI Audit',
+  },
+}
+
+// ─── SEO: Local Keyword Page Data ──────────────────────────────────────────────
+
+export const LOCAL_PAGES = [
+  {
+    slug: 'business-consultancy-bangladesh',
+    seoTitle: 'Business Consultancy in Bangladesh',
+    metaDescription:
+      'Structured strategic and management consulting for SMEs in Bangladesh. Financial clarity, margin improvement, AI implementation. Dhaka-based, SME-focused.',
+    h1: 'Business Consultancy in Bangladesh — Built for SMEs',
+    heroSubtitle:
+      'Bangladesh\'s SME sector drives the economy, but most small businesses don\'t have access to structured strategic consulting. Zaser & Co changes that. We bring the same rigour as large firms — financial analysis, operational strategy, AI implementation — at a price built for growing businesses.',
+    sections: [
+      {
+        title: 'Why Bangladeshi SMEs need structured consulting',
+        content: 'Growing businesses in Bangladesh face unique challenges: thin margins in a competitive market, limited access to financial intelligence tools, and rapid digital transformation that moves faster than most teams can adopt. Without structured advisory, founders make decisions based on instinct — not data.',
+      },
+      {
+        title: 'What we bring to the table',
+        content: 'Zaser & Co is a Dhaka-based strategic and management consultancy focused exclusively on small and medium businesses. We offer five disciplines — Financial Clarity, Margin & Operations, AI Audit & Implementation, Content Generation, and HR & AI Training — delivered as hands-on partnerships, not PowerPoint decks.',
+      },
+      {
+        title: 'Who we work with',
+        content: 'Online stores, education platforms, service agencies, freelancers, retail businesses, and startups doing ৳2 lakh to ৳50 lakh per month. If you sell online, serve clients, or run a team — and you want structured strategy to grow smarter — we\'re built for you.',
+      },
+    ],
+  },
+  {
+    slug: 'business-consultant-dhaka',
+    seoTitle: 'Business Consultant in Dhaka',
+    metaDescription:
+      'Dhaka-based management consultant for growing businesses. Hands-on strategy, financial analysis, operational improvement, and AI systems. Free business audit.',
+    h1: 'Business Consultant in Dhaka — Hands-On Strategy for Growing Businesses',
+    heroSubtitle:
+      'Looking for a business consultant in Dhaka who actually does the work? Zaser & Co is a Dhaka-based strategic and management consultancy that doesn\'t just advise — we implement. Financial dashboards, AI automation, operational systems — we build them with you.',
+    sections: [
+      {
+        title: 'A Dhaka-based consultancy that implements',
+        content: 'Most consultancies present recommendations and move on. We sit with your data, build your dashboards, configure your automations, write your SOPs, and stay until the strategy is working. That\'s what implementation-focused consulting looks like.',
+      },
+      {
+        title: 'Our services in Dhaka',
+        content: 'Financial Clarity with BreakPoint™ intelligence. Margin & Operations improvement. AI Audit & Implementation. Content Generation systems. HR & AI Training. Every engagement starts with a free Clarity Score™ assessment — 30 minutes, five dimensions, no cost.',
+      },
+      {
+        title: 'Industries we serve in Dhaka',
+        content: 'E-commerce brands, education businesses, service agencies, freelance businesses, retail operations, and startups. If your business is based in Dhaka and you\'re doing ৳2L–50L per month, we\'re the right fit.',
+      },
+    ],
+  },
+]

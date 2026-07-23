@@ -62,18 +62,43 @@ export const metadata: Metadata = {
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Organization',
+  '@type': 'ProfessionalService',
   name: 'Zaser & Co',
   url: 'https://zaserandco.com',
   description:
-    'Strategic and management consultancy for small and medium businesses in Bangladesh. Financial clarity, operational intelligence, and AI-powered systems.',
+    'Strategic and management consultancy for small and medium businesses in Bangladesh. Financial clarity, operational intelligence, AI implementation, and management frameworks.',
   foundingDate: '2025',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Dhaka',
+    addressRegion: 'Dhaka Division',
     addressCountry: 'BD',
   },
+  areaServed: [
+    { '@type': 'Country', name: 'Bangladesh' },
+    { '@type': 'City', name: 'Dhaka' },
+  ],
+  serviceType: [
+    'Business Consulting',
+    'Financial Consulting',
+    'Management Consulting',
+    'AI Implementation',
+    'Operational Improvement',
+  ],
+  priceRange: 'Free initial consultation',
   sameAs: ['https://linkedin.com/company/zaserandco'],
+}
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Zaser & Co',
+  url: 'https://zaserandco.com',
+  description: 'Strategic and management consultancy for growing businesses in Bangladesh.',
+  publisher: {
+    '@type': 'ProfessionalService',
+    name: 'Zaser & Co',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -83,6 +108,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body className="bg-linen text-obsidian-ink font-twk-lausanne antialiased relative">

@@ -7,9 +7,9 @@ export function Footer() {
     <footer className="bg-obsidian-ink text-linen relative overflow-hidden">
       <TopoWaveField className="z-0" theme="dark" lineCount={12} amplitude={10} mouseInteraction={false} opacity={0.3} />
       <div className="page-container section-padding relative z-10">
-        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-60 mb-60">
+        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-60 mb-60">
           {/* Brand */}
-          <div>
+          <div className="lg:col-span-2">
             <div className="flex gap-1 items-baseline mb-20">
               <span className="text-heading text-linen">Zaser</span>
               <span className="text-heading text-moss-glow">&amp; Co</span>
@@ -32,38 +32,59 @@ export function Footer() {
           <div>
             <h4 className="text-caption text-moss-glow font-550 uppercase tracking-widest mb-15">Services</h4>
             <nav className="space-y-8 text-body-sm">
-              <Link href="/#services" className="block text-linen hover:text-moss-glow transition-colors">
+              <Link href="/services/financial-clarity" className="block text-linen hover:text-moss-glow transition-colors">
                 Financial Clarity
               </Link>
-              <Link href="/#services" className="block text-linen hover:text-moss-glow transition-colors">
-                Margin Improvement
+              <Link href="/services/margin-operations" className="block text-linen hover:text-moss-glow transition-colors">
+                Margin &amp; Operations
               </Link>
-              <Link href="/#services" className="block text-linen hover:text-moss-glow transition-colors">
+              <Link href="/services/ai-audit-implementation" className="block text-linen hover:text-moss-glow transition-colors">
                 AI Audit
               </Link>
-            </nav>
-          </div>
-
-          {/* Insights */}
-          <div>
-            <h4 className="text-caption text-moss-glow font-550 uppercase tracking-widest mb-15">Insights</h4>
-            <nav className="space-y-8 text-body-sm">
-              <Link href="/insights/revenue-trap" className="block text-linen hover:text-moss-glow transition-colors">
-                The Profit Blind Spot
+              <Link href="/services/content-generation" className="block text-linen hover:text-moss-glow transition-colors">
+                Content Generation
               </Link>
-              <Link href="/insights/silent-bleed" className="block text-linen hover:text-moss-glow transition-colors">
-                The Margin Slow Bleed
+              <Link href="/services/hr-ai-training" className="block text-linen hover:text-moss-glow transition-colors">
+                HR &amp; AI Training
               </Link>
-              <Link href="/insights/time-trap" className="block text-linen hover:text-moss-glow transition-colors">
-                The AI Time Trap
+              <Link href="/services/business-process-improvement" className="block text-linen hover:text-moss-glow transition-colors">
+                Process Improvement
               </Link>
             </nav>
           </div>
 
-          {/* Systems */}
+          {/* Industries */}
           <div>
-            <h4 className="text-caption text-moss-glow font-550 uppercase tracking-widest mb-15">Systems</h4>
+            <h4 className="text-caption text-moss-glow font-550 uppercase tracking-widest mb-15">Industries</h4>
             <nav className="space-y-8 text-body-sm">
+              <Link href="/industries/ecommerce" className="block text-linen hover:text-moss-glow transition-colors">
+                E-Commerce
+              </Link>
+              <Link href="/industries/education-businesses" className="block text-linen hover:text-moss-glow transition-colors">
+                Education
+              </Link>
+              <Link href="/industries/service-businesses" className="block text-linen hover:text-moss-glow transition-colors">
+                Service Businesses
+              </Link>
+              <Link href="/industries/retail-businesses" className="block text-linen hover:text-moss-glow transition-colors">
+                Retail
+              </Link>
+            </nav>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="text-caption text-moss-glow font-550 uppercase tracking-widest mb-15">Resources</h4>
+            <nav className="space-y-8 text-body-sm">
+              <Link href="/insights" className="block text-linen hover:text-moss-glow transition-colors">
+                Insights
+              </Link>
+              <Link href="/free-business-audit" className="block text-linen hover:text-moss-glow transition-colors">
+                Free Business Audit
+              </Link>
+              <Link href="/free-ai-audit" className="block text-linen hover:text-moss-glow transition-colors">
+                Free AI Audit
+              </Link>
               <Link href="/breakpoint" className="block text-linen hover:text-moss-glow transition-colors">
                 BreakPoint™
               </Link>
@@ -77,6 +98,12 @@ export function Footer() {
           <div>
             <h4 className="text-caption text-moss-glow font-550 uppercase tracking-widest mb-15">Connect</h4>
             <nav className="space-y-8 text-body-sm">
+              <Link href="/contact" className="block text-linen hover:text-moss-glow transition-colors">
+                Contact
+              </Link>
+              <Link href="/about" className="block text-linen hover:text-moss-glow transition-colors">
+                About
+              </Link>
               <a href="https://linkedin.com/company/zaserandco" target="_blank" rel="noopener noreferrer" className="block text-linen hover:text-moss-glow transition-colors">
                 LinkedIn
               </a>
@@ -89,7 +116,17 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-mist/20 pt-40">
-          <p className="text-body-sm text-mist">© 2026 Zaser & Co. Dhaka, Bangladesh.</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '16px' }}>
+            <p className="text-body-sm text-mist">© 2026 Zaser & Co. Dhaka, Bangladesh.</p>
+            <nav style={{ display: 'flex', gap: '24px' }}>
+              <Link href="/business-consultancy-bangladesh" className="text-body-sm text-mist hover:text-moss-glow transition-colors" style={{ textDecoration: 'none' }}>
+                Business Consultancy Bangladesh
+              </Link>
+              <Link href="/business-consultant-dhaka" className="text-body-sm text-mist hover:text-moss-glow transition-colors" style={{ textDecoration: 'none' }}>
+                Business Consultant Dhaka
+              </Link>
+            </nav>
+          </div>
         </div>
       </div>
     </footer>
