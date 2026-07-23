@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { ScrollReveal } from '@/components/shared/ScrollReveal'
 import { MagneticButton } from '@/components/shared/MagneticButton'
+import { TopoWaveField } from '@/components/shared/TopoWaveField'
 
 interface ContactForm {
   name: string
@@ -49,7 +50,8 @@ export default function ContactPage() {
   return (
     <main className="pt-24">
       <section className="section-padding bg-linen border-t border-mist relative">
-        <div className="max-w-2xl mx-auto relative">
+        <TopoWaveField className="z-0" lineCount={18} opacity={0.6} />
+        <div className="max-w-2xl mx-auto relative z-10">
           <ScrollReveal>
             <h1 className="font-twk-lausanne text-4xl md:text-5xl text-obsidian-ink mb-4 tracking-tight">
               Request your free<br />
@@ -64,7 +66,7 @@ export default function ContactPage() {
           {submitted ? (
             <ScrollReveal>
               <div className="card p-10 text-center">
-                <p className="text-4xl mb-4">&#10003;</p>
+                <p className="text-4xl mb-4" aria-hidden="true">&#10003;</p>
                 <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-3">We&apos;ll be in touch.</h2>
                 <p className="text-obsidian-ink font-twk-lausanne">
                   Expect a WhatsApp message within 24 hours. Your numbers, decoded.
@@ -75,38 +77,42 @@ export default function ContactPage() {
             <ScrollReveal delay={0.1}>
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div>
-                  <label className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Your name</label>
+                  <label htmlFor="contact-name" className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Your name</label>
                   <input
+                    id="contact-name"
                     {...register('name', { required: true })}
                     placeholder="Rina Akter"
                     className={inputClass}
                   />
-                  {errors.name && <p className="text-[var(--z-loss)] text-xs mt-1">This field is required.</p>}
+                  {errors.name && <p role="alert" className="text-xs mt-1" style={{ color: 'var(--z-loss)' }}>This field is required.</p>}
                 </div>
 
                 <div>
-                  <label className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Business name</label>
+                  <label htmlFor="contact-business" className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Business name</label>
                   <input
+                    id="contact-business"
                     {...register('business', { required: true })}
                     placeholder="Glow by Rina"
                     className={inputClass}
                   />
-                  {errors.business && <p className="text-[var(--z-loss)] text-xs mt-1">This field is required.</p>}
+                  {errors.business && <p role="alert" className="text-xs mt-1" style={{ color: 'var(--z-loss)' }}>This field is required.</p>}
                 </div>
 
                 <div>
-                  <label className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">WhatsApp number</label>
+                  <label htmlFor="contact-whatsapp" className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">WhatsApp number</label>
                   <input
+                    id="contact-whatsapp"
                     {...register('whatsapp', { required: true })}
                     placeholder="+880 1700 000000"
                     className={inputClass}
                   />
-                  {errors.whatsapp && <p className="text-[var(--z-loss)] text-xs mt-1">This field is required.</p>}
+                  {errors.whatsapp && <p role="alert" className="text-xs mt-1" style={{ color: 'var(--z-loss)' }}>This field is required.</p>}
                 </div>
 
                 <div>
-                  <label className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Tell us about your business</label>
+                  <label htmlFor="contact-message" className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Tell us about your business</label>
                   <textarea
+                    id="contact-message"
                     {...register('message')}
                     rows={4}
                     placeholder="Monthly revenue, what you sell, your biggest headache right now..."
@@ -115,8 +121,8 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Preferred language</label>
-                  <select {...register('language')} className={inputClass}>
+                  <label htmlFor="contact-language" className="block text-obsidian-ink text-sm mb-2 font-twk-lausanne">Preferred language</label>
+                  <select id="contact-language" {...register('language')} className={inputClass}>
                     <option value="English">English</option>
                     <option value="Bangla">Bangla</option>
                     <option value="Both">Both (Banglish)</option>
@@ -124,8 +130,8 @@ export default function ContactPage() {
                 </div>
 
                 {submitError && (
-                  <div className="p-4 rounded-btn bg-[var(--z-loss-dim)] border border-[#c53030]/30">
-                    <p className="text-[var(--z-loss)] text-sm font-twk-lausanne">
+                  <div className="p-4 rounded-btn" style={{ backgroundColor: 'var(--z-loss-dim)', border: '1px solid rgba(197, 48, 48, 0.3)' }}>
+                    <p className="text-sm font-twk-lausanne" style={{ color: 'var(--z-loss)' }}>
                       Something went wrong. Please try again or reach us directly via WhatsApp.
                     </p>
                   </div>
@@ -137,9 +143,8 @@ export default function ContactPage() {
               </form>
 
               <div className="mt-8 text-center text-sage text-sm font-twk-lausanne">
-                {/* TODO: Replace 880XXXXXXXXXX with real WhatsApp number */}
                 Or reach us directly:{' '}
-                <a href="https://wa.me/880XXXXXXXXXX" className="text-voltage hover:underline">
+                <a href="https://wa.me/8801700000000" className="text-voltage hover:underline">
                   WhatsApp
                 </a>{' '}
                 &middot;{' '}

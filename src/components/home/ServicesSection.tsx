@@ -1,387 +1,597 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
-import { SERVICE_PILLARS } from '@/lib/constants'
 
-const SERVICE_HEADINGS: Record<string, string[]> = {
-  'financial-clarity':  ['Financial', 'Clarity'],
-  'margin-operations':  ['Margin &', 'Operations'],
-  'ai-audit':           ['AI Audit &', 'Impl.'],
-  'content-generation': ['Content', 'Generation'],
-  'hr-training':        ['HR & AI', 'Training'],
+const SERVICES = [
+  {
+    number: '01',
+    title: 'Financial Clarity',
+    tagline: 'Your strategic partner in financial intelligence.',
+    description:
+      "Strategy without financial visibility is guesswork. We give you the real numbers — margins, break-even, cash flow — through hands-on advisory and two proprietary systems, BreakPoint™ and StockPulse™. So every growth decision you make is backed by data, not instinct.",
+    bullets: [
+      "I make decisions based on revenue, not profit — because I don't know my profit",
+      'I need a financial strategy, not just a spreadsheet',
+      'I want someone who understands my numbers and tells me what they mean',
+    ],
+  },
+  {
+    number: '02',
+    title: 'Margin & Operations',
+    tagline: 'Your strategic partner in operational performance.',
+    description:
+      "Operational inefficiency is a strategy problem, not an admin problem. We diagnose your cost structure, identify where margin is being lost, and implement targeted restructuring — pricing, process, and resource allocation — so your growth translates into actual profit.",
+    bullets: [
+      "My costs are rising but I don't have a strategy to control them",
+      'I need someone to look at my operations objectively and tell me what to restructure',
+      'I want a structured plan for improving my margins, not generic advice',
+    ],
+  },
+  {
+    number: '03',
+    title: 'AI Audit & Implementation',
+    tagline: 'Your strategic partner in AI transformation.',
+    description:
+      "AI adoption without strategy is wasted budget. We assess your business across five dimensions of AI readiness, identify the highest-impact opportunities, and build working systems — customer automation, financial reporting, competitor intelligence — that integrate into your actual operation.",
+    bullets: [
+      'I need a strategy for AI in my business, not just another system to try',
+      'I want someone to audit my workflow and tell me exactly where AI fits',
+      'I need the implementation done for me, not a recommendation to do it myself',
+    ],
+  },
+  {
+    number: '04',
+    title: 'Content Generation',
+    tagline: 'Your strategic partner in content marketing.',
+    description:
+      "Content without strategy is noise. We build content systems aligned to your brand positioning, audience segments, and conversion goals — producing product copy, social content, ad campaigns, and customer communications with the consistency of a full marketing department.",
+    bullets: [
+      'I need a content strategy, not just someone to write posts',
+      'I want content that is aligned with my business goals, not random topics',
+      'I need a system that produces consistently, not a one-time batch',
+    ],
+  },
+  {
+    number: '05',
+    title: 'HR & AI Training',
+    tagline: 'Your strategic partner in people and capability.',
+    description:
+      "Your team is the execution layer of every strategy. We build the management infrastructure — SOPs, onboarding, performance frameworks, AI training — that turns a group of individuals into a scalable, self-sufficient operation. So your business runs on systems, not on you.",
+    bullets: [
+      'I need management structure, not just HR documents',
+      'I want my team trained strategically on the systems we use',
+      'I need someone to partner with me in building an organisation, not just fill roles',
+    ],
+  },
+]
+
+const NODE_ANGLES = [-90, -18, 54, 126, 198]
+const SHORT_LABELS = ['Financial\nClarity', 'Margin &\nOps', 'AI\nImpl.', 'Content', 'HR &\nTraining']
+
+function ServicePanel({ svc, isActive }: { svc: typeof SERVICES[0]; isActive: boolean }) {
+  return (
+    <div
+      className="svc-panel"
+      style={{
+        gridArea: '1 / 1',
+        opacity: isActive ? 1 : 0,
+        transform: isActive ? 'translateY(0)' : 'translateY(18px)',
+        pointerEvents: isActive ? 'auto' : 'none',
+        zIndex: isActive ? 1 : 0,
+        transition: 'opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
+        willChange: 'opacity, transform',
+      }}
+    >
+      <p style={{
+        fontFamily: 'var(--font-dm-mono)',
+        fontSize: '14px',
+        color: 'var(--z-signal, #5B8DEF)',
+        marginBottom: '12px',
+      }}>
+        {svc.number}
+      </p>
+
+      <h2 style={{
+        fontFamily: 'var(--font-editorial-new)',
+        fontSize: 'clamp(36px, 4vw, 56px)',
+        fontWeight: 400,
+        color: 'var(--z-chrome-peak, #E8E9ED)',
+        lineHeight: 1.1,
+        marginBottom: '12px',
+      }}>
+        {svc.title}
+      </h2>
+
+      <p style={{
+        fontFamily: 'var(--font-editorial-new)',
+        fontStyle: 'italic',
+        fontSize: '17px',
+        color: 'var(--z-chrome, #C8CAD0)',
+        marginBottom: '24px',
+      }}>
+        {svc.tagline}
+      </p>
+
+      <div style={{
+        width: '80px', height: '1px', marginBottom: '24px',
+        background: 'var(--z-stroke, linear-gradient(90deg, rgba(200,202,208,0.1), rgba(200,202,208,0.4), rgba(200,202,208,0.1)))',
+      }} />
+
+      <p style={{
+        fontFamily: 'var(--font-twk-lausanne)',
+        fontSize: '16px',
+        fontWeight: 300,
+        color: 'var(--z-chrome-bright, rgba(200,202,208,0.85))',
+        lineHeight: 1.7,
+        maxWidth: '480px',
+        marginBottom: '28px',
+      }}>
+        {svc.description}
+      </p>
+
+      <div style={{
+        display: 'flex', flexDirection: 'column', gap: '12px',
+        marginBottom: '32px',
+      }}>
+        {svc.bullets.map((bullet, i) => (
+          <div key={i} style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
+            <span style={{
+              fontFamily: 'var(--font-dm-mono)',
+              fontSize: '14px',
+              color: 'var(--z-signal, #5B8DEF)',
+              flexShrink: 0,
+              marginTop: '1px',
+            }}>
+              —
+            </span>
+            <span style={{
+              fontFamily: 'var(--font-twk-lausanne)',
+              fontSize: '15px',
+              fontWeight: 300,
+              color: 'var(--z-chrome, #C8CAD0)',
+              lineHeight: 1.6,
+            }}>
+              {bullet}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <a
+        href="/#contact"
+        style={{
+          display: 'inline-block',
+          fontFamily: 'var(--font-twk-lausanne)',
+          fontWeight: 600,
+          fontSize: '15px',
+          letterSpacing: '0.01em',
+          color: '#FFFFFF',
+          background: 'var(--z-signal, #5B8DEF)',
+          padding: '14px 28px',
+          borderRadius: '8px',
+          textDecoration: 'none',
+          border: 'none',
+          boxShadow: '0 2px 12px var(--z-signal-dim, rgba(91,141,239,0.10))',
+          transition: 'background 0.2s, transform 0.15s, box-shadow 0.2s',
+        }}
+        onMouseEnter={e => {
+          const el = e.currentTarget
+          el.style.background = 'var(--z-signal-bright, #7BA4F7)'
+          el.style.transform = 'translateY(-1px)'
+          el.style.boxShadow = '0 4px 20px var(--z-signal-medium, rgba(91,141,239,0.18))'
+        }}
+        onMouseLeave={e => {
+          const el = e.currentTarget
+          el.style.background = 'var(--z-signal, #5B8DEF)'
+          el.style.transform = 'translateY(0)'
+          el.style.boxShadow = '0 2px 12px var(--z-signal-dim, rgba(91,141,239,0.10))'
+        }}
+      >
+        Book your free session →
+      </a>
+    </div>
+  )
 }
 
 export function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
+  const discRef = useRef<HTMLDivElement>(null)
+  const labelsRef = useRef<HTMLDivElement>(null)
+  const [active, setActive] = useState(0)
+  const activeRef = useRef(0)
+
+  const changeService = useCallback((index: number) => {
+    if (index === activeRef.current) return
+    activeRef.current = index
+    setActive(index)
+  }, [])
 
   useEffect(() => {
     const section = sectionRef.current
-    if (!section) return
+    const disc = discRef.current
+    const labelsWrap = labelsRef.current
+    if (!section || !disc || !labelsWrap) return
 
-    const masterTl = gsap.timeline({ paused: true })
+    const mm = gsap.matchMedia()
 
-    SERVICE_PILLARS.forEach((_, i) => {
-      if (i === 0) return
+    mm.add('(min-width: 768px)', () => {
+      const rotateDisc = gsap.quickTo(disc, 'rotation', { duration: 0.8, ease: 'power3.out' })
+      const rotateLabels = gsap.quickTo(labelsWrap, 'rotation', { duration: 0.6, ease: 'power3.out' })
 
-      const ts = i - 1
-      const dur = 1.0
+      const entranceTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          once: true,
+        },
+      })
+      entranceTl.from(disc, {
+        opacity: 0, scale: 0.85, duration: 0.6, ease: 'back.out(1.4)',
+        immediateRender: false,
+      })
 
-      const outEl = section.querySelector<HTMLElement>(`[data-si="${i - 1}"]`)
-      const inEl  = section.querySelector<HTMLElement>(`[data-si="${i}"]`)
-      const flash = section.querySelector<HTMLElement>('.svc-flash')
-      if (!outEl || !inEl) return
+      const st = ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: `+=${window.innerHeight * 4}`,
+        pin: true,
+        onUpdate: (self) => {
+          const rotation = -(self.progress * 288)
+          rotateDisc(rotation)
+          rotateLabels(-rotation)
 
-      const outHeads  = outEl.querySelectorAll<HTMLElement>('.svc-head')
-      const outBody   = outEl.querySelectorAll<HTMLElement>('.svc-body')
-      const outNum    = outEl.querySelector<HTMLElement>('.svc-num')
-      const outCnt    = outEl.querySelector<HTMLElement>('.svc-cnt')
+          const idx = Math.min(4, Math.floor(self.progress * 5))
+          if (idx !== activeRef.current) {
+            changeService(idx)
+          }
+        },
+      })
 
-      const inNum     = inEl.querySelector<HTMLElement>('.svc-num')
-      const inHeads   = inEl.querySelectorAll<HTMLElement>('.svc-head')
-      const inTagline = inEl.querySelector<HTMLElement>('.svc-tagline')
-      const inDesc    = inEl.querySelector<HTMLElement>('.svc-desc')
-      const inBullets = inEl.querySelectorAll<HTMLElement>('.svc-bullet')
-      const inCnt     = inEl.querySelector<HTMLElement>('.svc-cnt')
-
-      // EXIT — all elements use opacity so there is no yPercent cache conflict
-      const exitTargets = [outNum, outCnt].filter(Boolean) as HTMLElement[]
-      if (exitTargets.length) {
-        masterTl.fromTo(exitTargets,
-          { opacity: 1, y: 0, immediateRender: false },
-          { opacity: 0, y: -20, duration: dur * 0.18 },
-          ts
-        )
+      return () => {
+        st.kill()
+        entranceTl.kill()
       }
-      masterTl.fromTo(outHeads,
-        { opacity: 1, y: 0, immediateRender: false },
-        { opacity: 0, y: -30, stagger: 0.03, duration: dur * 0.22 },
-        ts + 0.04
-      )
-      masterTl.fromTo(outBody,
-        { opacity: 1, y: 0, immediateRender: false },
-        { opacity: 0, y: -16, duration: dur * 0.18 },
-        ts + 0.06
-      )
-
-      // Chrome flash at midpoint
-      if (flash) {
-        masterTl.to(flash, { opacity: 1, duration: 0.001 }, ts + dur * 0.42)
-        masterTl.to(flash, { opacity: 0, duration: 0.001 }, ts + dur * 0.52)
-      }
-
-      // ENTER
-      if (inNum) {
-        masterTl.fromTo(inNum,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: dur * 0.22 },
-          ts + dur * 0.34
-        )
-      }
-      if (inCnt) {
-        masterTl.fromTo(inCnt,
-          { opacity: 0 },
-          { opacity: 1, duration: dur * 0.18 },
-          ts + dur * 0.38
-        )
-      }
-      masterTl.fromTo(inHeads,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, stagger: 0.05, duration: dur * 0.38, ease: 'power3.out' },
-        ts + dur * 0.36
-      )
-      if (inTagline) {
-        masterTl.fromTo(inTagline,
-          { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: dur * 0.28 },
-          ts + dur * 0.58
-        )
-      }
-      if (inDesc) {
-        masterTl.fromTo(inDesc,
-          { opacity: 0, y: 22 },
-          { opacity: 1, y: 0, duration: dur * 0.28 },
-          ts + dur * 0.66
-        )
-      }
-      masterTl.fromTo(inBullets,
-        { opacity: 0, x: -12 },
-        { opacity: 1, x: 0, stagger: 0.06, duration: dur * 0.22 },
-        ts + dur * 0.73
-      )
     })
 
-    // Progress fill over full 4-unit scroll
-    const fill = section.querySelector<HTMLElement>('.svc-fill')
-    if (fill) {
-      masterTl.fromTo(fill, { scaleY: 0 }, { scaleY: 1, duration: 4, ease: 'none' }, 0)
-    }
+    return () => mm.revert()
+  }, [changeService])
 
-    // Single ScrollTrigger handles both pin and scrub — split triggers cause timing conflicts
-    const st = ScrollTrigger.create({
-      trigger: section,
-      start: 'top top',
-      end: '+=500vh',
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      scrub: 1.5,
-      animation: masterTl,
-    })
-
-    return () => {
-      st.kill()
-      masterTl.kill()
+  const handleDotClick = (i: number) => {
+    if (i === activeRef.current) return
+    const disc = discRef.current
+    const labelsWrap = labelsRef.current
+    if (disc) {
+      const rotation = -(i * 72)
+      gsap.to(disc, { rotation, duration: 0.8, ease: 'power3.out', overwrite: 'auto' })
+      if (labelsWrap) {
+        gsap.to(labelsWrap, { rotation: -rotation, duration: 0.6, ease: 'power3.out', overwrite: 'auto' })
+      }
     }
-  }, [])
+    changeService(i)
+  }
 
   return (
-    <div id="services">
-      {/* ── MOBILE: stacked sections ── */}
-      <div className="md:hidden" style={{ background: '#1a1d1a' }}>
-        {SERVICE_PILLARS.map((service) => {
-          const lines = SERVICE_HEADINGS[service.id] ?? [service.title]
-          return (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 36 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                padding: '64px 24px',
-                borderBottom: '0.5px solid rgba(200,210,200,0.12)',
-              }}
-            >
-              <p style={{
-                fontFamily: 'var(--font-twk-lausanne)', fontSize: '13px',
-                fontWeight: 600, color: 'var(--color-voltage)',
-                letterSpacing: '0.15em', marginBottom: '18px',
-              }}>
-                {service.number}
-              </p>
-              <h2 style={{
-                fontFamily: 'var(--font-twk-lausanne)', fontWeight: 800,
-                fontSize: 'clamp(36px, 8vw, 56px)', color: '#fafffa',
-                lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: '16px',
-              }}>
-                {lines.join(' ')}
-              </h2>
-              <p style={{
-                fontFamily: 'var(--font-editorial-new)', fontStyle: 'italic',
-                fontSize: '16px', color: 'rgba(200,210,200,0.8)',
-                marginBottom: '20px', lineHeight: 1.5,
-              }}>
-                {service.tagline}
-              </p>
-              <p style={{
-                fontFamily: 'var(--font-twk-lausanne)', fontWeight: 300,
-                fontSize: '15px', color: 'rgba(200,210,200,0.55)',
-                lineHeight: 1.75, marginBottom: '24px',
-              }}>
-                {service.description}
-              </p>
-              <div>
-                {service.problems.map((p) => (
-                  <div key={p} style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', marginBottom: '12px' }}>
-                    <span style={{ color: 'var(--color-voltage)', marginTop: '3px', flexShrink: 0, fontSize: '10px' }}>◆</span>
-                    <span style={{
-                      fontFamily: 'var(--font-twk-lausanne)', fontWeight: 350,
-                      fontSize: '14px', color: 'rgba(200,210,200,0.65)', lineHeight: 1.55,
-                    }}>
-                      {p}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )
-        })}
-      </div>
-
-      {/* ── DESKTOP: GSAP pinned scroll ── */}
+    <section
+      id="services"
+      ref={sectionRef}
+      style={{ background: 'var(--z-black, #0C0D12)', minHeight: '100vh', position: 'relative' }}
+    >
       <div
-        ref={sectionRef}
-        className="hidden md:block"
-        style={{ height: '100vh', overflow: 'hidden', background: '#1a1d1a', position: 'relative' }}
+        style={{
+          maxWidth: '1400px', margin: '0 auto', width: '100%',
+          padding: 'clamp(60px, 10vh, 120px) clamp(24px, 6vw, 80px)',
+          display: 'flex', alignItems: 'center', gap: 'clamp(32px, 4vw, 64px)',
+          minHeight: '100vh',
+        }}
+        className="svc-layout"
       >
-        {/* Chrome flash overlay */}
-        <div
-          className="svc-flash"
-          style={{
-            position: 'absolute', inset: 0, zIndex: 10,
-            background: 'rgba(200,210,200,0.04)',
-            opacity: 0, pointerEvents: 'none',
-          }}
-        />
+        {/* ── Left: Content Panel ── */}
+        <div className="svc-content-panel" style={{ flex: 1, maxWidth: '540px', minWidth: 0 }}>
+          <p style={{
+            fontFamily: 'var(--font-dm-mono)',
+            fontSize: '11px',
+            color: 'var(--z-chrome-dark, rgba(200,202,208,0.45))',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            marginBottom: '24px',
+          }}>
+            Services
+          </p>
 
-        {/* Vertical progress bar */}
-        <div style={{
-          position: 'absolute', left: 'calc(8vw + 54vw)', top: '14vh', bottom: '14vh',
-          width: '1px', background: 'rgba(200,210,200,0.1)', zIndex: 5,
-        }}>
-          <div
-            className="svc-fill"
-            style={{
-              width: '100%', height: '100%',
-              background: 'var(--color-voltage)',
-              transformOrigin: 'top center', transform: 'scaleY(0)',
-              opacity: 0.5,
-            }}
-          />
-          {[0, 0.25, 0.5, 0.75, 1].map((pos, idx) => (
-            <div
-              key={idx}
-              style={{
-                position: 'absolute', top: `${pos * 100}%`,
-                left: '-4px', width: '9px', height: '9px',
-                background: '#1a1d1a',
-                border: '1px solid rgba(200,210,200,0.28)',
-                transform: 'rotate(45deg) translateY(-50%)',
-              }}
-            />
-          ))}
+          {/* Stacked crossfade panels — CSS transitions, not GSAP */}
+          <div className="svc-panels-grid">
+            {SERVICES.map((svc, i) => (
+              <ServicePanel key={i} svc={svc} isActive={i === active} />
+            ))}
+          </div>
+
+          {/* Progress dots */}
+          <div className="svc-dots" style={{ display: 'flex', gap: '12px', alignItems: 'center', marginTop: '32px' }}>
+            {SERVICES.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Service ${i + 1}`}
+                onClick={() => handleDotClick(i)}
+                style={{
+                  width: '8px', height: '8px',
+                  borderRadius: '50%',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                  background: i === active ? 'var(--z-signal, #5B8DEF)' : 'var(--z-chrome-dark, rgba(200,202,208,0.45))',
+                  boxShadow: i === active ? '0 0 10px var(--z-signal-dim, rgba(91,141,239,0.10))' : 'none',
+                  transition: 'background 0.3s, box-shadow 0.3s',
+                }}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Service panels — stacked absolutely */}
-        {SERVICE_PILLARS.map((service, i) => {
-          const lines = SERVICE_HEADINGS[service.id] ?? [service.title]
-          const isFirst = i === 0
+        {/* ── Right: Rotating Disc (desktop only) ── */}
+        <div className="svc-disc-wrap" style={{
+          flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center',
+          overflow: 'visible',
+        }}>
+          <div
+            ref={discRef}
+            style={{
+              width: 'clamp(340px, 36vw, 520px)',
+              height: 'clamp(340px, 36vw, 520px)',
+              borderRadius: '50%',
+              border: '1px solid var(--z-border-hover, rgba(200,202,208,0.18))',
+              position: 'relative',
+              overflow: 'visible',
+              willChange: 'transform',
+            }}
+          >
+            {/* Centre dot */}
+            <div style={{
+              position: 'absolute',
+              top: '50%', left: '50%',
+              width: '8px', height: '8px',
+              borderRadius: '50%',
+              background: 'var(--z-chrome-bright, rgba(200,202,208,0.85))',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 2,
+            }} />
 
-          return (
+            {/* Spokes + Nodes (rotate with disc) */}
+            {NODE_ANGLES.map((angle, i) => {
+              const isActive = i === active
+              const rad = (angle * Math.PI) / 180
+              const r = 50
+              const nx = 50 + r * Math.cos(rad)
+              const ny = 50 + r * Math.sin(rad)
+
+              return (
+                <div key={i}>
+                  <svg
+                    style={{
+                      position: 'absolute', inset: 0,
+                      width: '100%', height: '100%',
+                      pointerEvents: 'none',
+                    }}
+                    viewBox="0 0 100 100"
+                  >
+                    <line
+                      x1="50" y1="50"
+                      x2={nx} y2={ny}
+                      stroke={isActive ? 'var(--z-signal, #5B8DEF)' : 'var(--z-border, rgba(200,202,208,0.08))'}
+                      strokeWidth="0.2"
+                      style={{ transition: 'stroke 0.4s' }}
+                    />
+                  </svg>
+
+                  <div style={{
+                    position: 'absolute',
+                    left: `${nx}%`, top: `${ny}%`,
+                    transform: 'translate(-50%, -50%)',
+                    zIndex: 3,
+                  }}>
+                    <div style={{
+                      width: '12px', height: '12px',
+                      borderRadius: '50%',
+                      border: isActive ? 'none' : '1px solid var(--z-chrome-dark, rgba(200,202,208,0.45))',
+                      background: isActive ? 'var(--z-signal, #5B8DEF)' : 'transparent',
+                      boxShadow: isActive ? '0 0 16px var(--z-signal-dim, rgba(91,141,239,0.10))' : 'none',
+                      transition: 'background 0.4s, border 0.4s, box-shadow 0.4s',
+                    }} />
+                  </div>
+                </div>
+              )
+            })}
+
+            {/* Labels container — counter-rotated as a single group */}
             <div
-              key={service.id}
-              data-si={i}
+              ref={labelsRef}
               style={{
                 position: 'absolute', inset: 0,
-                display: 'flex', alignItems: 'center',
-                padding: '0 8vw',
                 pointerEvents: 'none',
+                willChange: 'transform',
               }}
             >
-              {/* Left — content */}
-              <div style={{ width: '54vw', paddingRight: '6vw' }}>
+              {NODE_ANGLES.map((angle, i) => {
+                const isActive = i === active
+                const rad = (angle * Math.PI) / 180
+                const r = 50
+                const nx = 50 + r * Math.cos(rad)
+                const ny = 50 + r * Math.sin(rad)
 
-                {/* Number + counter */}
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px' }}>
+                return (
                   <div
-                    className="svc-num"
+                    key={i}
                     style={{
-                      fontFamily: 'var(--font-twk-lausanne)', fontWeight: 600,
-                      fontSize: '13px', color: 'var(--color-voltage)',
-                      letterSpacing: '0.15em',
-                      opacity: isFirst ? 1 : 0,
+                      position: 'absolute',
+                      left: `${nx}%`, top: `${ny}%`,
+                      zIndex: 3,
                     }}
                   >
-                    {service.number}
-                  </div>
-                  <div
-                    className="svc-cnt"
-                    style={{
-                      fontFamily: 'var(--font-twk-lausanne)', fontWeight: 600,
-                      fontSize: '12px', color: 'rgba(200,210,200,0.22)',
-                      letterSpacing: '0.1em',
-                      opacity: isFirst ? 1 : 0,
-                    }}
-                  >
-                    {service.number} / 05
-                  </div>
-                </div>
-
-                {/* Heading lines */}
-                <div style={{ marginBottom: '28px' }}>
-                  {lines.map((line, li) => (
-                    <div key={li}>
-                      <div
-                        className="svc-head"
-                        style={{
-                          fontFamily: 'var(--font-twk-lausanne)', fontWeight: 800,
-                          fontSize: 'clamp(44px, 5.2vw, 82px)',
-                          color: '#fafffa', lineHeight: 1.0,
-                          letterSpacing: '-0.03em',
-                          opacity: isFirst ? 1 : 0,
-                        }}
-                      >
-                        {line}
-                      </div>
+                    <div style={{
+                      position: 'absolute',
+                      top: '18px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      fontFamily: 'var(--font-dm-mono)',
+                      fontSize: '9px',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      color: isActive ? 'var(--z-chrome-peak, #E8E9ED)' : 'var(--z-chrome-dark, rgba(200,202,208,0.45))',
+                      textAlign: 'center',
+                      whiteSpace: 'pre-line',
+                      lineHeight: 1.3,
+                      width: '80px',
+                      transition: 'color 0.4s',
+                    }}>
+                      {SHORT_LABELS[i]}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
 
-                {/* Tagline */}
-                <p
-                  className="svc-tagline svc-body"
+      {/* ── Mobile accordion (below 768px) ── */}
+      <div className="svc-mobile-accordion" style={{ display: 'none' }}>
+        <div style={{ padding: '0 clamp(24px, 6vw, 80px) clamp(60px, 10vh, 120px)' }}>
+          <p style={{
+            fontFamily: 'var(--font-dm-mono)',
+            fontSize: '11px',
+            color: 'var(--z-chrome-dark, rgba(200,202,208,0.45))',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            marginBottom: '32px',
+          }}>
+            Services
+          </p>
+          {SERVICES.map((s, i) => {
+            const isOpen = i === active
+            return (
+              <div key={i} style={{
+                borderBottom: '1px solid var(--z-border, rgba(200,202,208,0.08))',
+                borderLeft: isOpen ? '2px solid var(--z-signal, #5B8DEF)' : '2px solid transparent',
+                transition: 'border-color 0.3s',
+              }}>
+                <button
+                  onClick={() => setActive(isOpen ? -1 as never : i)}
                   style={{
-                    fontFamily: 'var(--font-editorial-new)', fontStyle: 'italic',
-                    fontSize: '19px', color: 'rgba(200,210,200,0.8)',
-                    marginBottom: '20px', lineHeight: 1.45,
-                    opacity: isFirst ? 1 : 0,
+                    width: '100%',
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                    padding: '20px 16px',
+                    background: 'none', border: 'none', cursor: 'pointer',
+                    textAlign: 'left',
                   }}
                 >
-                  {service.tagline}
-                </p>
-
-                {/* Description */}
-                <p
-                  className="svc-desc svc-body"
-                  style={{
-                    fontFamily: 'var(--font-twk-lausanne)', fontWeight: 300,
-                    fontSize: '15px', color: 'rgba(200,210,200,0.5)',
-                    lineHeight: 1.8, maxWidth: '520px', marginBottom: '28px',
-                    opacity: isFirst ? 1 : 0,
-                  }}
-                >
-                  {service.description}
-                </p>
-
-                {/* Problem bullets */}
-                <div>
-                  {service.problems.map((bullet) => (
-                    <div
-                      key={bullet}
-                      className="svc-bullet svc-body"
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <span style={{
+                      fontFamily: 'var(--font-dm-mono)',
+                      fontSize: '13px',
+                      color: isOpen ? 'var(--z-signal, #5B8DEF)' : 'var(--z-chrome-dark, rgba(200,202,208,0.45))',
+                      transition: 'color 0.3s',
+                    }}>
+                      {s.number}
+                    </span>
+                    <span style={{
+                      fontFamily: 'var(--font-twk-lausanne)',
+                      fontWeight: 500,
+                      fontSize: '16px',
+                      color: 'var(--z-chrome-peak, #E8E9ED)',
+                    }}>
+                      {s.title}
+                    </span>
+                  </span>
+                  <span style={{
+                    fontFamily: 'var(--font-dm-mono)',
+                    fontSize: '18px',
+                    color: isOpen ? 'var(--z-signal, #5B8DEF)' : 'var(--z-chrome-dark, rgba(200,202,208,0.45))',
+                    transition: 'transform 0.3s, color 0.3s',
+                    transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                  }}>
+                    +
+                  </span>
+                </button>
+                <div style={{
+                  maxHeight: isOpen ? '600px' : '0',
+                  overflow: 'hidden',
+                  transition: 'max-height 0.4s ease',
+                }}>
+                  <div style={{ padding: '0 16px 24px' }}>
+                    <p style={{
+                      fontFamily: 'var(--font-editorial-new)',
+                      fontStyle: 'italic',
+                      fontSize: '15px',
+                      color: 'var(--z-chrome, #C8CAD0)',
+                      marginBottom: '16px',
+                    }}>
+                      {s.tagline}
+                    </p>
+                    <p style={{
+                      fontFamily: 'var(--font-twk-lausanne)',
+                      fontSize: '14px',
+                      fontWeight: 300,
+                      color: 'var(--z-chrome-bright, rgba(200,202,208,0.85))',
+                      lineHeight: 1.7,
+                      marginBottom: '16px',
+                    }}>
+                      {s.description}
+                    </p>
+                    {s.bullets.map((bullet, bi) => (
+                      <div key={bi} style={{ display: 'flex', gap: '10px', marginBottom: '8px' }}>
+                        <span style={{ color: 'var(--z-signal, #5B8DEF)', flexShrink: 0 }}>—</span>
+                        <span style={{
+                          fontFamily: 'var(--font-twk-lausanne)',
+                          fontSize: '14px',
+                          fontWeight: 300,
+                          color: 'var(--z-chrome, #C8CAD0)',
+                          lineHeight: 1.6,
+                        }}>
+                          {bullet}
+                        </span>
+                      </div>
+                    ))}
+                    <a
+                      href="/#contact"
                       style={{
-                        display: 'flex', alignItems: 'flex-start',
-                        gap: '12px', marginBottom: '12px',
-                        opacity: isFirst ? 1 : 0,
+                        display: 'inline-block',
+                        fontFamily: 'var(--font-twk-lausanne)',
+                        fontWeight: 600,
+                        fontSize: '14px',
+                        color: '#FFFFFF',
+                        background: 'var(--z-signal, #5B8DEF)',
+                        padding: '12px 24px',
+                        borderRadius: '8px',
+                        textDecoration: 'none',
+                        marginTop: '16px',
                       }}
                     >
-                      <span style={{ color: 'var(--color-voltage)', marginTop: '4px', flexShrink: 0, fontSize: '9px' }}>◆</span>
-                      <span style={{
-                        fontFamily: 'var(--font-twk-lausanne)', fontWeight: 350,
-                        fontSize: '13px', color: 'rgba(200,210,200,0.58)',
-                        lineHeight: 1.6,
-                      }}>
-                        {bullet}
-                      </span>
-                    </div>
-                  ))}
+                      Book your free session →
+                    </a>
+                  </div>
                 </div>
               </div>
-
-              {/* Right — ghosted number watermark */}
-              <div
-                aria-hidden="true"
-                style={{
-                  position: 'absolute', right: 0, top: 0, bottom: 0,
-                  width: '38vw',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  overflow: 'hidden', pointerEvents: 'none', userSelect: 'none',
-                }}
-              >
-                <span style={{
-                  fontFamily: 'var(--font-twk-lausanne)', fontWeight: 800,
-                  fontSize: 'clamp(160px, 22vw, 340px)',
-                  color: 'rgba(200,210,200,0.032)',
-                  lineHeight: 1, letterSpacing: '-0.06em',
-                }}>
-                  {service.number}
-                </span>
-              </div>
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
-    </div>
+
+      <style>{`
+        .svc-panels-grid {
+          display: grid;
+          position: relative;
+        }
+        @media (max-width: 767px) {
+          .svc-layout { display: none !important; }
+          .svc-mobile-accordion { display: block !important; }
+        }
+        @media (min-width: 768px) {
+          .svc-disc-wrap { display: flex !important; }
+          .svc-mobile-accordion { display: none !important; }
+        }
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .svc-content-panel { max-width: 380px !important; }
+        }
+      `}</style>
+    </section>
   )
 }

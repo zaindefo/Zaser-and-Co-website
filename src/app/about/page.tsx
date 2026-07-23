@@ -20,7 +20,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <div className="space-y-6 text-obsidian-ink font-twk-lausanne text-lg leading-relaxed">
+            <div className="space-y-6 text-sage font-twk-lausanne text-lg leading-relaxed">
               <p>
                 Zaser &amp; Co was founded by{' '}
                 <span className="text-obsidian-ink font-medium">Syed Zain bin Noor</span> — a business,
@@ -40,9 +40,9 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.2} className="mt-12">
-            <div className="card p-8" style={{ borderColor: 'var(--z-border)' }}>
+            <div className="card p-8">
               <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">What makes us different</h2>
-              <p className="text-obsidian-ink text-lg leading-relaxed font-twk-lausanne">
+              <p className="text-sage text-lg leading-relaxed font-twk-lausanne">
                 Most consultancies advise — they produce a report, present a deck, and leave.
                 Zaser &amp; Co advises AND builds. When we identify a margin problem, we install a system
                 that tracks it in real-time. When we audit your AI readiness, we build the workflows.
@@ -96,7 +96,7 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.4} className="mt-12">
-            <div className="card p-8" style={{ borderColor: 'var(--z-border)' }}>
+            <div className="card p-8">
               <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">The brand promise</h2>
               <p className="text-voltage text-xl leading-relaxed font-twk-lausanne italic text-center">
                 &ldquo;We don&apos;t just tell you what&apos;s wrong.<br />

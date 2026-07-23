@@ -69,7 +69,7 @@ export function CustomCursor() {
           width: hovering ? 4 : 8,
           height: hovering ? 4 : 8,
           borderRadius: '50%',
-          backgroundColor: '#121613',
+          backgroundColor: '#0F1235',
           transition: 'width 0.2s, height 0.2s',
         }}
       />
@@ -80,8 +80,8 @@ export function CustomCursor() {
           width: hovering ? 64 : 40,
           height: hovering ? 64 : 40,
           borderRadius: '50%',
-          border: '1px solid rgba(43,238,75,0.3)',
-          backgroundColor: hovering ? 'rgba(43,238,75,0.08)' : 'transparent',
+          border: '1px solid rgba(196,134,106,0.4)',
+          backgroundColor: hovering ? 'rgba(196,134,106,0.1)' : 'transparent',
           transition: 'width 0.3s, height 0.3s, background-color 0.3s',
         }}
       />

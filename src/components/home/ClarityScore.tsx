@@ -1,68 +1,201 @@
 'use client'
-import { ScrollReveal } from '@/components/shared/ScrollReveal'
+import { useRef, useEffect } from 'react'
+import { gsap } from '@/lib/gsap'
 import { MagneticButton } from '@/components/shared/MagneticButton'
 import { RadarChart } from '@/components/shared/RadarChart'
 
+const DIMENSIONS = [
+  { label: 'Financial visibility', desc: 'Do you know your real margins, break-even, and cash position?' },
+  { label: 'Operational efficiency', desc: 'Are your processes documented, consistent, and scalable?' },
+  { label: 'AI readiness', desc: 'Can your business adopt AI tools effectively right now?' },
+  { label: 'Growth trajectory', desc: 'Is your revenue growing faster than your costs?' },
+  { label: 'Team capability', desc: 'Can your team operate independently with the right systems?' },
+]
+
 export function ClarityScore() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+
+    const ctx = gsap.context(() => {
+      const stroke = section.querySelector<HTMLElement>('.section-stroke')
+      const words = section.querySelectorAll<HTMLElement>('.cs-word')
+      const dims = section.querySelectorAll<HTMLElement>('.cs-dim')
+      const scoreBox = section.querySelector<HTMLElement>('.cs-score')
+
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: section, start: 'top 70%', once: true },
+      })
+
+      if (stroke) {
+        tl.fromTo(stroke, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: 'none' })
+      }
+      if (words.length) {
+        tl.from(words, { x: 80, opacity: 0, duration: 0.6, stagger: 0.08, ease: 'power4.out' }, '-=0.2')
+      }
+      if (scoreBox) {
+        tl.from(scoreBox, { opacity: 0, scale: 0.9, duration: 0.5, ease: 'back.out(1.5)' }, '-=0.2')
+      }
+      if (dims.length) {
+        tl.from(dims, { opacity: 0, y: 16, duration: 0.4, stagger: 0.08, ease: 'power2.out' }, '-=0.2')
+      }
+    }, section)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="section-padding page-container bg-linen border-t border-mist relative">
-      <div className="max-w-7xl mx-auto relative">
-        <ScrollReveal>
-          <p className="text-obsidian-ink text-xs font-mono tracking-widest uppercase text-center mb-4">
-            Clarity Score&trade;
-          </p>
-          <h2 className="font-twk-lausanne text-3xl md:text-5xl text-obsidian-ink text-center mb-4 tracking-tight">
-            Start with the truth about your business.
-          </h2>
-          <p className="text-obsidian-ink text-base md:text-lg text-center max-w-2xl mx-auto mb-12 leading-relaxed font-twk-lausanne">
-            Every Zaser &amp; Co engagement begins with a Clarity Score — a structured
-            diagnostic across five dimensions of business health. It takes 30
-            minutes. It costs nothing. And it tells you more about your business
-            than most founders learn in a year of operating.
-          </p>
-        </ScrollReveal>
+    <section
+      ref={sectionRef}
+      className="bg-paper-topo"
+      style={{ position: 'relative', padding: 'clamp(60px, 10vh, 120px) clamp(24px, 6vw, 80px)' }}
+    >
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div className="section-stroke" style={{ width: '100%', marginBottom: '48px' }} />
 
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12 mb-12">
-          <ScrollReveal delay={0.2}>
-            <RadarChart />
-          </ScrollReveal>
+        {/* Tag */}
+        <p style={{
+          fontFamily: 'var(--font-dm-mono)',
+          fontSize: 'var(--type-label)',
+          color: 'var(--color-voltage)',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          marginBottom: '16px',
+        }}>
+          Clarity Score™
+        </p>
 
-          <ScrollReveal delay={0.3}>
-            <div className="card p-8 text-center max-w-xs">
-              <p className="text-obsidian-ink text-sm mb-2">Typical starting score</p>
-              <p className="font-mono text-7xl font-medium text-sage mb-2">20–35</p>
-              <p className="text-sage text-xs">That&apos;s not a failure — it&apos;s a starting point</p>
-            </div>
-          </ScrollReveal>
+        {/* Display heading */}
+        <h2 style={{ margin: '0 0 16px' }}>
+          {['KNOW', 'WHERE', 'YOU', 'STAND'].map((word) => (
+            <span
+              key={word}
+              className="cs-word"
+              style={{
+                display: 'inline-block',
+                fontFamily: 'var(--font-bebas)',
+                fontSize: 'var(--type-display-section)',
+                color: 'var(--color-obsidian-ink)',
+                lineHeight: 1,
+                letterSpacing: '0.02em',
+                marginRight: '0.3em',
+              }}
+            >
+              {word}
+            </span>
+          ))}
+        </h2>
+
+        <p style={{
+          fontFamily: 'var(--font-editorial-new)',
+          fontStyle: 'italic',
+          fontSize: 'var(--type-body-lg)',
+          color: 'var(--color-sage)',
+          lineHeight: 1.6,
+          maxWidth: '600px',
+          marginBottom: 'clamp(40px, 6vh, 72px)',
+        }}>
+          Every project starts with a Clarity Score — a free, 30-minute look at your business across five areas. You walk away knowing your real numbers, your biggest gaps, and where the highest-impact improvements are. Whether you work with us after that or not, the clarity is yours to keep.
+        </p>
+
+        {/* Two-column: radar + score */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 'clamp(32px, 4vw, 64px)',
+          alignItems: 'center',
+          marginBottom: 'clamp(40px, 6vh, 72px)',
+        }}
+          className="cs-grid"
+        >
+          <RadarChart />
+
+          <div className="cs-score" style={{
+            border: '1px solid var(--color-mist)',
+            borderRadius: '14px',
+            padding: 'clamp(24px, 3vh, 40px)',
+            textAlign: 'center',
+          }}>
+            <p style={{
+              fontFamily: 'var(--font-twk-lausanne)',
+              fontSize: '14px',
+              color: 'var(--color-sage)',
+              marginBottom: '8px',
+            }}>
+              Typical starting score
+            </p>
+            <p style={{
+              fontFamily: 'var(--font-bebas)',
+              fontSize: 'clamp(64px, 10vw, 120px)',
+              color: 'var(--color-obsidian-ink)',
+              lineHeight: 1,
+              marginBottom: '8px',
+            }}>
+              20–35
+            </p>
+            <p style={{
+              fontFamily: 'var(--font-dm-mono)',
+              fontSize: '12px',
+              color: 'var(--color-sage)',
+              letterSpacing: '0.05em',
+            }}>
+              That&apos;s not a failure — it&apos;s a starting point
+            </p>
+          </div>
         </div>
 
-        <ScrollReveal>
-          <div className="card p-8 max-w-3xl mx-auto" style={{ borderColor: 'var(--z-border)' }}>
-            <p className="text-sage text-[10px] font-mono tracking-widest uppercase mb-4 text-center">
-              The five dimensions
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 text-center">
-              {[
-                { label: 'Financial visibility', desc: 'Do you know your real margins, break-even, and cash position?' },
-                { label: 'Operational efficiency', desc: 'Are your processes documented, consistent, and scalable?' },
-                { label: 'AI readiness', desc: 'Can your business adopt AI tools effectively right now?' },
-                { label: 'Growth trajectory', desc: 'Is your revenue growing faster than your costs?' },
-                { label: 'Team capability', desc: 'Can your team operate independently with the right systems?' },
-              ].map((dim) => (
-                <div key={dim.label}>
-                  <p className="font-mono text-voltage text-xs mb-2">{dim.label}</p>
-                  <p className="text-sage text-[11px] leading-relaxed">{dim.desc}</p>
-                </div>
-              ))}
+        {/* Five dimensions */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(5, 1fr)',
+          gap: '24px',
+          borderTop: '1px solid var(--color-mist)',
+          paddingTop: '32px',
+          marginBottom: '40px',
+        }}
+          className="cs-dims-grid"
+        >
+          {DIMENSIONS.map((dim) => (
+            <div key={dim.label} className="cs-dim">
+              <p style={{
+                fontFamily: 'var(--font-dm-mono)',
+                fontSize: '11px',
+                color: 'var(--color-voltage)',
+                letterSpacing: '0.05em',
+                marginBottom: '8px',
+                textTransform: 'uppercase',
+              }}>
+                {dim.label}
+              </p>
+              <p style={{
+                fontFamily: 'var(--font-twk-lausanne)',
+                fontSize: '13px',
+                color: 'var(--color-sage)',
+                lineHeight: 1.5,
+              }}>
+                {dim.desc}
+              </p>
             </div>
-          </div>
-        </ScrollReveal>
+          ))}
+        </div>
 
-        <ScrollReveal className="text-center mt-10">
+        <style>{`
+          @media (max-width: 1023px) {
+            .cs-grid { grid-template-columns: 1fr !important; }
+            .cs-dims-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          }
+          @media (max-width: 640px) {
+            .cs-dims-grid { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
+
+        <div style={{ textAlign: 'center' }}>
           <MagneticButton href="/contact" size="lg">
-            Get your Clarity Score — free, no obligation →
+            Book your free session →
           </MagneticButton>
-        </ScrollReveal>
+        </div>
       </div>
     </section>
   )

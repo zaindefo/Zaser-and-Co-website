@@ -28,7 +28,7 @@ export function MagneticButton({
 
   // Variant styles
   const variantClasses = {
-    primary: 'bg-voltage text-obsidian-ink font-550 uppercase text-caption tracking-widest hover:opacity-90',
+    primary: 'bg-voltage text-linen font-550 uppercase text-caption tracking-widest hover:opacity-90',
     ghost: 'bg-transparent text-obsidian-ink border border-obsidian-ink hover:bg-obsidian-ink hover:text-linen',
   }
 
@@ -36,7 +36,7 @@ export function MagneticButton({
 
   // Voltage shadow for primary CTA
   const shadowStyle = variant === 'primary' ? {
-    boxShadow: 'rgba(16, 94, 29, 0.45) 1px 8px 20px 0px, rgba(18, 146, 39, 0.25) 1px 8px 20px 0px'
+    boxShadow: 'rgba(16, 28, 120, 0.45) 1px 8px 20px 0px, rgba(18, 50, 180, 0.25) 1px 8px 20px 0px'
   } : {}
 
   if (href) {

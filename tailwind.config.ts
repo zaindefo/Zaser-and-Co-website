@@ -5,16 +5,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // NewForm Editorial Palette
-        linen: '#fafffa',
-        'obsidian-ink': '#121613',
+        linen: '#F6EFE4',
+        'obsidian-ink': '#0F1235',
         'pure-black': '#000000',
-        bark: '#232924',
-        sage: '#516254',
-        mist: '#c8d2c8',
-        voltage: '#2bee4b',
-        'moss-glow': '#93b799',
-        pollen: '#c4e4c9',
+        bark: '#0B0E2E',
+        sage: '#6B3828',
+        mist: '#C4C0BC',
+        voltage: '#1D2464',
+        'moss-glow': '#C4866A',
+        pollen: '#EDD4C6',
       },
       fontFamily: {
         'twk-lausanne': ['TWK Lausanne', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
@@ -94,8 +93,8 @@ const config: Config = {
         550: '550',
       },
       boxShadow: {
-        'voltage-lg': 'rgba(16, 94, 29, 0.45) 1px 8px 20px 0px',
-        'voltage-lg-2': 'rgba(18, 146, 39, 0.25) 1px 8px 20px 0px',
+        'voltage-lg': 'rgba(16, 28, 120, 0.45) 1px 8px 20px 0px',
+        'voltage-lg-2': 'rgba(18, 50, 180, 0.25) 1px 8px 20px 0px',
       },
       maxWidth: {
         page: '1440px',

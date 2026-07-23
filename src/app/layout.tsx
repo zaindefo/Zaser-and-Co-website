@@ -8,30 +8,52 @@ import { ClientLoader } from '@/components/ClientLoader'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Zaser & Co — Advisory That Builds',
+    default: 'Zaser & Co — Strategic & Management Consultancy',
     template: '%s | Zaser & Co',
   },
   description:
-    'Zaser & Co is a business consultancy that helps online businesses grow through financial clarity, AI implementation, and operational intelligence.',
+    'Zaser & Co is a strategic and management consultancy for small and medium businesses. Financial clarity, operational intelligence, and AI-powered systems.',
   openGraph: {
-    title: 'Zaser & Co — Advisory That Builds',
+    title: 'Zaser & Co — Strategic & Management Consultancy',
     description:
-      'Financial clarity. AI implementation. Operational intelligence. The consultancy that doesn\'t just advise — we build.',
+      'Strategic and management consultancy for growing businesses. Financial clarity, operational strategy, AI implementation, and management frameworks.',
     type: 'website',
     locale: 'en_US',
     url: 'https://zaserandco.com',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Zaser & Co — Advisory That Builds',
+    title: 'Zaser & Co — Strategic & Management Consultancy',
     description:
-      'Financial clarity. AI implementation. Operational intelligence. The consultancy that doesn\'t just advise — we build.',
+      'Strategic and management consultancy for growing businesses. Financial clarity, operational strategy, AI implementation, and management frameworks.',
   },
+}
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Zaser & Co',
+  url: 'https://zaserandco.com',
+  description:
+    'Strategic and management consultancy for small and medium businesses in Bangladesh. Financial clarity, operational intelligence, and AI-powered systems.',
+  foundingDate: '2025',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Dhaka',
+    addressCountry: 'BD',
+  },
+  sameAs: ['https://linkedin.com/company/zaserandco'],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" dir="ltr">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+      </head>
       <body className="bg-linen text-obsidian-ink font-twk-lausanne antialiased relative">
         <ClientLoader />
         <GlobalEffects />

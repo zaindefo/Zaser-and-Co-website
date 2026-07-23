@@ -144,7 +144,7 @@ export function Loader({ onComplete }: { onComplete: () => void }) {
           opacity: 0,
         }}
       >
-        Advisory that builds.
+        Strategic &amp; Management Consultancy
       </div>
 
       {/* Progress bar — bottom of screen, fills with voltage green */}

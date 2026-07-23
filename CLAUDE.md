@@ -22,7 +22,7 @@ No test runner or linter is configured.
 
 1. **Full Next.js 16 App Router site** — 5 pages: Home, BreakPoint (`/breakpoint`), StockPulse (`/stockpulse`), About, Contact.
 2. **GSAP animation system** — Lenis smooth scroll, ScrollTrigger pinned sections, scrub timelines, custom cursor, particle canvas, scroll progress bar, Easter eggs (Konami code).
-3. **Ghost Profit pinned decomposition** (`BlindGrowth.tsx`) — GSAP scrub timeline decomposes ৳8,00,000 revenue into cost layers with a live progress bar and animated counter. Keep this intact.
+3. **Cost breakdown pinned decomposition** (`BlindGrowth.tsx`) — GSAP scrub timeline decomposes ৳8,00,000 revenue into cost layers with a live progress bar and animated counter. Keep this intact.
 4. **StaggerReveal + PageTransition** shared components wired into layout.
 
 ### Design system migration (current session — IN PROGRESS)
@@ -48,7 +48,7 @@ Next.js 16 App Router marketing site for Zaser & Co (Bangladeshi online business
 
 **Copy is centralized** in `src/lib/constants.ts` — all headlines, stats, stories, FAQs, testimonials, and nav links. Components pull from constants; **never hardcode copy in JSX**.
 
-**Branded terms are IP** — never rename or rephrase: Ghost Profit, Zero Day, BreakPoint™, StockPulse™, Clarity Score™, Dead Shelf, Velocity Score, Burn Calendar™, Revenue Leak, Profit Pulse, Blind Growth.
+**Branded terms are IP** — never rename or rephrase: Zero Day, BreakPoint™, StockPulse™, Clarity Score™, Dead Shelf, Velocity Score, Burn Calendar™, Revenue Leak, Profit Pulse, Blind Growth.
 
 ### Key shared components
 
@@ -193,7 +193,7 @@ The wordmark reads "New Form" (split: obsidian "New" + voltage "Form") — this 
 ### Animation rules
 
 - Default easing: `[0.22, 1, 0.36, 1]` (confident deceleration)
-- Max duration: 1.2s (except Ghost Profit pinned sequence — that runs for 3000px scroll)
+- Max duration: 1.2s (except cost breakdown pinned sequence — that runs for 3000px scroll)
 - GSAP ScrollTrigger: `scrub: 1`
 - Respect `prefers-reduced-motion: reduce` — all animations off via CSS
 - No particle canvas, no grain, no grid in the new design

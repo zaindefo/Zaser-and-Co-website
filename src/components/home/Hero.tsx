@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MagneticButton } from '@/components/shared/MagneticButton'
+import { TopoWaveField } from '@/components/shared/TopoWaveField'
 import { HERO } from '@/lib/constants'
 
 // Each slot draws from a completely separate thematic image set
@@ -100,7 +101,7 @@ const QUICK_NAV = [
   { number: '01', label: 'Services',     href: '/#services' },
   { number: '02', label: 'BreakPoint™',  href: '/breakpoint' },
   { number: '03', label: 'StockPulse™',  href: '/stockpulse' },
-  { number: '04', label: 'Perspectives', href: '/#perspectives' },
+  { number: '04', label: 'Insights', href: '/#insights' },
 ]
 
 const STATS = [
@@ -114,62 +115,86 @@ export function Hero() {
 
   return (
     <section className="min-h-screen bg-linen relative flex flex-col">
-      {/* Background "Z" monogram — barely-there depth element */}
-      <div
-        className="absolute inset-0 overflow-hidden pointer-events-none select-none"
-        aria-hidden="true"
-      >
-        <span
-          style={{
-            fontFamily: 'var(--font-pp-mondwest)',
-            fontSize: 'clamp(300px, 50vw, 700px)',
-            color: 'rgba(18,22,19,0.016)',
-            position: 'absolute',
-            top: '5%',
-            right: '-8%',
-            lineHeight: 1,
-          }}
-        >
-          Z
-        </span>
-      </div>
+      {/* Topographic wave field — living terrain background */}
+      <TopoWaveField className="z-0" />
 
       {/* Main content */}
-      <div className="page-container px-6 md:px-12 lg:px-20 pt-40 md:pt-60 pb-40 flex-1 flex flex-col justify-center">
+      <div className="page-container px-6 md:px-12 lg:px-20 pt-40 md:pt-60 pb-40 flex-1 flex flex-col justify-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Heavy grotesque headline — matches NewForm editorial style */}
-          <h1
-            className="text-obsidian-ink"
-            style={{
-              fontFamily: 'var(--font-twk-lausanne)',
-              fontWeight: 800,
-              fontSize: 'clamp(44px, 8.5vw, 148px)',
-              lineHeight: 0.94,
-              letterSpacing: '-0.025em',
-              marginBottom: '3rem',
-            }}
-          >
-            {/* Line 1: text + wide landscape slot */}
-            <div className="flex items-center flex-wrap" style={{ gap: '0.18em', marginBottom: '0.06em' }}>
+          {/* Section label */}
+          {HERO.badge && (
+            <p style={{
+              fontFamily: 'var(--font-dm-mono)',
+              fontSize: '11px',
+              fontWeight: 500,
+              color: 'var(--z-chrome-dark, #5A5B66)',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              marginBottom: '24px',
+            }}>
+              {HERO.badge}
+            </p>
+          )}
+
+          <h1 style={{ marginBottom: '3rem' }} aria-label={`${l1} ${l2} ${l3} ${l4}`}>
+            {/* Row 1 — setup: warm brown sage, smaller */}
+            <div
+              className="flex items-center flex-wrap"
+              style={{
+                gap: '0.18em', marginBottom: '0.04em',
+                fontFamily: 'var(--font-bebas)',
+                fontSize: 'clamp(36px, 5.5vw, 72px)',
+                letterSpacing: '-0.02em', lineHeight: 0.88,
+                color: '#6B3828',
+              }}
+            >
               <span>{l1}</span>
-              <ImageCycler images={IMAGE_SETS.numbers} offsetMs={OFFSETS_MS[0]} widthEm={2.5} heightEm={0.82} />
+              <ImageCycler images={IMAGE_SETS.numbers} offsetMs={OFFSETS_MS[0]} widthEm={2.2} heightEm={0.8} />
             </div>
-            {/* Line 2: small portrait slot + text */}
-            <div className="flex items-center flex-wrap" style={{ gap: '0.18em', marginBottom: '0.06em' }}>
-              <ImageCycler images={IMAGE_SETS.profit} offsetMs={OFFSETS_MS[1]} widthEm={1.1} heightEm={0.82} />
+
+            {/* Row 2 — payoff: deep navy, larger */}
+            <div
+              className="flex items-center flex-wrap"
+              style={{
+                gap: '0.18em', marginBottom: '0.04em',
+                fontFamily: 'var(--font-bebas)',
+                fontSize: 'clamp(52px, 8vw, 100px)',
+                letterSpacing: '-0.025em', lineHeight: 0.88,
+                color: '#0F1235',
+              }}
+            >
+              <ImageCycler images={IMAGE_SETS.profit} offsetMs={OFFSETS_MS[1]} widthEm={1.0} heightEm={0.78} />
               <span>{l2}</span>
             </div>
-            {/* Line 3: text + wide landscape slot */}
-            <div className="flex items-center flex-wrap" style={{ gap: '0.18em', marginBottom: '0.06em' }}>
+
+            {/* Row 3 — setup: warm brown sage, smaller */}
+            <div
+              className="flex items-center flex-wrap"
+              style={{
+                gap: '0.18em', marginBottom: '0.04em',
+                fontFamily: 'var(--font-bebas)',
+                fontSize: 'clamp(36px, 5.5vw, 72px)',
+                letterSpacing: '-0.02em', lineHeight: 0.88,
+                color: '#6B3828',
+              }}
+            >
               <span>{l3}</span>
-              <ImageCycler images={IMAGE_SETS.operations} offsetMs={OFFSETS_MS[2]} widthEm={2.5} heightEm={0.82} />
+              <ImageCycler images={IMAGE_SETS.operations} offsetMs={OFFSETS_MS[2]} widthEm={2.2} heightEm={0.8} />
             </div>
-            {/* Line 4: text only */}
-            <div>
+
+            {/* Row 4 — payoff: dark indigo */}
+            <div
+              style={{
+                fontFamily: 'var(--font-bebas)',
+                fontSize: 'clamp(52px, 8vw, 100px)',
+                letterSpacing: '-0.025em', lineHeight: 0.88,
+                color: '#1D2464',
+              }}
+            >
               <span>{l4}</span>
             </div>
           </h1>
@@ -231,7 +256,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.7 }}
-        className="page-container px-6 md:px-12 lg:px-20 pb-20"
+        className="page-container px-6 md:px-12 lg:px-20 pb-20 relative z-10"
       >
         <div className="border-t border-mist pt-20 flex flex-wrap items-center gap-x-40 gap-y-20">
           <span className="text-caption text-mist/60 uppercase tracking-widest hidden md:inline">

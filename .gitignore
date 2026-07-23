@@ -19,5 +19,12 @@ Thumbs.db
 .claude/
 .agents/
 .superpowers/
+.recovery/
+.remember/
 skills-lock.json
 docs/superpowers/
+
+# Large media files
+*.mp4
+*.mov
+*.avi
