@@ -3,8 +3,9 @@ import { ScrollReveal } from '@/components/shared/ScrollReveal'
 import { MagneticButton } from '@/components/shared/MagneticButton'
 
 export const metadata: Metadata = {
-  title: 'About',
-  description: 'The story behind Zaser & Co — a consultancy that advises and builds, for online businesses that are growing.',
+  title: 'About — Our Story & Approach',
+  description: 'The story behind Zaser & Co — a strategic and management consultancy that advises and builds, for SMEs that are growing. Financial clarity, AI implementation, and operational improvement.',
+  alternates: { canonical: '/about' },
 }
 
 export default function AboutPage() {

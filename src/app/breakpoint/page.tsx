@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: 'BreakPoint™ — Real-Time Break-Even Intelligence',
   description:
     'Know your Zero Day. BreakPoint tracks daily revenue against break-even with AI insights, WhatsApp alerts, and scenario modeling for online businesses.',
+  alternates: { canonical: '/breakpoint' },
 }
 
 export default function BreakpointPage() {

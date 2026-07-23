@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Insights — Strategic Thinking for Growing Businesses',
   description:
     'Research, frameworks, and analysis from Zaser & Co. Financial strategy, operational performance, and AI implementation insights for SMEs.',
+  alternates: { canonical: '/insights' },
 }
 
 export default function InsightsIndex() {

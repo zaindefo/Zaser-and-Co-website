@@ -7,12 +7,42 @@ import { TransitionWrapper } from '@/components/layout/TransitionWrapper'
 import { ClientLoader } from '@/components/ClientLoader'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://zaserandco.com'),
   title: {
     default: 'Zaser & Co — Strategic & Management Consultancy',
     template: '%s | Zaser & Co',
   },
   description:
-    'Zaser & Co is a strategic and management consultancy for small and medium businesses. Financial clarity, operational intelligence, and AI-powered systems.',
+    'Zaser & Co is a strategic and management consultancy for small and medium businesses in Bangladesh. Financial clarity, operational intelligence, AI implementation, and management frameworks.',
+  keywords: [
+    'strategic consultancy Bangladesh',
+    'management consultancy Dhaka',
+    'business consultancy SME',
+    'financial clarity',
+    'AI implementation',
+    'operational improvement',
+    'Zaser and Co',
+    'break-even analysis',
+    'margin improvement',
+    'business strategy Bangladesh',
+  ],
+  authors: [{ name: 'Zaser & Co', url: 'https://zaserandco.com' }],
+  creator: 'Zaser & Co',
+  publisher: 'Zaser & Co',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://zaserandco.com',
+  },
   openGraph: {
     title: 'Zaser & Co — Strategic & Management Consultancy',
     description:
@@ -20,6 +50,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://zaserandco.com',
+    siteName: 'Zaser & Co',
   },
   twitter: {
     card: 'summary_large_image',

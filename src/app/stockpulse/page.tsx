@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'StockPulse™ — Inventory Intelligence',
   description:
     "Never stock out. Never overstock. StockPulse monitors every SKU's velocity, fires reorder alerts, and kills Dead Shelf before it kills your cash flow.",
+  alternates: { canonical: '/stockpulse' },
 }
 
 const VELOCITY_TIERS = [
