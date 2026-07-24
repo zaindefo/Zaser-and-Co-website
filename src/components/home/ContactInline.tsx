@@ -44,7 +44,7 @@ export function ContactInline() {
     setSubmitting(true)
     setSubmitError(false)
     try {
-      const res = await fetch('https://formspree.io/f/xojznlpv', {
+      const res = await fetch('https://formspree.io/f/mwvgrzrk', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
