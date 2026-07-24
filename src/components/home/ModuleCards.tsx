@@ -2,7 +2,7 @@
 import { useRef, useEffect } from 'react'
 import { gsap } from '@/lib/gsap'
 import { MagneticButton } from '@/components/shared/MagneticButton'
-import { BREAKPOINT_MODULE, STOCKPULSE_MODULE } from '@/lib/constants'
+import { STOCKPULSE_MODULE } from '@/lib/constants'
 
 function ModuleCard({ module, href, flip = false }: { module: any; href: string; flip?: boolean }) {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -213,9 +213,7 @@ export function ModuleCards() {
         }
       `}</style>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <ModuleCard module={BREAKPOINT_MODULE} href="/breakpoint" />
-        <div style={{ height: '1px', background: 'rgba(200,202,208,0.08)' }} />
-        <ModuleCard module={STOCKPULSE_MODULE} href="/stockpulse" flip />
+        <ModuleCard module={STOCKPULSE_MODULE} href="/stockpulse" />
       </div>
     </section>
   )

@@ -43,7 +43,7 @@ export function DashboardMock() {
       >
         <div className="flex items-center justify-between mb-6">
           <div>
-            <p className="text-sage text-xs font-body mb-0.5">BreakPoint</p>
+            <p className="text-sage text-xs font-body mb-0.5">StockPulse</p>
             <p className="text-obsidian-ink font-heading text-lg">June 2026</p>
           </div>
           <div className="flex items-center gap-2">

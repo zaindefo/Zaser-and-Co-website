@@ -13,7 +13,7 @@ export function ScenarioSlider() {
 
   return (
     <div className="card p-8 max-w-2xl mx-auto">
-      <h3 className="font-heading text-xl text-obsidian-ink mb-2">Interactive BreakPoint Demo</h3>
+      <h3 className="font-heading text-xl text-obsidian-ink mb-2">Interactive Revenue Simulator</h3>
       <p className="text-obsidian-ink text-sm mb-6 font-body">Drag to simulate revenue. See your Profit Pulse change.</p>
 
       <div className="mb-6">

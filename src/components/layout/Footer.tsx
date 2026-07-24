@@ -32,23 +32,11 @@ export function Footer() {
           <div>
             <h4 className="text-caption text-moss-glow font-550 uppercase tracking-widest mb-15">Services</h4>
             <nav className="space-y-8 text-body-sm">
-              <Link href="/services/financial-clarity" className="block text-linen hover:text-moss-glow transition-colors">
-                Financial Clarity
-              </Link>
-              <Link href="/services/margin-operations" className="block text-linen hover:text-moss-glow transition-colors">
-                Margin &amp; Operations
-              </Link>
               <Link href="/services/ai-audit-implementation" className="block text-linen hover:text-moss-glow transition-colors">
-                AI Audit
+                AI Audit &amp; Implementation
               </Link>
-              <Link href="/services/content-generation" className="block text-linen hover:text-moss-glow transition-colors">
-                Content Generation
-              </Link>
-              <Link href="/services/hr-ai-training" className="block text-linen hover:text-moss-glow transition-colors">
-                HR &amp; AI Training
-              </Link>
-              <Link href="/services/business-process-improvement" className="block text-linen hover:text-moss-glow transition-colors">
-                Process Improvement
+              <Link href="/services/management-operations" className="block text-linen hover:text-moss-glow transition-colors">
+                Management &amp; Operations
               </Link>
             </nav>
           </div>
@@ -85,11 +73,11 @@ export function Footer() {
               <Link href="/free-ai-audit" className="block text-linen hover:text-moss-glow transition-colors">
                 Free AI Audit
               </Link>
-              <Link href="/breakpoint" className="block text-linen hover:text-moss-glow transition-colors">
-                BreakPoint™
-              </Link>
               <Link href="/stockpulse" className="block text-linen hover:text-moss-glow transition-colors">
                 StockPulse™
+              </Link>
+              <Link href="/policies" className="block text-linen hover:text-moss-glow transition-colors">
+                Policies
               </Link>
             </nav>
           </div>

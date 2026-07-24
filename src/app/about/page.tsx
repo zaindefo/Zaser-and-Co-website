@@ -54,42 +54,22 @@ export default function AboutPage() {
 
           <ScrollReveal delay={0.3} className="mt-12">
             <div className="card p-8">
-              <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">Five pillars</h2>
+              <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">Two core services</h2>
               <ul className="space-y-4 text-obsidian-ink font-twk-lausanne leading-relaxed">
                 <li className="flex items-start gap-3">
                   <span className="text-voltage mt-1 flex-shrink-0">&#9670;</span>
                   <span>
-                    <span className="text-obsidian-ink font-medium">Financial Clarity.</span> Real margins,
-                    real break-even, real cash flow — through advisory and our proprietary tools BreakPoint&trade;
-                    and StockPulse&trade;.
+                    <span className="text-obsidian-ink font-medium">AI Audit &amp; Implementation.</span> We assess
+                    your business across five dimensions of AI readiness, build a prioritised roadmap, and deploy one
+                    working AI system — with full handover documentation and training.
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-voltage mt-1 flex-shrink-0">&#9670;</span>
                   <span>
-                    <span className="text-obsidian-ink font-medium">Margin &amp; Operations Improvement.</span> Diagnosing
-                    and fixing the operational problems that silently erode margin every day.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-voltage mt-1 flex-shrink-0">&#9670;</span>
-                  <span>
-                    <span className="text-obsidian-ink font-medium">AI Audit &amp; Implementation.</span> Structured
-                    assessment followed by working AI systems deployed in your business within weeks.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-voltage mt-1 flex-shrink-0">&#9670;</span>
-                  <span>
-                    <span className="text-obsidian-ink font-medium">Content Generation.</span> AI-powered content
-                    systems that produce consistent, on-brand, conversion-focused output at scale.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-voltage mt-1 flex-shrink-0">&#9670;</span>
-                  <span>
-                    <span className="text-obsidian-ink font-medium">HR &amp; AI Training.</span> Preparing teams
-                    to work with AI and building the HR foundations that prevent growing pains.
+                    <span className="text-obsidian-ink font-medium">Management &amp; Operations Strategy.</span> We
+                    diagnose your cost structure, map where margin is being lost, and deliver a 90-day improvement
+                    roadmap with an executive presentation deck.
                   </span>
                 </li>
               </ul>

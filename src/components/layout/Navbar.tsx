@@ -6,22 +6,17 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_LINKS = [
   { label: 'Services', href: '/#services', hasDropdown: true },
-  { label: 'BreakPoint', href: '/breakpoint' },
   { label: 'StockPulse', href: '/stockpulse' },
   { label: 'Insights', href: '/insights' },
+  { label: 'Policies', href: '/policies' },
 ]
 
 const SERVICES_DROPDOWN = [
-  { label: 'Financial Clarity', href: '/services/financial-clarity', desc: 'Know your real profit and break-even point.' },
-  { label: 'Margin & Operations', href: '/services/margin-operations', desc: 'Find cost leaks and improve margins.' },
-  { label: 'AI Audit & Implementation', href: '/services/ai-audit-implementation', desc: 'Automate what matters first.' },
-  { label: 'Content Generation', href: '/services/content-generation', desc: 'AI-powered content systems.' },
-  { label: 'HR & AI Training', href: '/services/hr-ai-training', desc: 'Build a team that runs without you.' },
-  { label: 'Process Improvement', href: '/services/business-process-improvement', desc: 'Systems that scale with you.' },
+  { label: 'AI Audit & Implementation', href: '/services/ai-audit-implementation', desc: 'We assess, build, and integrate AI systems.' },
+  { label: 'Management & Operations', href: '/services/management-operations', desc: 'Cost structure diagnosis and margin recovery.' },
 ]
 
 const PRODUCT_LINKS: Record<string, { dot: string; desc: string }> = {
-  '/breakpoint': { dot: 'var(--z-profit)', desc: 'Break-even intelligence for online businesses.' },
   '/stockpulse': { dot: '#6CA0DC', desc: 'Inventory intelligence that finds frozen cash.' },
 }
 
