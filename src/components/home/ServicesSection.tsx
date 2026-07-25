@@ -290,11 +290,10 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
             position: 'absolute', inset: 0,
             width: '100%', height: '100%',
             objectFit: 'cover',
-            filter: 'grayscale(1)',
-            opacity: 0.3,
+            opacity: 0.55,
           }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'rgba(24,32,64,0.65)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(12,15,22,0.4)' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.03) 0%, transparent 50%)' }} />
         <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
           <circle cx="50%" cy="50%" r="35%" stroke="rgba(255,255,255,0.015)" strokeWidth="0.5" fill="none" />
