@@ -56,6 +56,7 @@ interface Props {
   amplitude?: number
   mouseInteraction?: boolean
   opacity?: number
+  lineWidthScale?: number
 }
 
 export function TopoWaveField({
@@ -65,6 +66,7 @@ export function TopoWaveField({
   amplitude = 22,
   mouseInteraction = true,
   opacity = 1,
+  lineWidthScale = 1,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const mouseRef = useRef({ x: -9999, y: -9999 })
@@ -169,7 +171,7 @@ export function TopoWaveField({
 
         const c = isAccent ? colors.accent : colors.main
         ctx!.strokeStyle = `rgba(${c[0]},${c[1]},${c[2]},${baseAlpha})`
-        ctx!.lineWidth = isAccent ? colors.accentWidth : colors.mainWidth
+        ctx!.lineWidth = (isAccent ? colors.accentWidth : colors.mainWidth) * lineWidthScale
         ctx!.stroke()
       }
 
@@ -194,7 +196,7 @@ export function TopoWaveField({
       if (onMove) canvas.removeEventListener('mousemove', onMove)
       if (onLeave) canvas.removeEventListener('mouseleave', onLeave)
     }
-  }, [theme, lineCount, amplitude, mouseInteraction, opacity])
+  }, [theme, lineCount, amplitude, mouseInteraction, opacity, lineWidthScale])
 
   return (
     <canvas

@@ -234,7 +234,7 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
     }}>
       {/* Living organism background — white flowing lines on dark */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
-        <TopoWaveField theme="dark" lineCount={24} amplitude={18} mouseInteraction={false} opacity={0.5} />
+        <TopoWaveField theme="dark" lineCount={24} amplitude={18} mouseInteraction={false} opacity={0.8} lineWidthScale={3} />
       </div>
 
       {/* Ghost data viz */}
@@ -396,14 +396,15 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
       }}>
         <p style={{
           fontFamily: "var(--font-dm-mono, 'DM Mono', monospace)",
-          fontSize: '10px', color: '#782000',
-          letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '10px',
+          fontSize: '11px', color: '#C46A3A',
+          letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '12px',
+          fontWeight: 500,
         }}>
           ABOUT
         </p>
         <p style={{
           fontFamily: 'var(--font-twk-lausanne, Inter, sans-serif)',
-          fontSize: '14px', fontWeight: 300, color: '#AAAAAA', lineHeight: 1.65,
+          fontSize: '15px', fontWeight: 500, color: '#E8E8E8', lineHeight: 1.7,
         }}>
           {service.about}
         </p>
