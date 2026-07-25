@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react'
 import { gsap } from '@/lib/gsap'
 import Link from 'next/link'
+import { TopoWaveField } from '@/components/shared/TopoWaveField'
 
 const SERVICES = [
   {
@@ -27,6 +28,7 @@ const SERVICES = [
     href: '/services/ai-audit-implementation',
     ctaHref: '/free-ai-audit',
     ctaLabel: 'Book your free AI audit',
+    circleImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=800&fit=crop&q=80',
   },
   {
     number: '02',
@@ -51,6 +53,7 @@ const SERVICES = [
     href: '/services/management-operations',
     ctaHref: '/free-business-audit',
     ctaLabel: 'Get your operations diagnostic',
+    circleImage: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=800&fit=crop&q=80',
   },
 ]
 
@@ -195,57 +198,6 @@ function BrandMark() {
   )
 }
 
-/* ── Circle interior illustrations ── */
-
-function CircleIllustrationAI() {
-  return (
-    <svg viewBox="0 0 680 680" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.15, pointerEvents: 'none' }}>
-      <line x1="140" y1="340" x2="260" y2="240" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="260" y1="240" x2="380" y2="280" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="380" y1="280" x2="500" y2="200" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="260" y1="240" x2="220" y2="380" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="220" y1="380" x2="360" y2="400" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="360" y1="400" x2="380" y2="280" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="360" y1="400" x2="480" y2="420" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="500" y1="200" x2="540" y2="340" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="140" y1="340" x2="220" y2="380" stroke="#1D2348" strokeWidth="1.2" />
-      <circle cx="140" cy="340" r="10" fill="#1D2348" />
-      <circle cx="260" cy="240" r="14" fill="#1E2855" />
-      <circle cx="380" cy="280" r="11" fill="#1D2348" />
-      <circle cx="500" cy="200" r="9" fill="#1D2348" />
-      <circle cx="220" cy="380" r="10" fill="#1D2348" />
-      <circle cx="360" cy="400" r="12" fill="#1E2855" />
-      <circle cx="480" cy="420" r="8" fill="#1D2348" />
-      <circle cx="540" cy="340" r="9" fill="#1D2348" />
-      <path d="M 180 480 C 240 450, 320 470, 400 440" stroke="#1D2348" fill="none" strokeWidth="1" />
-      <path d="M 200 510 C 280 490, 360 500, 440 480" stroke="#1D2348" fill="none" strokeWidth="0.8" />
-      <line x1="250" y1="520" x2="430" y2="520" stroke="#1D2348" strokeWidth="0.8" />
-      <line x1="250" y1="540" x2="380" y2="540" stroke="#1D2348" strokeWidth="0.8" />
-    </svg>
-  )
-}
-
-function CircleIllustrationOps() {
-  return (
-    <svg viewBox="0 0 680 680" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.15, pointerEvents: 'none' }}>
-      <rect x="140" y="260" width="80" height="40" rx="4" stroke="#1D2348" fill="none" strokeWidth="1.2" />
-      <rect x="280" y="260" width="80" height="40" rx="4" stroke="#1D2348" fill="none" strokeWidth="1.2" />
-      <rect x="420" y="260" width="80" height="40" rx="4" stroke="#1D2348" fill="none" strokeWidth="1.2" />
-      <line x1="220" y1="280" x2="280" y2="280" stroke="#1D2348" strokeWidth="1.2" />
-      <line x1="360" y1="280" x2="420" y2="280" stroke="#1D2348" strokeWidth="1.2" />
-      <polygon points="276,276 276,284 282,280" fill="#1D2348" />
-      <polygon points="416,276 416,284 422,280" fill="#1D2348" />
-      <rect x="180" y="360" width="200" height="14" rx="3" fill="#1D2348" />
-      <rect x="180" y="384" width="155" height="14" rx="3" fill="#1D2348" />
-      <rect x="180" y="408" width="120" height="14" rx="3" fill="#1D2348" />
-      <rect x="180" y="432" width="85" height="14" rx="3" fill="#1D2348" />
-      <rect x="180" y="456" width="55" height="14" rx="3" fill="#1D2348" />
-      <circle cx="480" cy="420" r="40" stroke="#1D2348" fill="none" strokeWidth="1.2" />
-      <path d="M 480 380 A 40 40 0 0 1 520 420" stroke="#1E2855" strokeWidth="3" fill="none" />
-    </svg>
-  )
-}
-
 /* ── Service Hero (cinematic full-viewport section) ── */
 
 function ServiceHero({ service, index }: { service: typeof SERVICES[number]; index: number }) {
@@ -257,7 +209,6 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
     const ctx = gsap.context(() => {
       const trig = { trigger: el, start: 'top 65%', once: true }
       gsap.from(el.querySelector('.sh-circle'), { scale: 0.8, opacity: 0, duration: 1.2, ease: 'power2.out', scrollTrigger: trig })
-      gsap.from(el.querySelectorAll('.sh-orbit'), { opacity: 0, rotation: -15, duration: 1.4, ease: 'power2.out', stagger: 0.2, scrollTrigger: trig })
       gsap.from(el.querySelector('.sh-panel-bl'), { x: -50, y: 30, opacity: 0, duration: 1, ease: 'power2.out', delay: 0.3, scrollTrigger: trig })
       gsap.from(el.querySelector('.sh-panel-tr'), { x: 50, y: -30, opacity: 0, duration: 1, ease: 'power2.out', delay: 0.4, scrollTrigger: trig })
       gsap.from(el.querySelector('.sh-brand'), { scale: 0, opacity: 0, duration: 0.8, ease: 'back.out(2)', delay: 0.6, scrollTrigger: trig })
@@ -270,7 +221,6 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
 
   const PanelBL = index === 0 ? AINetworkPanel : CostStructurePanel
   const PanelTR = index === 0 ? AIDashboardPanel : RoadmapPanel
-  const CircleIllustration = index === 0 ? CircleIllustrationAI : CircleIllustrationOps
 
   return (
     <div ref={ref} className="sh-section" style={{
@@ -282,13 +232,10 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
       alignItems: 'center',
       justifyContent: 'center',
     }}>
-      {/* Dot grid — 2px dots, #1D2348, 50px spacing, 0.3 opacity */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
-        backgroundImage: 'radial-gradient(circle, #1D2348 1px, transparent 1px)',
-        backgroundSize: '50px 50px',
-        opacity: 0.3,
-      }} />
+      {/* Living organism background — white flowing lines on dark */}
+      <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
+        <TopoWaveField theme="dark" lineCount={24} amplitude={18} mouseInteraction={false} opacity={0.5} />
+      </div>
 
       {/* Ghost data viz */}
       <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 1, pointerEvents: 'none' }}>
@@ -326,49 +273,32 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
         {service.watermark}
       </div>
 
-      {/* Central circle — #182040 at 85% opacity, radial gradient to #0F1428 */}
+      {/* Central circle — engagement image with navy overlay */}
       <div className="sh-circle" style={{
         position: 'absolute', top: '50%', left: '50%',
         transform: 'translate(-50%, -50%)',
         width: 'min(55vw, 680px)', height: 'min(55vw, 680px)',
         borderRadius: '50%',
-        background: 'radial-gradient(circle at center, rgba(24,32,64,0.85) 0%, #0F1428 100%)',
+        background: '#0F1428',
         zIndex: 3, overflow: 'hidden',
       }}>
-        <CircleIllustration />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={service.circleImage}
+          alt=""
+          style={{
+            position: 'absolute', inset: 0,
+            width: '100%', height: '100%',
+            objectFit: 'cover',
+            filter: 'grayscale(1)',
+            opacity: 0.3,
+          }}
+        />
         <div style={{ position: 'absolute', inset: 0, background: 'rgba(24,32,64,0.65)' }} />
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.03) 0%, transparent 50%)' }} />
         <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
           <circle cx="50%" cy="50%" r="35%" stroke="rgba(255,255,255,0.015)" strokeWidth="0.5" fill="none" />
           <circle cx="50%" cy="50%" r="22%" stroke="rgba(255,255,255,0.01)" strokeWidth="0.5" fill="none" />
-        </svg>
-      </div>
-
-      {/* Orbit ring 1 — 1.5px #3C3C3C, dash 8/12, cardinal dots */}
-      <div className="sh-orbit" style={{
-        position: 'absolute', top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 'min(66vw, 820px)', height: 'min(66vw, 820px)',
-        zIndex: 4, pointerEvents: 'none',
-      }}>
-        <svg viewBox="0 0 820 820" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-          <circle cx="410" cy="410" r="408" stroke="#3C3C3C" strokeWidth="1.5" strokeDasharray="8 12" fill="none" />
-          <circle cx="410" cy="2" r="3" fill="#782000" />
-          <circle cx="818" cy="410" r="3" fill="#782000" />
-          <circle cx="410" cy="818" r="3" fill="#782000" />
-          <circle cx="2" cy="410" r="3" fill="#782000" />
-        </svg>
-      </div>
-
-      {/* Orbit ring 2 — thinner, dimmer */}
-      <div className="sh-orbit" style={{
-        position: 'absolute', top: '50%', left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 'min(78vw, 960px)', height: 'min(78vw, 960px)',
-        zIndex: 4, pointerEvents: 'none',
-      }}>
-        <svg viewBox="0 0 960 960" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}>
-          <circle cx="480" cy="480" r="478" stroke="#3C3C3C" strokeWidth="1" strokeDasharray="8 12" fill="none" opacity="0.5" />
         </svg>
       </div>
 
