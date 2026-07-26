@@ -59,130 +59,212 @@ const SERVICES = [
 
 /* ── SVG illustration panels ── */
 
-function AINetworkPanel() {
+function AIAssessmentPanel() {
   return (
     <svg viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="280" height="200" fill="#FFFFFF" />
-      <text x="16" y="16" fill="#8A8E99" fontSize="9" fontFamily="'DM Mono', monospace" letterSpacing="0.15em">NEURAL MAPPING</text>
-      <line x1="40" y1="120" x2="100" y2="60" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="100" y1="60" x2="180" y2="80" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="180" y1="80" x2="240" y2="50" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="100" y1="60" x2="80" y2="140" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="80" y1="140" x2="160" y2="150" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="160" y1="150" x2="180" y2="80" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="40" y1="120" x2="80" y2="140" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="160" y1="150" x2="230" y2="160" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="180" y1="80" x2="240" y2="130" stroke="#D0D4DE" strokeWidth="1" />
-      <line x1="100" y1="60" x2="140" y2="30" stroke="#D0D4DE" strokeWidth="1" />
-      <circle cx="40" cy="120" r="6" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <circle cx="100" cy="60" r="9" fill="#C05020" stroke="#D06030" strokeWidth="1.5" />
-      <circle cx="100" cy="60" r="16" fill="none" stroke="#C05020" strokeWidth="0.5" opacity="0.3" />
-      <circle cx="180" cy="80" r="7" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <circle cx="240" cy="50" r="5" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <circle cx="80" cy="140" r="7" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <circle cx="160" cy="150" r="6" fill="#C05020" stroke="#D06030" strokeWidth="1" />
-      <circle cx="160" cy="150" r="12" fill="none" stroke="#C05020" strokeWidth="0.5" opacity="0.2" />
-      <circle cx="230" cy="160" r="4" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <circle cx="240" cy="130" r="5" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <circle cx="140" cy="30" r="4" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <text x="100" y="46" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="middle">STRATEGY</text>
-      <text x="180" y="96" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="middle">DATA</text>
-      <text x="40" y="108" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="middle">PEOPLE</text>
-      <text x="160" y="166" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="middle">TECH</text>
-      <text x="240" y="144" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="middle">GOV</text>
+      {/* Header */}
+      <text x="16" y="15" fill="#555566" fontSize="7" fontFamily="'DM Mono', monospace" letterSpacing="0.12em" fontWeight="600">AI READINESS ASSESSMENT</text>
+      <text x="16" y="36" fill="#C05020" fontSize="20" fontFamily="'DM Mono', monospace" fontWeight="700">55</text>
+      <text x="43" y="36" fill="#8A8E99" fontSize="7" fontFamily="'DM Mono', monospace">/100</text>
+      <text x="16" y="46" fill="#B0B4C0" fontSize="5.5" fontFamily="'DM Mono', monospace">COMPOSITE INDEX</text>
+      {/* Radar — pentagon grid, cx=148, cy=116, R=50 */}
+      <polygon points="148,66 196,100 177,156 119,156 100,100" fill="none" stroke="#E0E2EA" strokeWidth="0.5" />
+      <polygon points="148,83 180,106 167,143 129,143 116,106" fill="none" stroke="#E8EAF0" strokeWidth="0.4" />
+      <polygon points="148,99 164,112 158,130 138,130 132,112" fill="none" stroke="#F0F1F4" strokeWidth="0.3" />
+      <line x1="148" y1="116" x2="148" y2="66" stroke="#E8EAF0" strokeWidth="0.4" />
+      <line x1="148" y1="116" x2="196" y2="100" stroke="#E8EAF0" strokeWidth="0.4" />
+      <line x1="148" y1="116" x2="177" y2="156" stroke="#E8EAF0" strokeWidth="0.4" />
+      <line x1="148" y1="116" x2="119" y2="156" stroke="#E8EAF0" strokeWidth="0.4" />
+      <line x1="148" y1="116" x2="100" y2="100" stroke="#E8EAF0" strokeWidth="0.4" />
+      {/* Data polygon — Strategy 72, Data 45, Tech 68, People 54, Gov 38 */}
+      <polygon points="148,80 170,109 168,143 132,138 130,110" fill="rgba(192,80,32,0.1)" stroke="#C05020" strokeWidth="1.2" />
+      <circle cx="148" cy="80" r="2.5" fill="#C05020" />
+      <circle cx="170" cy="109" r="2.5" fill="#C05020" />
+      <circle cx="168" cy="143" r="2.5" fill="#C05020" />
+      <circle cx="132" cy="138" r="2.5" fill="#C05020" />
+      <circle cx="130" cy="110" r="2.5" fill="#C05020" />
+      <circle cx="148" cy="116" r="1.5" fill="#C05020" opacity="0.3" />
+      {/* Dimension labels */}
+      <text x="148" y="58" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="middle">STRATEGY</text>
+      <text x="202" y="102" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">DATA</text>
+      <text x="182" y="162" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">TECHNOLOGY</text>
+      <text x="114" y="162" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">PEOPLE</text>
+      <text x="94" y="102" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">GOVERNANCE</text>
+      {/* Score values */}
+      <text x="155" y="77" fill="#C05020" fontSize="6.5" fontFamily="'DM Mono', monospace" fontWeight="600">72</text>
+      <text x="174" y="106" fill="#C05020" fontSize="6.5" fontFamily="'DM Mono', monospace" fontWeight="600">45</text>
+      <text x="172" y="147" fill="#C05020" fontSize="6.5" fontFamily="'DM Mono', monospace" fontWeight="600">68</text>
+      <text x="126" y="141" fill="#C05020" fontSize="6.5" fontFamily="'DM Mono', monospace" fontWeight="600" textAnchor="end">54</text>
+      <text x="125" y="108" fill="#C05020" fontSize="6.5" fontFamily="'DM Mono', monospace" fontWeight="600" textAnchor="end">38</text>
+      {/* Status */}
+      <line x1="16" y1="182" x2="264" y2="182" stroke="#F0F1F4" strokeWidth="0.5" />
+      <circle cx="22" cy="192" r="2" fill="#C05020" />
+      <text x="28" y="194" fill="#8A8E99" fontSize="5.5" fontFamily="'DM Mono', monospace">PHASE 1 AUDIT RECOMMENDED</text>
     </svg>
   )
 }
 
-function AIDashboardPanel() {
+function ReadinessMetricsPanel() {
   return (
     <svg viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="260" height="180" fill="#FFFFFF" />
-      <text x="16" y="16" fill="#8A8E99" fontSize="9" fontFamily="'DM Mono', monospace" letterSpacing="0.15em">AI READINESS SCORE</text>
-      <rect x="16" y="26" width="68" height="38" rx="4" fill="#F4F5F8" stroke="#E0E2EA" strokeWidth="0.5" />
-      <rect x="92" y="26" width="68" height="38" rx="4" fill="#F4F5F8" stroke="#E0E2EA" strokeWidth="0.5" />
-      <rect x="168" y="26" width="68" height="38" rx="4" fill="#F4F5F8" stroke="#E0E2EA" strokeWidth="0.5" />
-      <rect x="24" y="34" width="32" height="3" rx="1.5" fill="#C0C4D0" />
-      <rect x="24" y="44" width="48" height="8" rx="2" fill="#B0B4C0" opacity="0.4" />
-      <rect x="100" y="34" width="28" height="3" rx="1.5" fill="#C0C4D0" />
-      <rect x="100" y="44" width="44" height="8" rx="2" fill="#C05020" opacity="0.6" />
-      <rect x="176" y="34" width="36" height="3" rx="1.5" fill="#C0C4D0" />
-      <rect x="176" y="44" width="50" height="8" rx="2" fill="#B0B4C0" opacity="0.4" />
-      <rect x="16" y="74" width="228" height="94" rx="4" fill="#F4F5F8" stroke="#E0E2EA" strokeWidth="0.5" />
-      <line x1="24" y1="158" x2="236" y2="158" stroke="#E0E2EA" strokeWidth="0.5" />
-      <rect x="32" y="130" width="14" height="28" rx="2" fill="#C0C4D0" />
-      <rect x="54" y="118" width="14" height="40" rx="2" fill="#C0C4D0" />
-      <rect x="76" y="126" width="14" height="32" rx="2" fill="#C0C4D0" />
-      <rect x="98" y="108" width="14" height="50" rx="2" fill="#C05020" />
-      <rect x="120" y="120" width="14" height="38" rx="2" fill="#C0C4D0" />
-      <rect x="142" y="112" width="14" height="46" rx="2" fill="#C0C4D0" />
-      <rect x="164" y="122" width="14" height="36" rx="2" fill="#C0C4D0" />
-      <rect x="186" y="104" width="14" height="54" rx="2" fill="#C0C4D0" />
-      <rect x="208" y="114" width="14" height="44" rx="2" fill="#C0C4D0" />
+      {/* Header */}
+      <text x="14" y="14" fill="#555566" fontSize="7" fontFamily="'DM Mono', monospace" letterSpacing="0.12em" fontWeight="600">PERFORMANCE METRICS</text>
+      {/* KPI card 1 — Clarity Score */}
+      <rect x="14" y="24" width="72" height="40" rx="4" fill="#F8F9FB" stroke="#E8EAF0" strokeWidth="0.5" />
+      <text x="20" y="35" fill="#8A8E99" fontSize="5" fontFamily="'DM Mono', monospace">CLARITY SCORE™</text>
+      <text x="20" y="54" fill="#C05020" fontSize="16" fontFamily="'DM Mono', monospace" fontWeight="700">72</text>
+      <text x="42" y="54" fill="#B0B4C0" fontSize="6.5" fontFamily="'DM Mono', monospace">/100</text>
+      {/* KPI card 2 — Velocity Score */}
+      <rect x="94" y="24" width="72" height="40" rx="4" fill="#F8F9FB" stroke="#E8EAF0" strokeWidth="0.5" />
+      <text x="100" y="35" fill="#8A8E99" fontSize="5" fontFamily="'DM Mono', monospace">VELOCITY SCORE</text>
+      <text x="100" y="54" fill="#3A3F50" fontSize="16" fontFamily="'DM Mono', monospace" fontWeight="700">45</text>
+      <text x="122" y="54" fill="#B0B4C0" fontSize="6.5" fontFamily="'DM Mono', monospace">/100</text>
+      {/* KPI card 3 — Risk Level */}
+      <rect x="174" y="24" width="72" height="40" rx="4" fill="#F8F9FB" stroke="#E8EAF0" strokeWidth="0.5" />
+      <text x="180" y="35" fill="#8A8E99" fontSize="5" fontFamily="'DM Mono', monospace">RISK LEVEL</text>
+      <rect x="180" y="42" width="38" height="14" rx="3" fill="rgba(192,80,32,0.12)" />
+      <text x="199" y="52" fill="#C05020" fontSize="7.5" fontFamily="'DM Mono', monospace" fontWeight="600" textAnchor="middle">MEDIUM</text>
+      {/* Divider */}
+      <line x1="14" y1="72" x2="246" y2="72" stroke="#F0F1F4" strokeWidth="0.5" />
+      {/* Dimension gauges — 5 horizontal bars */}
+      <text x="14" y="87" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">STRATEGY</text>
+      <rect x="70" y="81" width="150" height="7" rx="2" fill="#F0F1F4" />
+      <rect x="70" y="81" width="108" height="7" rx="2" fill="#C05020" opacity="0.7" />
+      <text x="230" y="87" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">72%</text>
+
+      <text x="14" y="102" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">DATA</text>
+      <rect x="70" y="96" width="150" height="7" rx="2" fill="#F0F1F4" />
+      <rect x="70" y="96" width="68" height="7" rx="2" fill="#C05020" opacity="0.5" />
+      <text x="230" y="102" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">45%</text>
+
+      <text x="14" y="117" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">TECHNOLOGY</text>
+      <rect x="70" y="111" width="150" height="7" rx="2" fill="#F0F1F4" />
+      <rect x="70" y="111" width="102" height="7" rx="2" fill="#C05020" opacity="0.65" />
+      <text x="230" y="117" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">68%</text>
+
+      <text x="14" y="132" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">PEOPLE</text>
+      <rect x="70" y="126" width="150" height="7" rx="2" fill="#F0F1F4" />
+      <rect x="70" y="126" width="81" height="7" rx="2" fill="#C05020" opacity="0.55" />
+      <text x="230" y="132" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">54%</text>
+
+      <text x="14" y="147" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">GOVERNANCE</text>
+      <rect x="70" y="141" width="150" height="7" rx="2" fill="#F0F1F4" />
+      <rect x="70" y="141" width="57" height="7" rx="2" fill="#C05020" opacity="0.4" />
+      <text x="230" y="147" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">38%</text>
+      {/* Status */}
+      <line x1="14" y1="158" x2="246" y2="158" stroke="#F0F1F4" strokeWidth="0.5" />
+      <circle cx="20" cy="170" r="2" fill="#C05020" />
+      <text x="26" y="172" fill="#8A8E99" fontSize="5.5" fontFamily="'DM Mono', monospace">5 DIMENSIONS — IMPLEMENTATION READY</text>
     </svg>
   )
 }
 
-function CostStructurePanel() {
+function CostAnalysisPanel() {
   return (
     <svg viewBox="0 0 280 200" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="280" height="200" fill="#FFFFFF" />
-      <text x="16" y="16" fill="#8A8E99" fontSize="9" fontFamily="'DM Mono', monospace" letterSpacing="0.15em">COST STRUCTURE BREAKDOWN</text>
-      {/* Bar 1: Vendor & Supply 38% */}
-      <rect x="16" y="30" width="200" height="22" rx="4" fill="#C05020" />
-      <text x="24" y="45" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace">Vendor &amp; Supply</text>
-      <text x="208" y="45" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace" textAnchor="end">38%</text>
-      {/* Bar 2: Labour & Team 24% */}
-      <rect x="16" y="58" width="155" height="22" rx="4" fill="#3A3F50" />
-      <text x="24" y="73" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace">Labour &amp; Team</text>
-      <text x="163" y="73" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace" textAnchor="end">24%</text>
-      {/* Bar 3: Op. Overhead 18% */}
-      <rect x="16" y="86" width="120" height="22" rx="4" fill="#6B7080" />
-      <text x="24" y="101" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace">Op. Overhead</text>
-      <text x="128" y="101" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace" textAnchor="end">18%</text>
-      {/* Bar 4: Marketing 12% */}
-      <rect x="16" y="114" width="85" height="22" rx="4" fill="#9098A8" />
-      <text x="24" y="129" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace">Marketing</text>
-      <text x="93" y="129" fill="#FFFFFF" fontSize="9" fontFamily="'DM Mono', monospace" textAnchor="end">12%</text>
-      {/* Bar 5: Misc. 8% */}
-      <rect x="16" y="142" width="55" height="22" rx="4" fill="#C0C4D0" />
-      <text x="24" y="157" fill="#555566" fontSize="9" fontFamily="'DM Mono', monospace">Misc.</text>
-      <text x="63" y="157" fill="#555566" fontSize="9" fontFamily="'DM Mono', monospace" textAnchor="end">8%</text>
+      {/* Header */}
+      <text x="16" y="15" fill="#555566" fontSize="7" fontFamily="'DM Mono', monospace" letterSpacing="0.12em" fontWeight="600">COST STRUCTURE ANALYSIS</text>
+      {/* Summary metrics */}
+      <rect x="16" y="25" width="80" height="30" rx="4" fill="#F8F9FB" stroke="#E8EAF0" strokeWidth="0.5" />
+      <text x="22" y="35" fill="#8A8E99" fontSize="4.5" fontFamily="'DM Mono', monospace">MONTHLY REVENUE</text>
+      <text x="22" y="48" fill="#3A3F50" fontSize="10" fontFamily="'DM Mono', monospace" fontWeight="700">৳8,00,000</text>
+
+      <rect x="104" y="25" width="72" height="30" rx="4" fill="#F8F9FB" stroke="#E8EAF0" strokeWidth="0.5" />
+      <text x="110" y="35" fill="#8A8E99" fontSize="4.5" fontFamily="'DM Mono', monospace">REVENUE LEAK</text>
+      <text x="110" y="48" fill="#C05020" fontSize="10" fontFamily="'DM Mono', monospace" fontWeight="700">-12%</text>
+
+      <rect x="184" y="25" width="80" height="30" rx="4" fill="#F8F9FB" stroke="#E8EAF0" strokeWidth="0.5" />
+      <text x="190" y="35" fill="#8A8E99" fontSize="4.5" fontFamily="'DM Mono', monospace">NET MARGIN</text>
+      <text x="190" y="48" fill="#1a8a3e" fontSize="10" fontFamily="'DM Mono', monospace" fontWeight="700">23%</text>
+      {/* Divider */}
+      <line x1="16" y1="62" x2="264" y2="62" stroke="#F0F1F4" strokeWidth="0.5" />
+      {/* Cost breakdown bars */}
+      <text x="16" y="78" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">Vendor &amp; Supply</text>
+      <rect x="90" y="72" width="150" height="8" rx="2" fill="#F0F1F4" />
+      <rect x="90" y="72" width="57" height="8" rx="2" fill="#C05020" />
+      <text x="248" y="79" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">38%</text>
+
+      <text x="16" y="96" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">Labour &amp; Team</text>
+      <rect x="90" y="90" width="150" height="8" rx="2" fill="#F0F1F4" />
+      <rect x="90" y="90" width="36" height="8" rx="2" fill="#3A3F50" />
+      <text x="248" y="97" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">24%</text>
+
+      <text x="16" y="114" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">Op. Overhead</text>
+      <rect x="90" y="108" width="150" height="8" rx="2" fill="#F0F1F4" />
+      <rect x="90" y="108" width="27" height="8" rx="2" fill="#6B7080" />
+      <text x="248" y="115" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">18%</text>
+
+      <text x="16" y="132" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">Marketing</text>
+      <rect x="90" y="126" width="150" height="8" rx="2" fill="#F0F1F4" />
+      <rect x="90" y="126" width="18" height="8" rx="2" fill="#9098A8" />
+      <text x="248" y="133" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">12%</text>
+
+      <text x="16" y="150" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace">Misc. Expenses</text>
+      <rect x="90" y="144" width="150" height="8" rx="2" fill="#F0F1F4" />
+      <rect x="90" y="144" width="12" height="8" rx="2" fill="#C0C4D0" />
+      <text x="248" y="151" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" textAnchor="end">8%</text>
+      {/* Leak indicator line */}
+      <line x1="147" y1="68" x2="147" y2="156" stroke="#C05020" strokeWidth="0.5" strokeDasharray="2 2" opacity="0.4" />
+      <text x="149" y="162" fill="#C05020" fontSize="4.5" fontFamily="'DM Mono', monospace" opacity="0.6">LEAK ZONE</text>
+      {/* Status */}
+      <line x1="16" y1="180" x2="264" y2="180" stroke="#F0F1F4" strokeWidth="0.5" />
+      <circle cx="22" cy="191" r="2" fill="#C05020" />
+      <text x="28" y="193" fill="#8A8E99" fontSize="5.5" fontFamily="'DM Mono', monospace">OPTIMIZATION TARGET: ৳96,000/mo</text>
     </svg>
   )
 }
 
-function RoadmapPanel() {
+function TimelinePanel() {
   return (
     <svg viewBox="0 0 260 180" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="260" height="180" fill="#FFFFFF" />
-      <text x="16" y="16" fill="#8A8E99" fontSize="9" fontFamily="'DM Mono', monospace" letterSpacing="0.15em">90-DAY ROADMAP</text>
-      {/* Timeline rail */}
-      <line x1="35" y1="90" x2="225" y2="90" stroke="#E0E2EA" strokeWidth="1.5" />
-      <line x1="35" y1="90" x2="162" y2="90" stroke="#C05020" strokeWidth="2.5" opacity="0.6" />
-      {/* Node 1: DIAGNOSTIC — WK 1-2 */}
-      <circle cx="35" cy="90" r="9" fill="#C05020" stroke="#D06030" strokeWidth="1" />
-      <circle cx="35" cy="90" r="3.5" fill="#FFFFFF" opacity="0.9" />
-      <line x1="35" y1="73" x2="35" y2="81" stroke="#C05020" strokeWidth="1" opacity="0.4" />
-      <text x="35" y="65" fill="#555566" fontSize="6.5" fontFamily="'DM Mono', monospace" textAnchor="middle">DIAGNOSTIC</text>
-      <text x="35" y="112" fill="#8A8E99" fontSize="6" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 1–2</text>
-      {/* Node 2: COST MAP — WK 3-4 */}
-      <circle cx="98" cy="90" r="9" fill="#C05020" stroke="#D06030" strokeWidth="1" />
-      <circle cx="98" cy="90" r="3.5" fill="#FFFFFF" opacity="0.9" />
-      <line x1="98" y1="73" x2="98" y2="81" stroke="#C05020" strokeWidth="1" opacity="0.4" />
-      <text x="98" y="65" fill="#555566" fontSize="6.5" fontFamily="'DM Mono', monospace" textAnchor="middle">COST MAP</text>
-      <text x="98" y="112" fill="#8A8E99" fontSize="6" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 3–4</text>
-      {/* Node 3: ROADMAP — WK 5-6 */}
-      <circle cx="162" cy="90" r="9" fill="#C05020" stroke="#D06030" strokeWidth="1" />
-      <circle cx="162" cy="90" r="3.5" fill="#FFFFFF" opacity="0.9" />
-      <line x1="162" y1="73" x2="162" y2="81" stroke="#C05020" strokeWidth="1" opacity="0.4" />
-      <text x="162" y="65" fill="#555566" fontSize="6.5" fontFamily="'DM Mono', monospace" textAnchor="middle">ROADMAP</text>
-      <text x="162" y="112" fill="#8A8E99" fontSize="6" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 5–6</text>
-      {/* Node 4: HANDOVER — WK 7-8 */}
-      <circle cx="225" cy="90" r="9" fill="#E8EAF0" stroke="#C0C4D0" strokeWidth="1" />
-      <line x1="225" y1="73" x2="225" y2="81" stroke="#C0C4D0" strokeWidth="1" opacity="0.4" />
-      <text x="225" y="65" fill="#B0B4C0" fontSize="6.5" fontFamily="'DM Mono', monospace" textAnchor="middle">HANDOVER</text>
-      <text x="225" y="112" fill="#B0B4C0" fontSize="6" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 7–8</text>
+      {/* Header */}
+      <text x="14" y="14" fill="#555566" fontSize="7" fontFamily="'DM Mono', monospace" letterSpacing="0.12em" fontWeight="600">90-DAY IMPROVEMENT ROADMAP</text>
+      {/* Progress chip */}
+      <rect x="200" y="18" width="46" height="12" rx="3" fill="rgba(192,80,32,0.1)" />
+      <text x="223" y="27" fill="#C05020" fontSize="6.5" fontFamily="'DM Mono', monospace" fontWeight="600" textAnchor="middle">67%</text>
+      <rect x="14" y="20" width="180" height="3" rx="1.5" fill="#F0F1F4" />
+      <rect x="14" y="20" width="120" height="3" rx="1.5" fill="#C05020" opacity="0.6" />
+      {/* Week grid lines */}
+      <line x1="60" y1="36" x2="60" y2="144" stroke="#F0F1F4" strokeWidth="0.3" strokeDasharray="2 2" />
+      <line x1="106" y1="36" x2="106" y2="144" stroke="#F0F1F4" strokeWidth="0.3" strokeDasharray="2 2" />
+      <line x1="152" y1="36" x2="152" y2="144" stroke="#F0F1F4" strokeWidth="0.3" strokeDasharray="2 2" />
+      <line x1="198" y1="36" x2="198" y2="144" stroke="#F0F1F4" strokeWidth="0.3" strokeDasharray="2 2" />
+      <line x1="244" y1="36" x2="244" y2="144" stroke="#F0F1F4" strokeWidth="0.3" strokeDasharray="2 2" />
+      {/* Week labels */}
+      <text x="60" y="152" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 2</text>
+      <text x="106" y="152" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 4</text>
+      <text x="152" y="152" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 6</text>
+      <text x="198" y="152" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 8</text>
+      <text x="244" y="152" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace" textAnchor="middle">WK 12</text>
+      {/* Phase 1: DIAGNOSTIC — Wk 1–2, complete */}
+      <text x="14" y="48" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" fontWeight="600">DIAGNOSTIC</text>
+      <text x="14" y="56" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace">{'Wk 1–2'}</text>
+      <rect x="37" y="40" width="35" height="18" rx="3" fill="#C05020" />
+      <text x="55" y="52" fill="#FFFFFF" fontSize="5" fontFamily="'DM Mono', monospace" textAnchor="middle" fontWeight="600">DONE</text>
+      {/* Phase 2: COST MAP — Wk 3–4, complete */}
+      <text x="14" y="78" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" fontWeight="600">COST MAP</text>
+      <text x="14" y="86" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace">{'Wk 3–4'}</text>
+      <rect x="72" y="70" width="35" height="18" rx="3" fill="#C05020" />
+      <text x="90" y="82" fill="#FFFFFF" fontSize="5" fontFamily="'DM Mono', monospace" textAnchor="middle" fontWeight="600">DONE</text>
+      {/* Phase 3: RESTRUCTURE — Wk 5–8, in progress */}
+      <text x="14" y="108" fill="#555566" fontSize="5.5" fontFamily="'DM Mono', monospace" fontWeight="600">RESTRUCTURE</text>
+      <text x="14" y="116" fill="#B0B4C0" fontSize="4.5" fontFamily="'DM Mono', monospace">{'Wk 5–8'}</text>
+      <rect x="107" y="100" width="70" height="18" rx="3" fill="#F4F5F8" stroke="#E0E2EA" strokeWidth="0.5" />
+      <rect x="107" y="100" width="30" height="18" rx="3" fill="rgba(192,80,32,0.25)" />
+      <text x="142" y="112" fill="#8A8E99" fontSize="5" fontFamily="'DM Mono', monospace" textAnchor="middle">ACTIVE</text>
+      {/* Phase 4: HANDOVER — Wk 9–12, upcoming */}
+      <text x="14" y="138" fill="#B0B4C0" fontSize="5.5" fontFamily="'DM Mono', monospace" fontWeight="600">HANDOVER</text>
+      <text x="14" y="146" fill="#C0C4D0" fontSize="4.5" fontFamily="'DM Mono', monospace">{'Wk 9–12'}</text>
+      <rect x="177" y="130" width="67" height="18" rx="3" fill="#F8F9FB" stroke="#E8EAF0" strokeWidth="0.5" />
+      <text x="211" y="142" fill="#B0B4C0" fontSize="5" fontFamily="'DM Mono', monospace" textAnchor="middle">UPCOMING</text>
+      {/* Status */}
+      <line x1="14" y1="160" x2="246" y2="160" stroke="#F0F1F4" strokeWidth="0.5" />
+      <circle cx="20" cy="171" r="2" fill="#C05020" />
+      <text x="26" y="173" fill="#8A8E99" fontSize="5.5" fontFamily="'DM Mono', monospace">ON TRACK — MILESTONE 3 IN PROGRESS</text>
     </svg>
   )
 }
@@ -219,8 +301,8 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
     return () => ctx.revert()
   }, [])
 
-  const PanelBL = index === 0 ? AINetworkPanel : CostStructurePanel
-  const PanelTR = index === 0 ? AIDashboardPanel : RoadmapPanel
+  const PanelBL = index === 0 ? AIAssessmentPanel : CostAnalysisPanel
+  const PanelTR = index === 0 ? ReadinessMetricsPanel : TimelinePanel
 
   return (
     <div ref={ref} className="sh-section" style={{
@@ -309,7 +391,7 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
         <BrandMark />
       </div>
 
-      {/* Panel bottom-left — white bg for contrast */}
+      {/* Panel bottom-left — white bg, z-index above text */}
       <div className="sh-panel-bl" style={{
         position: 'absolute',
         bottom: '28%', left: '5%',
@@ -318,22 +400,22 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
         borderRadius: '12px',
         background: '#FFFFFF',
         border: '1px solid #E0E2EA',
-        overflow: 'hidden', zIndex: 5,
+        overflow: 'hidden', zIndex: 10,
         boxShadow: '0 12px 40px rgba(0,0,0,0.25)',
       }}>
         <PanelBL />
       </div>
 
-      {/* Panel top-right — white bg for contrast */}
+      {/* Panel top-right — white bg, moved below slogan text, z-index above text */}
       <div className="sh-panel-tr" style={{
         position: 'absolute',
-        top: '10%', right: '5%',
+        top: '20%', right: '5%',
         width: 'clamp(160px, 20vw, 280px)',
         aspectRatio: '260 / 180',
         borderRadius: '12px',
         background: '#FFFFFF',
         border: '1px solid #E0E2EA',
-        overflow: 'hidden', zIndex: 5,
+        overflow: 'hidden', zIndex: 10,
         boxShadow: '0 12px 40px rgba(0,0,0,0.25)',
       }}>
         <PanelTR />
