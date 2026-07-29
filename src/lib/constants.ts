@@ -27,7 +27,7 @@ export const HERO = {
 
 export const TICKER_ITEMS = [
   'Strategic & management consultancy for growing businesses',
-  'Every engagement starts with a free strategic assessment',
+  'Every engagement starts with a Clarity Score assessment',
   'Structured advisory for businesses doing ৳2L–50L/month',
   'Two services, one partner: strategy that delivers',
   'AI Audit & Implementation · Management & Operations Strategy',
@@ -156,6 +156,44 @@ export const METHODOLOGY_PILLARS = [
   },
 ]
 
+// ─── Engagement Snapshots (homepage case studies) ────────────────────────────
+
+export const CASE_STUDY_SNAPSHOTS = [
+  {
+    industry: 'E-Commerce · Skincare',
+    client: 'Glow by Rina',
+    location: 'Dhaka',
+    revenue: '৳8L/month',
+    finding: 'Real profit was ৳47K — not the ৳1.5L she thought',
+    outcome: '৳47K → ৳1.82L',
+    outcomeLabel: 'monthly profit after restructuring',
+    timeframe: '90 days',
+    service: 'Management & Operations',
+  },
+  {
+    industry: 'E-Commerce · Grocery',
+    client: 'FreshKart',
+    location: 'Chittagong',
+    revenue: '2× revenue growth over 18 months',
+    finding: 'Profit had quietly dropped from 22% to 11% — four simultaneous cost leaks',
+    outcome: '11% → 19%',
+    outcomeLabel: 'profit margin recovered',
+    timeframe: '6 months',
+    service: 'Management & Operations',
+  },
+  {
+    industry: 'E-Commerce · Fashion',
+    client: 'StyleHive',
+    location: 'Dhaka',
+    revenue: 'Growing fast, founder-bottlenecked',
+    finding: '15+ hours/week spent on three repetitive tasks a computer could handle',
+    outcome: '15+ hrs/week',
+    outcomeLabel: 'recovered — 12 new products launched',
+    timeframe: '1 quarter',
+    service: 'AI Audit & Implementation',
+  },
+]
+
 // ─── Insights (B2B editorial blog articles) ──────────────────────────────────
 
 export const INSIGHTS = [
@@ -167,7 +205,7 @@ export const INSIGHTS = [
     format: 'Common Mistake',
     readTime: '6 min read',
     headline: "You made ৳10 lakh last month.\nHow much of it did you actually keep?",
-    execSummary: "Most business owners know their revenue number. Almost none of them know their real take-home after every expense is counted. That gap is where profit quietly disappears — and it takes less than 30 minutes to see it clearly for the first time.",
+    execSummary: "68% of online businesses in Bangladesh overestimate their real margin by at least 15 points. The gap between reported revenue and actual take-home is where profit quietly disappears — and it takes less than 30 minutes to see it clearly for the first time.",
     toc: ['The number everyone tracks — and the one that matters', 'What happens when you add it all up', 'How we help you see it clearly', 'Story: Glow by Rina'],
     painPoint:
       "Every morning you check your orders. Sales are coming in. The number looks healthy. You start thinking — maybe I should hire someone, add more products, spend more on ads. Things feel like they're working. And in a way, they are. Revenue is real. But revenue is not profit.",
@@ -199,7 +237,7 @@ export const INSIGHTS = [
     format: 'Warning Signs',
     readTime: '5 min read',
     headline: "Your sales doubled.\nSomewhere along the way, your profit didn't.",
-    execSummary: "Growth feels good. But as businesses get bigger, small cost problems quietly get bigger too. By the time most owners notice, months of profit have already slipped away. Here's what to watch for — and how to stop it early.",
+    execSummary: "The average growing e-commerce operation has 4–5 cost leaks running simultaneously — platform fees, return logistics, ad waste, inventory carrying costs, and underpriced bundles. By the time most owners notice, months of profit have already slipped away.",
     toc: ['Why more revenue can mean less money in your pocket', 'The four places money quietly disappears', 'How we find and fix the leaks', 'Story: FreshKart'],
     painPoint:
       "Two years in. Sales have doubled. You've got more customers, more staff, more orders. Everything looks like it's going in the right direction. But your bank balance at the end of the month doesn't feel much better than it did a year ago. You're not sure why. You're working harder than ever. Where is the money going?",
@@ -231,7 +269,7 @@ export const INSIGHTS = [
     format: 'Practical Guide',
     readTime: '7 min read',
     headline: "You're spending 3 days a week\non work a computer could do in 10 minutes.",
-    execSummary: "Every business owner knows they should be using AI tools. Almost none of them know where to start — or how to make it actually stick. Here's the simple way we do it: start with one task, make it work, then move to the next.",
+    execSummary: "Owners spend 11+ hours a week on tasks AI can handle in minutes — customer replies, inventory updates, reporting. But most AI adoptions fail because they start with the wrong task. Here's the simple way we do it: start with one task, make it work, then move to the next.",
     toc: ['Why AI feels confusing even though it should be simple', 'The tasks most businesses should hand to a computer first', 'How we set it up for you — step by step', 'Story: StyleHive'],
     painPoint:
       "You already know AI is changing things. You've probably tried ChatGPT, maybe watched a few videos, maybe even signed up for a tool that promised to save you hours. But somehow you're still doing the same things manually. Replying to the same customer questions. Typing the same captions. Going through the same spreadsheets. The hours are going somewhere — just not somewhere useful.",
@@ -337,7 +375,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: 'What is the Clarity Score?',
-    a: 'It\'s a free, 30-minute strategic assessment where we evaluate your business across five dimensions: financial visibility, operational efficiency, AI readiness, growth trajectory, and team capability. You walk away knowing exactly where the strategic gaps are — even if you don\'t work with us after that.',
+    a: 'It\'s a complimentary 30-minute strategic assessment where we evaluate your business across five dimensions: financial visibility, operational efficiency, AI readiness, growth trajectory, and team capability. You walk away knowing exactly where the strategic gaps are — even if you don\'t work with us after that.',
   },
   {
     q: 'How are you different from other consultancies?',
@@ -345,11 +383,11 @@ export const FAQ_ITEMS = [
   },
   {
     q: 'Which service do I need?',
-    a: 'We start with a free Clarity Score assessment that tells us exactly where the gaps are. Some businesses need AI systems built into their operation. Others need their cost structure diagnosed and restructured. Many need both — and we design the sequence together based on what will create the most impact first.',
+    a: 'We start with your Clarity Score assessment — that tells us exactly where the gaps are. Some businesses need AI systems built into their operation. Others need their cost structure diagnosed and restructured. Many need both — and we design the sequence together based on what will create the most impact first.',
   },
   {
     q: 'What does it cost?',
-    a: 'The first session is always free. After that, every project is priced based on what your business actually needs — not a generic package. We\'re built to be affordable for growing businesses, and we\'ll always be upfront about costs before any work starts.',
+    a: 'Your initial strategic assessment is always complimentary. Engagements are scoped individually — most range from ৳25,000 to ৳1,50,000 depending on depth and duration. We\'re transparent about costs before any commitment, and we structure payments around what makes sense for your stage of business.',
   },
   {
     q: 'Do you work with businesses outside Bangladesh?',

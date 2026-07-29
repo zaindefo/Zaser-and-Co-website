@@ -97,7 +97,7 @@ export function ClarityScore() {
           maxWidth: '600px',
           marginBottom: 'clamp(40px, 6vh, 72px)',
         }}>
-          Every project starts with a Clarity Score — a free, 30-minute look at your business across five areas. You walk away knowing your real numbers, your biggest gaps, and where the highest-impact improvements are. Whether you work with us after that or not, the clarity is yours to keep.
+          Every project starts with a Clarity Score — a complimentary 30-minute assessment of your business across five dimensions. You walk away knowing your real numbers, your biggest gaps, and where the highest-impact improvements are. Whether you work with us after that or not, the clarity is yours to keep.
         </p>
 
         {/* Two-column: radar + score */}
@@ -193,7 +193,7 @@ export function ClarityScore() {
 
         <div style={{ textAlign: 'center' }}>
           <MagneticButton href="/contact" size="lg">
-            Book your free session →
+            Book your Clarity Score →
           </MagneticButton>
         </div>
       </div>

@@ -20,6 +20,7 @@ const SERVICES = [
       'One Working AI System',
       'Handover Documentation & Training',
     ],
+    frameworks: ['Strategy', 'Data', 'Technology', 'People', 'Governance'],
     clientStatements: [
       'I need a strategy for AI in my business, not just another tool to try',
       'I want someone to audit my workflow and tell me exactly where AI fits',
@@ -45,6 +46,7 @@ const SERVICES = [
       '90-Day Improvement Roadmap',
       'Executive Presentation Deck',
     ],
+    frameworks: ['Lean', 'Kaizen', 'PDCA', 'DuPont ROE', 'Value Stream Mapping', 'CVP Analysis'],
     clientStatements: [
       'My costs are rising but I don\'t have a strategy to control them',
       'I need someone to look at my operations objectively and tell me what to fix',
@@ -575,6 +577,34 @@ function ServiceDetails({ service }: { service: typeof SERVICES[number] }) {
               ))}
             </div>
           </div>
+
+          {/* Frameworks */}
+          {service.frameworks && service.frameworks.length > 0 && (
+            <div>
+              <p className="sd-item" style={{
+                fontFamily: "var(--font-dm-mono, 'DM Mono', monospace)",
+                fontSize: '11px', color: '#828282',
+                letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: '20px',
+              }}>
+                Frameworks We Use
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {service.frameworks.map((fw, i) => (
+                  <span key={i} className="sd-item" style={{
+                    fontFamily: "var(--font-dm-mono, 'DM Mono', monospace)",
+                    fontSize: '11px', fontWeight: 500,
+                    color: '#C05020', letterSpacing: '0.06em',
+                    padding: '8px 16px',
+                    background: 'rgba(192,80,32,0.08)',
+                    border: '1px solid rgba(192,80,32,0.15)',
+                    borderRadius: '6px',
+                  }}>
+                    {fw}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Client pain points */}
           <div>

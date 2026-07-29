@@ -163,7 +163,7 @@ export function ContactInline() {
                 color: '#6B3828',
                 lineHeight: 1.5,
               }}>
-                Book a free session. In 30 minutes, we&apos;ll assess your business across five dimensions and tell you exactly where the strategic gaps are. No cost. No commitment. Just clarity on where you stand and what comes next.
+                Book your Clarity Score. In 30 minutes, we&apos;ll assess your business across five dimensions and tell you exactly where the strategic gaps are. No commitment required — just clarity on where you stand and what comes next.
               </p>
             </div>
 
@@ -233,7 +233,7 @@ export function ContactInline() {
 
               <div style={{ marginTop: '8px' }}>
                 <MagneticButton size="lg" className="w-full justify-center">
-                  {submitting ? 'Sending…' : 'Book your free session →'}
+                  {submitting ? 'Sending…' : 'Book your Clarity Score →'}
                 </MagneticButton>
               </div>
             </form>
