@@ -114,7 +114,7 @@ export function Hero() {
   const [l1, l2, l3, l4] = HERO.headline
 
   return (
-    <section className="min-h-screen bg-linen relative flex flex-col">
+    <section data-no-clip className="min-h-screen bg-linen relative flex flex-col">
       {/* Topographic wave field — living terrain background */}
       <TopoWaveField className="z-0" />
 

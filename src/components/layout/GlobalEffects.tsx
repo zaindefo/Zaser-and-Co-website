@@ -1,11 +1,67 @@
 'use client'
+import { useEffect } from 'react'
 import { useSmoothScroll } from '@/lib/lenis'
 import { CustomCursor } from '@/components/shared/CustomCursor'
 import { ScrollProgress } from '@/components/shared/ScrollProgress'
 import { EasterEggs } from '@/components/shared/EasterEggs'
+import { gsap, ScrollTrigger } from '@/lib/gsap'
+
+function useSectionAnimations() {
+  useEffect(() => {
+    const mm = gsap.matchMedia()
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const sections = document.querySelectorAll<HTMLElement>('main > div > section, main section')
+      const seen = new Set<HTMLElement>()
+
+      sections.forEach((section) => {
+        if (seen.has(section)) return
+        seen.add(section)
+
+        if (section.closest('[data-no-clip]')) return
+
+        gsap.fromTo(section,
+          { clipPath: 'inset(100% 0 0 0)' },
+          {
+            clipPath: 'inset(0% 0 0 0)',
+            duration: 0.9,
+            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 85%',
+              once: true,
+            },
+          },
+        )
+      })
+
+      const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax]')
+      parallaxEls.forEach((el) => {
+        gsap.fromTo(el,
+          { y: -60 },
+          {
+            y: 60,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: el.closest('section') || el,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: true,
+            },
+          },
+        )
+      })
+    })
+
+    return () => {
+      mm.revert()
+    }
+  }, [])
+}
 
 export function GlobalEffects() {
   useSmoothScroll()
+  useSectionAnimations()
 
   return (
     <>
