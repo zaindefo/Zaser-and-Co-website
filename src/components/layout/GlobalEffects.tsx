@@ -11,21 +11,17 @@ function useSectionAnimations() {
     const mm = gsap.matchMedia()
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      const sections = document.querySelectorAll<HTMLElement>('main > div > section, main section')
-      const seen = new Set<HTMLElement>()
+      const sections = document.querySelectorAll<HTMLElement>('main > section')
 
       sections.forEach((section) => {
-        if (seen.has(section)) return
-        seen.add(section)
-
-        if (section.closest('[data-no-clip]')) return
+        if (section.hasAttribute('data-no-clip')) return
 
         gsap.fromTo(section,
           { clipPath: 'inset(100% 0 0 0)' },
           {
             clipPath: 'inset(0% 0 0 0)',
             duration: 0.9,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             scrollTrigger: {
               trigger: section,
               start: 'top 85%',

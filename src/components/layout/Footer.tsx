@@ -73,9 +73,6 @@ export function Footer() {
               <Link href="/free-ai-audit" className="block text-linen hover:text-moss-glow transition-colors">
                 Free AI Audit
               </Link>
-              <Link href="/stockpulse" className="block text-linen hover:text-moss-glow transition-colors">
-                StockPulse™
-              </Link>
               <Link href="/policies" className="block text-linen hover:text-moss-glow transition-colors">
                 Policies
               </Link>

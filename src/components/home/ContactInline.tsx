@@ -6,6 +6,7 @@ import { trackEvent, SEO_EVENTS } from '@/lib/tracking'
 
 interface ContactForm {
   name: string
+  email: string
   whatsapp: string
   company: string
   service: string
@@ -69,7 +70,7 @@ export function ContactInline() {
           { opacity: 0, y: '100%' },
           {
             opacity: 1, y: '0%', duration: 0.7,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             delay: 0.3 + i * 0.12,
             scrollTrigger: { trigger: el, start: 'top 75%', once: true },
           },
@@ -91,7 +92,7 @@ export function ContactInline() {
           { opacity: 0, y: 24 },
           {
             opacity: 1, y: 0, duration: 0.6,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             scrollTrigger: { trigger: el, start: 'top 65%', once: true },
             delay: 1.0,
           },
@@ -103,7 +104,7 @@ export function ContactInline() {
           { opacity: 0, x: -12 },
           {
             opacity: 1, x: 0, duration: 0.5,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             delay: 1.2 + i * 0.1,
             scrollTrigger: { trigger: el, start: 'top 60%', once: true },
           },
@@ -116,7 +117,7 @@ export function ContactInline() {
           { opacity: 0, y: 40 },
           {
             opacity: 1, y: 0, duration: 0.7,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             scrollTrigger: { trigger: el, start: 'top 65%', once: true },
             delay: 0.5,
           },
@@ -155,7 +156,7 @@ export function ContactInline() {
         background: '#0F1428',
         position: 'relative',
         overflow: 'hidden',
-        padding: 'clamp(80px, 12vh, 140px) clamp(24px, 6vw, 80px)',
+        padding: 'clamp(100px, 14vh, 160px) clamp(24px, 6vw, 80px) clamp(80px, 12vh, 140px)',
       }}
     >
       {/* Full-width swoosh line at top */}
@@ -323,14 +324,14 @@ export function ContactInline() {
 
             {/* Right column — form card */}
             <div className="contact-form-card" style={{
-              background: '#111827',
-              border: '1px solid rgba(255,255,255,0.06)',
-              padding: 'clamp(28px, 4vw, 48px)',
+              background: '#161D33',
+              border: '1px solid rgba(255,255,255,0.1)',
+              padding: 'clamp(24px, 3.5vw, 40px)',
               borderRadius: 0,
-              boxShadow: '0 24px 48px rgba(0,0,0,0.3)',
+              boxShadow: '0 24px 48px rgba(0,0,0,0.4)',
               opacity: 0,
             }}>
-              <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+              <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 {/* Name */}
                 <div>
                   <label style={labelStyle}>Your name</label>
@@ -352,11 +353,33 @@ export function ContactInline() {
                   {errors.name && <p style={errorStyle}>Required.</p>}
                 </div>
 
+                {/* Email */}
+                <div>
+                  <label style={labelStyle}>Email address</label>
+                  <input
+                    type="email"
+                    {...register('email', { required: true })}
+                    placeholder="rina@glowbyrina.com"
+                    style={fieldStyle}
+                    onFocus={e => {
+                      e.target.style.borderBottomColor = '#782000'
+                      const lbl = e.target.previousElementSibling as HTMLElement
+                      if (lbl) lbl.style.color = '#FFFFFF'
+                    }}
+                    onBlur={e => {
+                      e.target.style.borderBottomColor = '#3C3C3C'
+                      const lbl = e.target.previousElementSibling as HTMLElement
+                      if (lbl) lbl.style.color = '#828282'
+                    }}
+                  />
+                  {errors.email && <p style={errorStyle}>Required.</p>}
+                </div>
+
                 {/* WhatsApp */}
                 <div>
                   <label style={labelStyle}>WhatsApp number</label>
                   <input
-                    {...register('whatsapp', { required: true })}
+                    {...register('whatsapp')}
                     placeholder="+880 1700 000000"
                     style={fieldStyle}
                     onFocus={e => {
@@ -370,7 +393,6 @@ export function ContactInline() {
                       if (lbl) lbl.style.color = '#828282'
                     }}
                   />
-                  {errors.whatsapp && <p style={errorStyle}>Required.</p>}
                 </div>
 
                 {/* Company */}
@@ -421,7 +443,7 @@ export function ContactInline() {
                   <label style={labelStyle}>Tell us more</label>
                   <textarea
                     {...register('message')}
-                    rows={4}
+                    rows={3}
                     placeholder="Monthly revenue, what you sell, your biggest headache right now..."
                     style={{ ...fieldStyle, resize: 'none' as const }}
                     onFocus={e => {
@@ -456,7 +478,7 @@ export function ContactInline() {
                     background: '#182040',
                     border: '1.5px solid #FFFFFF',
                     padding: '16px 36px',
-                    marginTop: '8px',
+                    marginTop: '4px',
                     cursor: 'pointer',
                     overflow: 'hidden',
                     transition: 'border-color 0.4s',

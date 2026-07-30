@@ -17,7 +17,7 @@ export function FAQ() {
       if (swoosh) {
         gsap.fromTo(swoosh, { scaleX: 0 }, {
           scaleX: 1, duration: 0.8,
-          ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          ease: 'power3.out',
           scrollTrigger: { trigger: section, start: 'top 85%', once: true },
         })
       }
@@ -28,7 +28,7 @@ export function FAQ() {
           { opacity: 0, y: 12 },
           {
             opacity: 1, y: 0, duration: 0.5,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             scrollTrigger: { trigger: section, start: 'top 80%', once: true },
             delay: 0.2,
           },
@@ -41,7 +41,7 @@ export function FAQ() {
           { opacity: 0, y: '100%' },
           {
             opacity: 1, y: '0%', duration: 0.7,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             delay: 0.3 + i * 0.12,
             scrollTrigger: { trigger: section, start: 'top 78%', once: true },
           },
@@ -54,7 +54,7 @@ export function FAQ() {
           { opacity: 0, y: 16 },
           {
             opacity: 1, y: 0, duration: 0.4,
-            ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+            ease: 'power3.out',
             delay: 0.6 + i * 0.06,
             scrollTrigger: { trigger: section, start: 'top 70%', once: true },
           },
@@ -71,7 +71,7 @@ export function FAQ() {
       if (el) {
         const answer = el.querySelector<HTMLElement>('.faq-answer-text')
         if (answer) gsap.to(answer, { opacity: 0, y: -8, duration: 0.25, ease: 'power2.in' })
-        gsap.to(el, { height: 0, duration: 0.35, ease: 'cubic-bezier(0.16, 1, 0.3, 1)', delay: 0.05 })
+        gsap.to(el, { height: 0, duration: 0.35, ease: 'power3.out', delay: 0.05 })
       }
       setOpen(null)
     } else {
@@ -80,7 +80,7 @@ export function FAQ() {
         if (prev) {
           const prevAnswer = prev.querySelector<HTMLElement>('.faq-answer-text')
           if (prevAnswer) gsap.to(prevAnswer, { opacity: 0, y: -8, duration: 0.2, ease: 'power2.in' })
-          gsap.to(prev, { height: 0, duration: 0.3, ease: 'cubic-bezier(0.16, 1, 0.3, 1)', delay: 0.05 })
+          gsap.to(prev, { height: 0, duration: 0.3, ease: 'power3.out', delay: 0.05 })
         }
       }
       setOpen(i)
@@ -90,13 +90,13 @@ export function FAQ() {
         const h = el.offsetHeight
         gsap.fromTo(el,
           { height: 0 },
-          { height: h, duration: 0.4, ease: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+          { height: h, duration: 0.4, ease: 'power3.out' },
         )
         const answer = el.querySelector<HTMLElement>('.faq-answer-text')
         if (answer) {
           gsap.fromTo(answer,
             { opacity: 0, y: 8 },
-            { opacity: 1, y: 0, duration: 0.35, ease: 'cubic-bezier(0.16, 1, 0.3, 1)', delay: 0.1 },
+            { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out', delay: 0.1 },
           )
         }
       }

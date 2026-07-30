@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const NAV_LINKS = [
   { label: 'Services', href: '/#services', hasDropdown: true },
-  { label: 'StockPulse', href: '/stockpulse' },
   { label: 'Insights', href: '/insights' },
   { label: 'Policies', href: '/policies' },
 ]
@@ -16,9 +15,7 @@ const SERVICES_DROPDOWN = [
   { label: 'Management & Operations', href: '/services/management-operations', desc: 'Cost structure diagnosis and margin recovery.' },
 ]
 
-const PRODUCT_LINKS: Record<string, { dot: string; desc: string }> = {
-  '/stockpulse': { dot: '#6CA0DC', desc: 'Inventory intelligence that finds frozen cash.' },
-}
+const PRODUCT_LINKS: Record<string, { dot: string; desc: string }> = {}
 
 export function Navbar() {
   const [open, setOpen] = useState(false)

@@ -99,9 +99,8 @@ function ImageCycler({
 
 const QUICK_NAV = [
   { number: '01', label: 'Services',     href: '/#services' },
-  { number: '02', label: 'StockPulse™',  href: '/stockpulse' },
-  { number: '03', label: 'Insights',     href: '/insights' },
-  { number: '04', label: 'Policies',     href: '/policies' },
+  { number: '02', label: 'Insights',     href: '/insights' },
+  { number: '03', label: 'Policies',     href: '/policies' },
 ]
 
 const STATS = [
