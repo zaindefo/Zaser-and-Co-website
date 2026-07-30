@@ -9,21 +9,32 @@ import { ContactInline } from '@/components/home/ContactInline'
 import { ContactFooterPanel } from '@/components/home/ContactFooterPanel'
 import { StackingPanels } from '@/components/shared/StackingPanels'
 
+/**
+ * The stacking-panel transition is deliberately used at two boundaries only —
+ * services → insights, and FAQ → contact. Every other section keeps the standard
+ * scroll reveal, so the effect stays an accent rather than the whole page.
+ */
 export default function Home() {
   return (
     <main>
+      <Hero />
+      <ServicePanel index={0} />
+
       <StackingPanels>
-        <Hero />
-        <ServicePanel index={0} />
         <ServicePanel index={1} />
-        <CaseStudies />
         <Insights />
-        <ClarityScore />
-        <Founder />
+      </StackingPanels>
+
+      <CaseStudies />
+      <ClarityScore />
+      <Founder />
+
+      <StackingPanels>
         <FAQ />
         <ContactInline />
-        <ContactFooterPanel />
       </StackingPanels>
+
+      <ContactFooterPanel />
     </main>
   )
 }
