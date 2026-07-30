@@ -33,10 +33,11 @@ function useSectionAnimations() {
 
       const parallaxEls = document.querySelectorAll<HTMLElement>('[data-parallax]')
       parallaxEls.forEach((el) => {
+        const speed = parseFloat(el.dataset.parallax || '60')
         gsap.fromTo(el,
-          { y: -60 },
+          { y: -speed },
           {
-            y: 60,
+            y: speed,
             ease: 'none',
             scrollTrigger: {
               trigger: el.closest('section') || el,
@@ -44,6 +45,18 @@ function useSectionAnimations() {
               end: 'bottom top',
               scrub: true,
             },
+          },
+        )
+      })
+
+      document.querySelectorAll<HTMLElement>('.accent-tick').forEach((tick) => {
+        gsap.fromTo(tick,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: { trigger: tick, start: 'top 90%', once: true },
           },
         )
       })

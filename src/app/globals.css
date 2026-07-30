@@ -343,6 +343,7 @@
   /* Accent Tick Mark — Decorative punctuation */
   .accent-tick {
     @apply bg-sage h-1 w-12;
+    transform-origin: left center;
   }
 
   /* Body Copy */

@@ -347,7 +347,7 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
       }} />
 
       {/* Watermark — service name only, 160px, cropped at bottom-right */}
-      <div className="sh-watermark" aria-hidden="true" style={{
+      <div className="sh-watermark" data-parallax="30" aria-hidden="true" style={{
         position: 'absolute', bottom: '-0.15em', right: '-0.02em', zIndex: 2,
         fontFamily: "var(--font-bebas, 'Bebas Neue', Impact, sans-serif)",
         fontSize: 'clamp(100px, 13vw, 160px)', fontWeight: 700, lineHeight: 0.85,
