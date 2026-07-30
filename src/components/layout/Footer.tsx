@@ -1,8 +1,13 @@
 'use client'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { TopoWaveField } from '@/components/shared/TopoWaveField'
 
 export function Footer() {
+  // The homepage ends with <ContactFooterPanel />, its own final stacking layer.
+  const pathname = usePathname()
+  if (pathname === '/') return null
+
   return (
     <footer className="bg-obsidian-ink text-linen relative overflow-hidden">
       <TopoWaveField className="z-0" theme="dark" lineCount={12} amplitude={10} mouseInteraction={false} opacity={0.3} />

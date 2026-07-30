@@ -16,6 +16,19 @@
   --color-moss-glow: #C4866A;
   --color-pollen: #EDD4C6;
 
+  /* Service-section palette — butter yellow on void black.
+     Scoped to the service sections only; the rest of the site keeps the
+     rust/navy identity above. */
+  --butter-yellow: #F5D547;
+  --butter-light: #FFF1B8;
+  --butter-muted: #C4A832;
+  --void-black: #0A0C14;
+  --void-surface: #0E1018;
+  --void-border: #1A1C28;
+  --chrome-white: #E8EDF5;
+  --chrome-mid: #828282;
+  --chrome-dark: #3C3C3C;
+
   /* Typography — Font Families */
   --font-twk-lausanne: 'Plus Jakarta Sans', 'TWK Lausanne', ui-sans-serif, system-ui, sans-serif;
   --font-editorial-new: 'Cormorant', 'Editorial New', ui-serif, Georgia, serif;
@@ -427,11 +440,59 @@
   background-size: auto, auto, auto, 48px 48px, 48px 48px;
 }
 
+/* ── Scroll-pinned stacking panels ──
+   Sticky siblings with rising z-index: each panel slides up over the previous
+   one, which GSAP recedes into the background. The wrapper background is what
+   shows through the gap around a receded panel, so it reads as depth. */
+.stack-wrapper {
+  position: relative;
+  background: var(--void-black);
+}
+
+.stack-panel {
+  position: sticky;
+  top: 0;
+}
+
+.stack-panel-inner {
+  overflow: hidden;
+  will-change: transform;
+  transform-origin: 50% 50%;
+}
+
+/* Mobile falls back to plain document flow — sticky stacking is unreliable on
+   iOS Safari and the receding cards read poorly on small screens. */
+@media (max-width: 767px) {
+  .stack-panel {
+    position: relative;
+    top: auto !important;
+  }
+  .stack-panel-inner {
+    overflow: visible;
+    will-change: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    border-radius: 0 !important;
+  }
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .stack-panel {
+    position: relative;
+    top: auto !important;
+  }
+  .stack-panel-inner {
+    overflow: visible;
+    will-change: auto;
+    transform: none !important;
+    opacity: 1 !important;
+    border-radius: 0 !important;
   }
 }

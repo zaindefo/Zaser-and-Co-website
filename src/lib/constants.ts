@@ -1,11 +1,34 @@
 ﻿// ─── Navigation ───────────────────────────────────────────────────────────────
 
+// StockPulse is intentionally absent — the page stays live for SEO but is off the nav.
 export const NAV_LINKS = [
   { label: 'Services', href: '/#services' },
-  { label: 'StockPulse', href: '/stockpulse' },
   { label: 'Insights', href: '/insights' },
   { label: 'Policies', href: '/policies' },
 ]
+
+// ─── Contact / footer panel (final stacking layer on the homepage) ────────────
+
+export const CONTACT_PANEL = {
+  wordmark: 'ZASER & CO',
+  tagline: 'Strategic & Management Consultancy',
+  navLinks: [
+    { label: 'Home', href: '/' },
+    { label: 'Services', href: '/#services' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+  ],
+  utilityLinks: [
+    { label: 'Contact us', href: '/contact' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/company/zaserandco' },
+    { label: 'Policies', href: '/policies' },
+    { label: 'Email', href: 'mailto:hello@zaserandco.com' },
+  ],
+  cardLabel: 'Contact us',
+  email: 'hello@zaserandco.com',
+  location: 'Dhaka, Bangladesh',
+  badge: 'Advisory That Builds.',
+}
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
