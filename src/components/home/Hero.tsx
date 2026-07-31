@@ -1,6 +1,6 @@
 'use client'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { TopoWaveField } from '@/components/shared/TopoWaveField'
 import { HERO } from '@/lib/constants'
 
@@ -10,50 +10,57 @@ const STATS = [
   { value: '৳15–25%',  lines: ['of inventory capital', 'is frozen in dead stock'] },
 ]
 
-/* Editorial callouts over the artwork. Desktop only — hidden below 768px. */
-const CALLOUTS = ['Financial intelligence', 'Operational clarity', 'AI-powered systems']
+/* Editorial callouts laid over the illustration — atmosphere, not navigation. */
+const CALLOUTS = [
+  { label: 'Financial intelligence', top: '26%' },
+  { label: 'Operational clarity',    top: '48%' },
+  { label: 'AI-powered systems',     top: '70%' },
+]
+
+/* The headline alternates rust and navy line by line. */
+const HEADLINE_TONES = ['var(--zaser-rust)', 'var(--zaser-navy)', 'var(--zaser-rust)', 'var(--zaser-navy)']
 
 export function Hero() {
-  const [l1, l2, l3, l4] = HERO.headline
-
   return (
-    <section data-no-clip className="zhero">
-      {/* Faint contour field — sits under everything */}
-      <TopoWaveField className="zhero-topo" opacity={0.12} />
+    <section data-no-clip className="hero-root">
+      {/* Faint contour field — only ever visible on the paper side */}
+      <TopoWaveField className="z-0" opacity={0.12} lineCount={10} amplitude={12} />
 
-      {/* Text block first in the DOM so mobile stacks text above the image */}
-      <div className="zhero-inner">
+      {/* ── Left: brand message ── */}
+      <div className="hero-inner">
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
+          className="hero-copy"
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          {HERO.badge && <p className="zhero-eyebrow">{HERO.badge}</p>}
+          {HERO.badge && <p className="hero-eyebrow">{HERO.badge}</p>}
 
-          <h1 className="zhero-headline">
-            <span className="zhero-line zhero-line--rust">{l1}</span>
-            <span className="zhero-line zhero-line--navy">{l2}</span>
-            <span className="zhero-line zhero-line--rust">{l3}</span>
-            <span className="zhero-line zhero-line--navy">{l4}</span>
+          <h1 className="hero-headline">
+            {HERO.headline.map((line, i) => (
+              <span key={line} style={{ display: 'block', color: HEADLINE_TONES[i] }}>
+                {line}
+              </span>
+            ))}
           </h1>
 
-          <p className="zhero-body">{HERO.subheadline}</p>
+          <p className="hero-body">{HERO.subheadline}</p>
 
-          <div className="zhero-ctas">
-            <Link href="/contact" className="zhero-cta">
-              {HERO.primaryCTA} →
+          <div className="hero-cta-row">
+            <Link href="/contact" className="hero-cta">
+              {HERO.primaryCTA} <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/#services" className="zhero-cta-ghost">
-              {HERO.secondaryCTA} →
+            <Link href="/#services" className="hero-cta-secondary">
+              {HERO.secondaryCTA} <span aria-hidden="true">→</span>
             </Link>
           </div>
 
-          <div className="zhero-stats">
+          <div className="hero-stats">
             {STATS.map((stat) => (
-              <div className="zhero-stat" key={stat.value}>
-                <p className="zhero-stat-value">{stat.value}</p>
+              <div className="hero-stat" key={stat.value}>
+                <p className="hero-stat-value">{stat.value}</p>
                 {stat.lines.map((line) => (
-                  <span className="zhero-stat-line" key={line}>{line}</span>
+                  <span key={line} className="hero-stat-line">{line}</span>
                 ))}
               </div>
             ))}
@@ -61,182 +68,185 @@ export function Hero() {
         </motion.div>
       </div>
 
-      {/* Full-bleed artwork panel — absolute on desktop, in flow on mobile */}
-      <div className="zhero-media">
+      {/* ── Right: full-height illustration panel ── */}
+      <div className="hero-media">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/hero-consultancy.webp"
-          alt="A consultant at a desk reviewing performance charts and financial reports, with analysis frameworks pinned to the wall and a city skyline beyond the window."
-          width={1691}
-          height={930}
+          width={1717}
+          height={916}
           fetchPriority="high"
           decoding="async"
+          alt="A consultant reviewing performance charts and financial reports at a desk, with workflow notes pinned above and a city skyline beyond the window."
         />
-        <ul className="zhero-callouts" aria-hidden="true">
-          {CALLOUTS.map((label) => (
-            <li key={label}><span className="zhero-dot" />{label}</li>
-          ))}
-        </ul>
+        {CALLOUTS.map((c) => (
+          <span className="hero-callout" key={c.label} style={{ top: c.top }}>
+            <span className="hero-callout-dot" />
+            <span className="hero-callout-rule" />
+            <em>{c.label}</em>
+          </span>
+        ))}
       </div>
 
       <style>{`
-        .zhero {
+        /* ── Mobile first: text, then image ── */
+        .hero-root {
           position: relative;
           background: var(--zaser-paper);
           overflow: hidden;
           display: flex;
           flex-direction: column;
         }
-        .zhero-topo { z-index: 0; }
 
-        .zhero-inner {
+        .hero-inner {
           position: relative;
-          z-index: 3;
-          padding: 132px 24px 72px;
+          z-index: 10;
+          padding: 128px 24px 48px;
         }
+        .hero-copy { max-width: 640px; }
 
-        /* ── Type ── */
-        .zhero-eyebrow {
+        .hero-eyebrow {
           font-family: var(--font-dm-mono);
           font-size: 11px;
           font-weight: 500;
           color: var(--zaser-grey);
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          margin-bottom: 26px;
+          margin-bottom: 24px;
         }
-        .zhero-headline { margin: 0 0 32px; }
-        .zhero-line {
-          display: block;
-          font-family: var(--font-bebas);
-          line-height: 0.86;
-          letter-spacing: -0.015em;
-          font-size: clamp(52px, 12vw, 76px);
-        }
-        .zhero-line--rust { color: var(--zaser-rust); }
-        .zhero-line--navy { color: var(--zaser-navy); }
 
-        .zhero-body {
+        .hero-headline {
+          font-family: var(--font-bebas);
+          font-size: clamp(46px, 13vw, 72px);
+          line-height: 0.88;
+          letter-spacing: -0.02em;
+          margin-bottom: 32px;
+        }
+
+        .hero-body {
           font-family: var(--font-twk-lausanne);
-          font-weight: 350;
           font-size: 16px;
-          line-height: 1.75;
+          font-weight: 400;
+          line-height: 1.72;
           color: var(--zaser-dark-grey);
-          max-width: 44ch;
+          max-width: 52ch;
           margin-bottom: 36px;
         }
 
-        /* ── CTAs ── */
-        .zhero-ctas {
+        .hero-cta-row {
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          gap: 14px 28px;
-          margin-bottom: 56px;
+          gap: 28px;
+          margin-bottom: 48px;
         }
-        .zhero-cta {
+        .hero-cta {
           display: inline-flex;
           align-items: center;
-          font-family: var(--font-twk-lausanne);
-          font-size: 12px;
-          font-weight: 600;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--zaser-white);
+          gap: 10px;
           background: var(--zaser-deep-navy);
-          padding: 19px 34px;
-          border-radius: 6px;
+          color: var(--zaser-white);
+          font-family: var(--font-twk-lausanne);
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          padding: 18px 32px;
+          border-radius: 8px;
           text-decoration: none;
-          box-shadow: 0 6px 18px rgba(15, 20, 40, 0.16);
-          transition: background 220ms ease, box-shadow 220ms ease;
+          box-shadow: 0 6px 20px rgba(15, 20, 40, 0.16);
+          transition: background 220ms ease, transform 220ms ease;
         }
-        .zhero-cta:hover {
-          background: var(--zaser-navy);
-          box-shadow: 0 8px 22px rgba(15, 20, 40, 0.22);
-        }
-        .zhero-cta-ghost {
+        .hero-cta:hover { background: var(--zaser-navy); transform: translateY(-1px); }
+        .hero-cta-secondary {
           font-family: var(--font-twk-lausanne);
           font-size: 14px;
           font-weight: 500;
-          color: var(--zaser-navy);
+          color: var(--zaser-rust);
           text-decoration: none;
           border-bottom: 1px solid transparent;
-          transition: color 200ms ease, border-color 200ms ease;
+          transition: border-color 220ms ease;
         }
-        .zhero-cta-ghost:hover {
-          color: var(--zaser-rust);
-          border-bottom-color: var(--zaser-rust);
-        }
+        .hero-cta-secondary:hover { border-bottom-color: var(--zaser-rust); }
 
-        /* ── Stats ── */
-        .zhero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
-        .zhero-stat { padding-left: 18px; border-left: 1px solid rgba(24, 32, 64, 0.16); }
-        .zhero-stat-value {
+        .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px 28px; }
+        .hero-stat { padding-left: 0; }
+        .hero-stat-value {
           font-family: var(--font-dm-mono);
+          font-size: clamp(17px, 2vw, 21px);
           font-weight: 500;
-          font-size: clamp(17px, 1.5vw, 21px);
           color: var(--zaser-navy);
           letter-spacing: -0.01em;
-          margin-bottom: 10px;
+          margin-bottom: 8px;
         }
-        .zhero-stat-line {
+        .hero-stat-line {
           display: block;
           font-family: var(--font-twk-lausanne);
-          font-size: 13.5px;
-          font-weight: 350;
-          line-height: 1.5;
-          color: var(--zaser-dark-grey);
+          font-size: 13px;
+          line-height: 1.45;
+          color: var(--zaser-grey);
         }
 
-        /* ── Artwork ── */
-        .zhero-media { position: relative; width: 100%; aspect-ratio: 16 / 11; }
-        .zhero-media img {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
+        .hero-media { position: relative; width: 100%; aspect-ratio: 16 / 10; z-index: 1; }
+        .hero-media img {
+          width: 100%; height: 100%;
           object-fit: cover;
           object-position: center right;
           display: block;
         }
-        .zhero-callouts { display: none; }
+        /* Callouts are desktop-only */
+        .hero-callout { display: none; }
+
+        @media (min-width: 480px) {
+          .hero-stats { grid-template-columns: repeat(3, 1fr); }
+        }
 
         /* ── Tablet ── */
         @media (min-width: 768px) {
-          .zhero { min-height: 100vh; display: block; }
-          .zhero-inner {
-            width: 52%;
-            padding: clamp(120px, 15vh, 168px) 32px 80px clamp(32px, 5vw, 70px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+          .hero-root {
+            flex-direction: row;
+            align-items: center;
             min-height: 100vh;
           }
-          .zhero-line { font-size: clamp(46px, 6.4vw, 72px); }
-          .zhero-stats { grid-template-columns: repeat(3, 1fr); gap: 18px; }
-
-          /* Full-bleed panel: top of section to bottom, hard against the right edge */
-          .zhero-media {
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 52%;
-            aspect-ratio: auto;
-            z-index: 1;
+          .hero-inner {
+            width: 54%;
+            padding: 140px 32px 80px 40px;
           }
-          /* Soft cream blend so the artwork merges into the text field */
-          .zhero-media::before {
+          .hero-headline { font-size: clamp(52px, 6.4vw, 76px); }
+
+          .hero-media {
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 46%;
+            height: auto;
+            aspect-ratio: auto;
+          }
+          /* Left edge dissolves into the paper so the panel reads as part of the
+             hero rather than an image pasted on top of it. */
+          .hero-media::before {
             content: "";
             position: absolute;
             inset: 0 auto 0 0;
             width: 28%;
-            background: linear-gradient(
-              to right,
+            background: linear-gradient(to right,
               var(--zaser-paper) 0%,
               rgba(243, 238, 229, 0.72) 42%,
-              transparent 100%
-            );
+              transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+          }
+          /* The navbar is transparent and its right-hand links cross over this
+             panel. Fade the top band back to paper so they stay readable
+             without the image losing its full-height bleed. */
+          .hero-media::after {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 132px;
+            background: linear-gradient(to bottom,
+              var(--zaser-paper) 0%,
+              rgba(243, 238, 229, 0.66) 46%,
+              transparent 100%);
             z-index: 2;
             pointer-events: none;
           }
@@ -244,47 +254,43 @@ export function Hero() {
 
         /* ── Desktop ── */
         @media (min-width: 1024px) {
-          .zhero-inner { width: 47%; padding-left: 70px; padding-right: 40px; }
-          .zhero-media { width: 54%; }
-          .zhero-line { font-size: clamp(58px, 5.4vw, 92px); }
-
-          .zhero-callouts {
-            display: flex;
-            position: absolute;
-            left: 32%;
-            right: 40px;
-            bottom: 44px;
-            z-index: 3;
-            justify-content: flex-end;
-            gap: 26px;
-            margin: 0;
-            padding: 0;
-            list-style: none;
+          .hero-inner {
+            width: 47%;
+            padding: 160px 40px 96px 70px;
           }
-          .zhero-callouts li {
+          .hero-headline { font-size: clamp(64px, 5.4vw, 92px); }
+          .hero-body { font-size: 17px; }
+          .hero-media { width: 53%; }
+
+          /* Dividers only once the stats sit on one row */
+          .hero-stat + .hero-stat {
+            padding-left: 28px;
+            border-left: 1px solid rgba(24, 32, 64, 0.14);
+          }
+          .hero-stats { gap: 0 28px; }
+
+          .hero-callout {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            position: absolute;
+            right: 40px;
+            z-index: 3;
             font-family: var(--font-editorial-new);
             font-style: italic;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.92);
-            white-space: nowrap;
-          }
-          .zhero-dot {
-            width: 4px; height: 4px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.75);
-            box-shadow: -18px 0 0 -1.5px rgba(255, 255, 255, 0.35);
-          }
-          /* Low scrim so the callouts stay legible over light parts of the artwork */
-          .zhero-media::after {
-            content: "";
-            position: absolute;
-            inset: auto 0 0 0;
-            height: 190px;
-            background: linear-gradient(to top, rgba(15, 20, 40, 0.55), transparent);
-            z-index: 2;
+            font-size: 14px;
+            color: rgba(24, 32, 64, 0.72);
             pointer-events: none;
+          }
+          .hero-callout-dot {
+            width: 4px; height: 4px; border-radius: 50%;
+            background: var(--zaser-rust);
+            flex-shrink: 0;
+          }
+          .hero-callout-rule {
+            width: 26px; height: 1px;
+            background: rgba(24, 32, 64, 0.28);
+            flex-shrink: 0;
           }
         }
       `}</style>

@@ -18,6 +18,17 @@
   --color-moss-glow: #C4866A;
   --color-pollen: #EDD4C6;
 
+  /* Zaser & Co brand palette — used by the art-directed hero */
+  --zaser-navy: #182040;
+  --zaser-deep-navy: #0F1428;
+  --zaser-rust: #782000;
+  --zaser-rust-lift: #8C2800;
+  --zaser-paper: #F3EEE5;
+  --zaser-paper-soft: #EFE7DA;
+  --zaser-grey: #828282;
+  --zaser-dark-grey: #3C3C3C;
+  --zaser-white: #FFFFFF;
+
   /* Zaser & Co brand palette — navy / rust on warm paper */
   --zaser-navy: #182040;
   --zaser-deep-navy: #0F1428;
