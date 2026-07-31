@@ -2,6 +2,7 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { gsap } from '@/lib/gsap'
+import { LivingOrganism } from '@/components/shared/LivingOrganism'
 import { CONTACT_PANEL } from '@/lib/constants'
 
 /**
@@ -233,6 +234,9 @@ export function ContactFooterPanel() {
         {/* ── Layers 2 + 3 — blueprint with the contact card on top ── */}
         <div className="cf-stage">
           <div className="cf-blueprint">
+            {/* Drifting node network behind the schematic — keep this, it is the
+                living background motion for the footer panel. */}
+            <LivingOrganism opacity={0.18} spread={0.7} nodeCount={16} />
             <BlueprintSchematic />
           </div>
 
