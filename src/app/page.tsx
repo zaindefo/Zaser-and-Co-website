@@ -5,7 +5,6 @@ import { Insights } from '@/components/home/Insights'
 import { ClarityScore } from '@/components/home/ClarityScore'
 import { Founder } from '@/components/home/Founder'
 import { FAQ } from '@/components/home/FAQ'
-import { ContactInline } from '@/components/home/ContactInline'
 import { ContactFooterPanel } from '@/components/home/ContactFooterPanel'
 import { StackingPanels } from '@/components/shared/StackingPanels'
 
@@ -31,10 +30,8 @@ export default function Home() {
 
       <StackingPanels>
         <FAQ />
-        <ContactInline />
+        <ContactFooterPanel />
       </StackingPanels>
-
-      <ContactFooterPanel />
     </main>
   )
 }

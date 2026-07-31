@@ -10,8 +10,10 @@ export const NAV_LINKS = [
 // ─── Contact / footer panel (final stacking layer on the homepage) ────────────
 
 export const CONTACT_PANEL = {
-  wordmark: 'ZASER & CO',
+  wordmarkPrimary: 'ZASER',
+  wordmarkAccent: '& CO',
   tagline: 'Strategic & Management Consultancy',
+  subTagline: 'Strategy that delivers. For businesses that are ready to grow.',
   navLinks: [
     { label: 'Home', href: '/' },
     { label: 'Services', href: '/#services' },
@@ -22,12 +24,23 @@ export const CONTACT_PANEL = {
     { label: 'Contact us', href: '/contact' },
     { label: 'LinkedIn', href: 'https://linkedin.com/company/zaserandco' },
     { label: 'Policies', href: '/policies' },
-    { label: 'Email', href: 'mailto:hello@zaserandco.com' },
+    { label: 'Privacy Policy', href: '/policies' },
+    { label: 'Email', href: 'mailto:zasernco@gmail.com' },
   ],
   cardLabel: 'Contact us',
-  email: 'hello@zaserandco.com',
-  location: 'Dhaka, Bangladesh',
-  badge: 'Advisory That Builds.',
+  // Each line is its own link target — mailto, map, tel.
+  contactLines: [
+    { label: 'zasernco@gmail.com', href: 'mailto:zasernco@gmail.com' },
+    { label: 'Baridhara DOHS, Dhaka', href: null },
+    { label: '01857485643', href: 'tel:+8801857485643' },
+  ],
+  badgeTagline: 'Advisory That Builds.',
+  est: 'EST. 2026',
+  copyright: '© 2026 Zaser & Co. Dhaka, Bangladesh.',
+  seoLinks: [
+    { label: 'Business Consultancy Bangladesh', href: '/business-consultancy-bangladesh' },
+    { label: 'Business Consultant Dhaka', href: '/business-consultant-dhaka' },
+  ],
 }
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
