@@ -1,101 +1,8 @@
 'use client'
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { MagneticButton } from '@/components/shared/MagneticButton'
 import { TopoWaveField } from '@/components/shared/TopoWaveField'
 import { HERO } from '@/lib/constants'
-
-// Each slot draws from a completely separate thematic image set
-const IMAGE_SETS = {
-  numbers: [
-    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=900&h=560&fit=crop&q=85',
-  ],
-  profit: [
-    'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&h=560&fit=crop&q=85',
-  ],
-  operations: [
-    'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&h=560&fit=crop&q=85',
-    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=900&h=560&fit=crop&q=85',
-  ],
-}
-
-const CYCLE_MS = 3400  // hold time per image
-const FADE_MS  = 800   // crossfade duration
-
-// Stagger offsets — slots never transition at the same moment
-const OFFSETS_MS = [0, 1350, 2650]
-
-function ImageCycler({
-  images,
-  offsetMs,
-  widthEm,
-  heightEm,
-}: {
-  images: string[]
-  offsetMs: number
-  widthEm: number
-  heightEm: number
-}) {
-  const [idx, setIdx] = useState(0)
-
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval>
-    const t = setTimeout(() => {
-      interval = setInterval(() => {
-        setIdx(i => (i + 1) % images.length)
-      }, CYCLE_MS)
-    }, offsetMs)
-    return () => {
-      clearTimeout(t)
-      clearInterval(interval)
-    }
-  }, [images.length, offsetMs])
-
-  return (
-    <span
-      style={{
-        display: 'inline-block',
-        flexShrink: 0,
-        width: `${widthEm}em`,
-        height: `${heightEm}em`,
-        borderRadius: 10,
-        overflow: 'hidden',
-        verticalAlign: 'middle',
-        position: 'relative',
-      }}
-    >
-      {images.map((src, i) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={src}
-          src={src}
-          alt=""
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            filter: 'grayscale(1)',
-            opacity: i === idx ? 1 : 0,
-            transition: `opacity ${FADE_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`,
-          }}
-        />
-      ))}
-    </span>
-  )
-}
 
 const QUICK_NAV = [
   { number: '01', label: 'Services',     href: '/#services' },
@@ -109,106 +16,70 @@ const STATS = [
   { value: '৳15–25%',  lines: ['of inventory capital', 'is frozen in dead stock'] },
 ]
 
+/* Alternating scale: the setup lines sit quieter, the payoff lines carry weight. */
+const SETUP_LINE = {
+  fontFamily: 'var(--font-bebas)',
+  fontSize: 'clamp(26px, 3.2vw, 44px)',
+  letterSpacing: '-0.02em',
+  lineHeight: 0.92,
+  color: '#6B3828',
+}
+
+const PAYOFF_LINE = {
+  fontFamily: 'var(--font-bebas)',
+  fontSize: 'clamp(36px, 4.6vw, 62px)',
+  letterSpacing: '-0.025em',
+  lineHeight: 0.92,
+}
+
 export function Hero() {
   const [l1, l2, l3, l4] = HERO.headline
 
   return (
     <section data-no-clip className="min-h-screen bg-linen relative flex flex-col">
-      {/* Topographic wave field — living terrain background */}
+      {/* Topographic wave field — sits behind the text side; the media panel covers it */}
       <TopoWaveField className="z-0" />
 
-      {/* Main content */}
       <div className="page-container px-6 md:px-12 lg:px-20 pt-40 md:pt-60 pb-40 flex-1 flex flex-col justify-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Section label */}
-          {HERO.badge && (
-            <p style={{
-              fontFamily: 'var(--font-dm-mono)',
-              fontSize: '11px',
-              fontWeight: 500,
-              color: 'var(--z-chrome-dark, #5A5B66)',
-              letterSpacing: '0.2em',
-              textTransform: 'uppercase',
-              marginBottom: '24px',
-            }}>
-              {HERO.badge}
-            </p>
-          )}
+          <div className="hero-grid">
+            {/* ── Left: information block ── */}
+            <div className="hero-content">
+              {HERO.badge && (
+                <p style={{
+                  fontFamily: 'var(--font-dm-mono)',
+                  fontSize: '11px',
+                  fontWeight: 500,
+                  color: 'var(--z-chrome-dark, #5A5B66)',
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  marginBottom: '24px',
+                }}>
+                  {HERO.badge}
+                </p>
+              )}
 
-          <h1 style={{ marginBottom: '3rem' }} aria-label={`${l1} ${l2} ${l3} ${l4}`}>
-            {/* Row 1 — setup: warm brown sage, smaller */}
-            <div
-              className="flex items-center flex-wrap"
-              style={{
-                gap: '0.18em', marginBottom: '0.04em',
-                fontFamily: 'var(--font-bebas)',
-                fontSize: 'clamp(36px, 5.5vw, 72px)',
-                letterSpacing: '-0.02em', lineHeight: 0.88,
-                color: '#6B3828',
-              }}
-            >
-              <span>{l1}</span>
-              <ImageCycler images={IMAGE_SETS.numbers} offsetMs={OFFSETS_MS[0]} widthEm={2.2} heightEm={0.8} />
-            </div>
+              <h1 style={{ marginBottom: '2.25rem' }}>
+                <span style={{ ...SETUP_LINE, display: 'block' }}>{l1}</span>
+                <span style={{ ...PAYOFF_LINE, display: 'block', color: '#0F1235' }}>{l2}</span>
+                <span style={{ ...SETUP_LINE, display: 'block' }}>{l3}</span>
+                <span style={{ ...PAYOFF_LINE, display: 'block', color: '#1D2464' }}>{l4}</span>
+              </h1>
 
-            {/* Row 2 — payoff: deep navy, larger */}
-            <div
-              className="flex items-center flex-wrap"
-              style={{
-                gap: '0.18em', marginBottom: '0.04em',
-                fontFamily: 'var(--font-bebas)',
-                fontSize: 'clamp(52px, 8vw, 100px)',
-                letterSpacing: '-0.025em', lineHeight: 0.88,
-                color: '#0F1235',
-              }}
-            >
-              <ImageCycler images={IMAGE_SETS.profit} offsetMs={OFFSETS_MS[1]} widthEm={1.0} heightEm={0.78} />
-              <span>{l2}</span>
-            </div>
-
-            {/* Row 3 — setup: warm brown sage, smaller */}
-            <div
-              className="flex items-center flex-wrap"
-              style={{
-                gap: '0.18em', marginBottom: '0.04em',
-                fontFamily: 'var(--font-bebas)',
-                fontSize: 'clamp(36px, 5.5vw, 72px)',
-                letterSpacing: '-0.02em', lineHeight: 0.88,
-                color: '#6B3828',
-              }}
-            >
-              <span>{l3}</span>
-              <ImageCycler images={IMAGE_SETS.operations} offsetMs={OFFSETS_MS[2]} widthEm={2.2} heightEm={0.8} />
-            </div>
-
-            {/* Row 4 — payoff: dark indigo */}
-            <div
-              style={{
-                fontFamily: 'var(--font-bebas)',
-                fontSize: 'clamp(52px, 8vw, 100px)',
-                letterSpacing: '-0.025em', lineHeight: 0.88,
-                color: '#1D2464',
-              }}
-            >
-              <span>{l4}</span>
-            </div>
-          </h1>
-
-          {/* Two-column: subheadline + CTAs | key stats */}
-          <div className="grid md:grid-cols-2 gap-40 items-start mb-60">
-            <div>
-              <p className="text-body-sm-2 text-sage mb-40 leading-relaxed">
+              <p className="text-body-sm-2 text-sage leading-relaxed" style={{ maxWidth: '46ch', marginBottom: '36px' }}>
                 {HERO.subheadline}
               </p>
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
                 className="flex flex-col sm:flex-row gap-20"
+                style={{ marginBottom: '48px' }}
               >
                 <MagneticButton href="/contact" size="lg">
                   {HERO.primaryCTA} →
@@ -217,36 +88,51 @@ export function Hero() {
                   {HERO.secondaryCTA} →
                 </button>
               </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.45 }}
+                className="hero-stats"
+              >
+                {STATS.map((stat) => (
+                  <div key={stat.value}>
+                    <p
+                      className="font-mono font-medium text-obsidian-ink mb-8 tracking-tight"
+                      style={{ fontSize: 'clamp(14px, 1.5vw, 20px)' }}
+                    >
+                      {stat.value}
+                    </p>
+                    <div>
+                      {stat.lines.map((line) => (
+                        <span key={line} className="block text-body-sm text-sage leading-snug">
+                          {line}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
             </div>
 
-            {/* Stats strip */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.45 }}
-              className="grid grid-cols-3 gap-20 md:border-l md:border-mist md:pl-40"
-            >
-              {STATS.map((stat) => (
-                <div key={stat.value}>
-                  <p
-                    className="font-mono font-medium text-obsidian-ink mb-8 tracking-tight"
-                    style={{ fontSize: 'clamp(14px, 1.8vw, 21px)' }}
-                  >
-                    {stat.value}
-                  </p>
-                  <div>
-                    {stat.lines.map((line) => (
-                      <span key={line} className="block text-body-sm text-sage leading-snug">
-                        {line}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+            {/* ── Right: media panel ──
+                No nested fade: the parent block already handles the entrance, and a
+                second opacity:0 here would hide the hero visual until JS runs. */}
+            <div className="hero-media">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/hero-consultancy.webp"
+                width={1691}
+                height={930}
+                /* LCP element — fetch it eagerly rather than letting it queue */
+                fetchPriority="high"
+                decoding="async"
+                alt="A consultant at a desk reviewing performance charts and financial reports, with analysis frameworks pinned to the wall and a city skyline beyond the window."
+              />
+            </div>
           </div>
 
-          <div className="accent-tick" />
+          <div className="accent-tick" style={{ marginTop: '48px' }} />
         </motion.div>
       </div>
 
@@ -271,12 +157,67 @@ export function Hero() {
                 {item.number}
               </span>
               <span>{item.label}</span>
-              {/* Voltage underline slides in from left on hover */}
               <span className="absolute bottom-0 left-0 h-px bg-voltage transition-all duration-300 ease-out w-0 group-hover:w-full" />
             </a>
           ))}
         </div>
       </motion.div>
+
+      <style>{`
+        /* Mobile first — single column, text before media */
+        .hero-grid { display: grid; grid-template-columns: 1fr; gap: 40px; }
+        .hero-content { min-width: 0; }
+        .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+        .hero-media {
+          position: relative;
+          overflow: hidden;
+          border-radius: var(--radius-card);
+          border: 1px solid rgba(15, 18, 53, 0.06);
+          background: #EFE8DD;
+          aspect-ratio: 16 / 10;
+        }
+        .hero-media img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          /* Bias right of centre so the desk and subject stay in frame when cropped */
+          object-position: 60% center;
+          display: block;
+        }
+
+        @media (max-width: 520px) {
+          .hero-stats { grid-template-columns: 1fr; gap: 24px; }
+        }
+
+        /* Tablet — two columns, media slightly narrower */
+        @media (min-width: 768px) {
+          .hero-grid {
+            grid-template-columns: 58fr 42fr;
+            gap: clamp(24px, 2.6vw, 44px);
+            align-items: stretch;
+          }
+          .hero-media {
+            aspect-ratio: auto;
+            min-height: clamp(420px, 50vh, 600px);
+          }
+          .hero-media img { object-position: 68% center; }
+        }
+
+        /* Desktop — media anchors the hero at 45% of its width */
+        @media (min-width: 1024px) {
+          .hero-grid {
+            /* Gap is deliberately modest: it counts against the column split, and a
+               wider one pushes the media panel below its 42% floor. */
+            grid-template-columns: 55fr 45fr;
+            gap: clamp(28px, 2.8vw, 56px);
+          }
+          .hero-media { min-height: clamp(480px, 58vh, 680px); }
+          .hero-media img { object-position: 70% center; }
+        }
+      `}</style>
     </section>
   )
 }
