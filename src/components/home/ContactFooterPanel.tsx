@@ -16,40 +16,139 @@ import { CONTACT_PANEL } from '@/lib/constants'
  * overlapping and stack in document flow instead.
  */
 
-/** Decorative wiring-diagram marks. Atmosphere only — nothing here is data. */
+/* The consulting engagement lifecycle, drawn as a process flow. */
+const FLOW_STAGES = [
+  { label: 'DISCOVERY', cx: 60 },
+  { label: 'DIAGNOSTIC', cx: 160 },
+  { label: 'ANALYSIS', cx: 260 },
+  { label: 'ROADMAP', cx: 360 },
+  { label: 'DELIVERY', cx: 460 },
+]
+
+/* Cost structure sample — the widest band is outlined rather than filled. */
+const COST_BANDS = [
+  { label: 'FIXED', pct: '48%', w: 120, outlined: true },
+  { label: 'VARIABLE', pct: '32%', w: 80, outlined: false },
+  { label: 'SEMI-VAR', pct: '20%', w: 50, outlined: false },
+]
+
+/* Abstract data points sitting on grid intersections. */
+const NODES = [
+  { cx: 160, cy: 80, lit: false },
+  { cx: 320, cy: 160, lit: true },
+  { cx: 240, cy: 370, lit: false },
+  { cx: 480, cy: 400, lit: true },
+  { cx: 400, cy: 500, lit: false },
+]
+
+const MONO = "'DM Mono', monospace"
+const INK = '#3C3C3C'
+
+/**
+ * Methodology schematic — process flow, five-dimension assessment, cost
+ * structure and margin erosion. Atmosphere, not data: it should read as a page
+ * from an internal methodology document seen through dark glass.
+ */
 function BlueprintSchematic() {
-  const line = { stroke: '#3C3C3C', strokeWidth: 1, fill: 'none' } as const
+  const line = { stroke: INK, strokeWidth: 1, fill: 'none' } as const
 
   return (
     <svg
       aria-hidden="true"
+      viewBox="0 0 580 630"
+      preserveAspectRatio="xMidYMid meet"
       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
     >
-      {/* Element 4 — diagonal construction line */}
-      <path className="bp-draw" d="M 4% 6% L 42% 62%" {...line} strokeDasharray="4 4" opacity="0.5" />
+      {/* Element 6 — construction line */}
+      <path className="bp-draw" d="M 24 44 L 300 330" stroke="#1A1C28" strokeWidth="0.5" fill="none" strokeDasharray="4 4" />
 
-      {/* Element 1 — connection path with endpoints */}
-      <path className="bp-draw" d="M 10% 22% L 68% 22%" {...line} strokeDasharray="8 4" />
-      <path className="bp-draw" d="M 10% 22% l 7 -3.5 l 0 7 z" fill="#3C3C3C" stroke="none" />
-      <circle className="bp-draw" cx="32%" cy="22%" r="4" {...line} />
-      <circle className="bp-draw" cx="52%" cy="22%" r="4" {...line} />
-      <text x="10%" y="17%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">#1</text>
-      <text x="69%" y="17%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">X1</text>
+      {/* Element 5 — drawing reference labels */}
+      <text className="bp-draw" x="24" y="28" fill={INK} fontSize="7" fontFamily={MONO}>REF: ZC-OPS-2026</text>
+      <text className="bp-draw" x="556" y="606" fill={INK} fontSize="7" fontFamily={MONO} textAnchor="end">SCALE: 1:1 · ADVISORY</text>
 
-      {/* Element 2 — component arc */}
-      <path className="bp-draw" d="M 44% 22% a 26 26 0 0 1 52 0" {...line} />
-      <text x="46%" y="30%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">18A</text>
+      {/* Element 1 — engagement lifecycle flow */}
+      {FLOW_STAGES.map((stage, i) => {
+        const next = FLOW_STAGES[i + 1]
+        return (
+          <g className="bp-draw" key={stage.label}>
+            <rect x={stage.cx - 6} y={104} width={12} height={12} {...line} />
+            <text x={stage.cx} y={132} fill={INK} fontSize="7" fontFamily={MONO} textAnchor="middle">
+              {stage.label}
+            </text>
+            {next && (
+              <>
+                <line x1={stage.cx + 6} y1={110} x2={next.cx - 13} y2={110} {...line} strokeDasharray="6 4" />
+                <polygon points={`${next.cx - 13},107 ${next.cx - 13},113 ${next.cx - 6},110`} fill={INK} />
+              </>
+            )}
+          </g>
+        )
+      })}
 
-      {/* Element 3 — second, shorter connection path */}
-      <path className="bp-draw" d="M 10% 46% L 44% 46%" {...line} strokeDasharray="8 4" />
-      <path className="bp-draw" d="M 10% 46% l 7 -3.5 l 0 7 z" fill="#3C3C3C" stroke="none" />
-      <text x="10%" y="41%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">#2</text>
+      {/* Element 4 — margin erosion between revenue and net margin */}
+      <g className="bp-draw">
+        <line x1={130} y1={200} x2={300} y2={200} {...line} />
+        <text x={50} y={203} fill={INK} fontSize="7" fontFamily={MONO}>REVENUE</text>
+        <text x={306} y={203} fill={INK} fontSize="7" fontFamily={MONO}>৳800K</text>
 
-      {/* Element 5 — wire specification labels */}
-      <text x="78%" y="34%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">AWG12</text>
-      <text x="78%" y="39%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">BLACK</text>
-      <text x="6%" y="86%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">L /+</text>
-      <text x="6%" y="94%" fill="#3C3C3C" fontSize="8" fontFamily="'DM Mono', monospace">N /−</text>
+        <line x1={130} y1={280} x2={300} y2={280} {...line} />
+        <text x={50} y={283} fill={INK} fontSize="7" fontFamily={MONO}>NET MARGIN</text>
+        <text x={306} y={283} fill={INK} fontSize="7" fontFamily={MONO}>৳184K</text>
+
+        <line x1={200} y1={204} x2={250} y2={276} {...line} strokeDasharray="4 3" />
+        <text x={196} y={243} fill={INK} fontSize="6" fontFamily={MONO} textAnchor="end">LEAK</text>
+        <text x={254} y={243} fill={INK} fontSize="6" fontFamily={MONO}>-12%</text>
+      </g>
+
+      {/* Element 2 — five-dimension readiness radar */}
+      <g className="bp-draw">
+        <polygon points="430,260 468,287.6 453.5,332.4 406.5,332.4 392,287.6" {...line} />
+        <line x1={430} y1={300} x2={430} y2={260} {...line} strokeWidth="0.5" />
+        <line x1={430} y1={300} x2={468} y2={287.6} {...line} strokeWidth="0.5" />
+        <line x1={430} y1={300} x2={453.5} y2={332.4} {...line} strokeWidth="0.5" />
+        <line x1={430} y1={300} x2={406.5} y2={332.4} {...line} strokeWidth="0.5" />
+        <line x1={430} y1={300} x2={392} y2={287.6} {...line} strokeWidth="0.5" />
+        {/* Sample profile — 72 / 45 / 68 / 54 / 38 */}
+        <polygon
+          points="430,271.2 447.1,294.4 446,322 417.3,317.5 415.5,295.3"
+          fill="rgba(245, 213, 71, 0.08)"
+          stroke={INK}
+          strokeWidth="0.5"
+        />
+        <text x={430} y={252} fill={INK} fontSize="6" fontFamily={MONO} textAnchor="middle">STR</text>
+        <text x={476} y={285} fill={INK} fontSize="6" fontFamily={MONO}>DAT</text>
+        <text x={460} y={345} fill={INK} fontSize="6" fontFamily={MONO}>TEC</text>
+        <text x={400} y={345} fill={INK} fontSize="6" fontFamily={MONO} textAnchor="end">PEO</text>
+        <text x={384} y={285} fill={INK} fontSize="6" fontFamily={MONO} textAnchor="end">GOV</text>
+      </g>
+
+      {/* Element 3 — cost structure */}
+      {COST_BANDS.map((band, i) => {
+        const y = 430 + i * 16
+        return (
+          <g className="bp-draw" key={band.label}>
+            <text x={50} y={y + 5} fill={INK} fontSize="6" fontFamily={MONO}>{band.label}</text>
+            <rect
+              x={110} y={y} width={band.w} height={6}
+              fill={band.outlined ? 'none' : '#1A1C28'}
+              stroke={band.outlined ? INK : 'none'}
+              strokeWidth={band.outlined ? 1 : 0}
+            />
+            <text x={235} y={y + 5} fill={INK} fontSize="6" fontFamily={MONO}>{band.pct}</text>
+          </g>
+        )
+      })}
+
+      {/* Element 7 — data nodes on grid intersections */}
+      {NODES.map((node) => (
+        <circle
+          className="bp-draw"
+          key={`${node.cx}-${node.cy}`}
+          cx={node.cx} cy={node.cy} r={4}
+          stroke={INK} strokeWidth="1"
+          fill={node.lit ? 'rgba(245, 213, 71, 0.1)' : 'none'}
+        />
+      ))}
     </svg>
   )
 }
