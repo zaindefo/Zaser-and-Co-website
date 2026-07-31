@@ -459,7 +459,7 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
         </p>
         <h2 style={{
           fontFamily: "var(--font-bebas, 'Bebas Neue', Impact, sans-serif)",
-          fontSize: 'clamp(30px, 4vw, 52px)', color: '#F5D547',
+          fontSize: 'clamp(30px, 4vw, 52px)', color: '#FFFFFF',
           lineHeight: 1, letterSpacing: '-0.01em', textTransform: 'uppercase',
         }}>
           {service.titleLines.map((line, i) => (
@@ -526,8 +526,8 @@ function ServiceHero({ service, index }: { service: typeof SERVICES[number]; ind
           display: 'inline-flex', alignItems: 'center',
           fontFamily: "var(--font-dm-mono, 'DM Mono', monospace)",
           fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase',
-          color: '#0A0C14', background: '#F5D547',
-          border: '1.5px solid #F5D547', padding: '14px 28px',
+          color: '#0A0C14', background: '#FFFFFF',
+          border: '1.5px solid #FFFFFF', padding: '14px 28px',
           borderRadius: '4px', textDecoration: 'none',
           transition: 'background 0.25s, border-color 0.25s',
         }}>
@@ -661,7 +661,7 @@ function ServiceDetails({ service }: { service: typeof SERVICES[number] }) {
               display: 'inline-flex', alignItems: 'center',
               fontFamily: 'var(--font-twk-lausanne, Inter, sans-serif)',
               fontWeight: 600, fontSize: '14px', color: '#0A0C14',
-              background: '#F5D547', padding: '14px 28px', borderRadius: '8px',
+              background: '#FFFFFF', padding: '14px 28px', borderRadius: '8px',
               textDecoration: 'none', transition: 'background 0.2s',
             }}>
               {service.ctaLabel} →
