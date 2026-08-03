@@ -43,7 +43,9 @@ const NODES = [
 ]
 
 const MONO = "'DM Mono', monospace"
-const INK = '#3C3C3C'
+/* Warm mid-brown — legible against the leather-brown panel without shouting. */
+const INK = '#6B5640'
+const GRID_LINE = '#4A3828'
 
 /**
  * Methodology schematic — process flow, five-dimension assessment, cost
@@ -61,7 +63,7 @@ function BlueprintSchematic() {
       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
     >
       {/* Element 6 — construction line */}
-      <path className="bp-draw" d="M 24 44 L 300 330" stroke="#1A1C28" strokeWidth="0.5" fill="none" strokeDasharray="4 4" />
+      <path className="bp-draw" d="M 24 44 L 300 330" stroke={GRID_LINE} strokeWidth="0.5" fill="none" strokeDasharray="4 4" />
 
       {/* Element 5 — drawing reference labels */}
       <text className="bp-draw" x="24" y="28" fill={INK} fontSize="7" fontFamily={MONO}>REF: ZC-OPS-2026</text>
@@ -112,7 +114,7 @@ function BlueprintSchematic() {
         {/* Sample profile — 72 / 45 / 68 / 54 / 38 */}
         <polygon
           points="430,271.2 447.1,294.4 446,322 417.3,317.5 415.5,295.3"
-          fill="rgba(245, 213, 71, 0.08)"
+          fill="rgba(245, 213, 71, 0.1)"
           stroke={INK}
           strokeWidth="0.5"
         />
@@ -131,7 +133,7 @@ function BlueprintSchematic() {
             <text x={50} y={y + 5} fill={INK} fontSize="6" fontFamily={MONO}>{band.label}</text>
             <rect
               x={110} y={y} width={band.w} height={6}
-              fill={band.outlined ? 'none' : '#1A1C28'}
+              fill={band.outlined ? 'none' : GRID_LINE}
               stroke={band.outlined ? INK : 'none'}
               strokeWidth={band.outlined ? 1 : 0}
             />
@@ -147,7 +149,7 @@ function BlueprintSchematic() {
           key={`${node.cx}-${node.cy}`}
           cx={node.cx} cy={node.cy} r={4}
           stroke={INK} strokeWidth="1"
-          fill={node.lit ? 'rgba(245, 213, 71, 0.1)' : 'none'}
+          fill={node.lit ? 'rgba(245, 213, 71, 0.12)' : 'none'}
         />
       ))}
     </svg>
@@ -196,7 +198,7 @@ export function ContactFooterPanel() {
         <div className="cf-top">
           <div>
             <p className="cf-wordmark">
-              <span style={{ color: '#E8EDF5' }}>{wordmarkPrimary}</span>{' '}
+              <span style={{ color: 'var(--zaser-white)' }}>{wordmarkPrimary}</span>{' '}
               <span style={{ color: '#782000' }}>{wordmarkAccent}</span>
             </p>
             <p className="cf-tagline">{tagline}</p>
@@ -236,7 +238,7 @@ export function ContactFooterPanel() {
           <div className="cf-blueprint">
             {/* Drifting node network behind the schematic — keep this, it is the
                 living background motion for the footer panel. */}
-            <LivingOrganism opacity={0.18} spread={0.7} nodeCount={16} />
+            <LivingOrganism opacity={0.18} spread={0.7} nodeCount={16} lineRGB="74, 56, 40" />
             <BlueprintSchematic />
           </div>
 
@@ -281,7 +283,7 @@ export function ContactFooterPanel() {
 
       <style>{`
         .cf-root {
-          background: #0A0C14;
+          background: var(--footer-espresso);
           position: relative;
           overflow: hidden;
           min-height: 90vh;
@@ -305,7 +307,7 @@ export function ContactFooterPanel() {
         .cf-tagline {
           font-family: var(--font-dm-mono);
           font-size: 9px;
-          color: #828282;
+          color: var(--footer-taupe);
           letter-spacing: 0.25em;
           text-transform: uppercase;
           margin-top: 8px;
@@ -323,24 +325,24 @@ export function ContactFooterPanel() {
           font-family: var(--font-twk-lausanne);
           font-weight: 300;
           font-size: 36px;
-          color: #3C3C3C;
+          color: var(--footer-line);
           line-height: 1.4;
         }
         .cf-nav-link {
           font-family: var(--font-twk-lausanne);
           font-weight: 300;
           font-size: 36px;
-          color: #E8EDF5;
+          color: var(--zaser-white);
           line-height: 1.4;
           text-decoration: none;
           transition: color 300ms ease;
         }
-        .cf-nav-link:hover { color: #F5D547; }
-        .cf-rule { margin-top: 32px; border: 0; border-top: 1px solid #1A1C28; }
+        .cf-nav-link:hover { color: var(--butter-yellow); }
+        .cf-rule { margin-top: 32px; border: 0; border-top: 1px solid #2E2218; }
         .cf-subtagline {
           font-family: var(--font-twk-lausanne);
           font-size: 14px;
-          color: #3C3C3C;
+          color: var(--footer-line);
           margin-top: 16px;
         }
 
@@ -349,12 +351,12 @@ export function ContactFooterPanel() {
           font-family: var(--font-twk-lausanne);
           font-size: 15px;
           font-weight: 400;
-          color: #E8EDF5;
+          color: var(--footer-sand);
           line-height: 2.2;
           text-decoration: none;
           transition: color 200ms ease;
         }
-        .cf-util-link:hover { color: #F5D547; }
+        .cf-util-link:hover { color: var(--butter-yellow); }
 
         /* Layers 2 + 3 */
         .cf-stage { position: relative; margin-top: 64px; }
@@ -362,33 +364,38 @@ export function ContactFooterPanel() {
           position: absolute;
           right: -80px;
           top: 0;
-          width: 60%;
+          /* 68% of the padded stage lands at ~60% of the viewport once the
+             negative right offset bleeds it off the edge. */
+          width: 68%;
           height: 100%;
-          background: #0E1018;
+          background: var(--footer-leather);
           background-image:
-            repeating-linear-gradient(0deg, #1A1C28 0 1px, transparent 1px 80px),
-            repeating-linear-gradient(90deg, #1A1C28 0 1px, transparent 1px 80px);
+            repeating-linear-gradient(0deg, var(--footer-line) 0 1px, transparent 1px 80px),
+            repeating-linear-gradient(90deg, var(--footer-line) 0 1px, transparent 1px 80px);
           z-index: 2;
         }
+        /* Card sits LEFT, flush to the page edge, overlapping the blueprint's
+           left flank — the blueprint then peeks out to its right and bleeds off
+           the viewport. This inverts the usual content-left/card-right split. */
         .cf-card-wrap {
           position: relative;
           z-index: 3;
           display: flex;
-          justify-content: flex-end;
+          justify-content: flex-start;
           padding-top: 120px;
         }
         .cf-card {
-          background: #FFF1B8;
-          width: 46%;
+          background: var(--butter-yellow);
+          width: 56%;
           min-height: 350px;
           padding: 48px 48px 40px;
           box-shadow: 0 -8px 40px rgba(0,0,0,0.15);
-          margin-right: -80px;
+          margin-left: -80px;
         }
         .cf-card-label {
           font-family: var(--font-twk-lausanne);
           font-size: 14px;
-          color: #828282;
+          color: var(--footer-warm);
           margin-bottom: 24px;
         }
         .cf-contact-lines { display: flex; flex-direction: column; gap: 8px; }
@@ -396,18 +403,26 @@ export function ContactFooterPanel() {
           font-family: var(--font-twk-lausanne);
           font-size: 22px;
           font-weight: 600;
-          color: #0A0C14;
+          color: var(--footer-espresso);
           text-decoration: none;
           transition: color 200ms ease;
         }
-        a.cf-contact:hover { color: #782000; }
+        a.cf-contact:hover { color: var(--zaser-rust); }
 
-        .cf-badge { background: #F5D547; padding: 32px; margin-top: 48px; }
+        /* White badge on the yellow card completes the tonal run:
+           espresso -> leather -> butter -> white. */
+        .cf-badge {
+          position: relative;
+          z-index: 4;
+          background: var(--zaser-white);
+          padding: 32px;
+          margin-top: 48px;
+        }
         .cf-badge-tagline {
           font-family: var(--font-twk-lausanne);
           font-size: 14px;
           font-weight: 500;
-          color: #0A0C14;
+          color: var(--footer-espresso);
           margin-bottom: 40px;
         }
         .cf-badge-logo {
@@ -419,7 +434,7 @@ export function ContactFooterPanel() {
         .cf-est {
           font-family: var(--font-dm-mono);
           font-size: 9px;
-          color: #3C3C3C;
+          color: var(--footer-taupe);
           letter-spacing: 0.2em;
           margin-top: 12px;
         }
@@ -437,11 +452,11 @@ export function ContactFooterPanel() {
         .cf-copy, .cf-seo-link {
           font-family: var(--font-dm-mono);
           font-size: 11px;
-          color: #3C3C3C;
+          color: var(--footer-line);
         }
         .cf-seo { display: flex; gap: 24px; flex-wrap: wrap; }
         .cf-seo-link { text-decoration: none; transition: color 200ms ease; }
-        .cf-seo-link:hover { color: #828282; }
+        .cf-seo-link:hover { color: var(--footer-taupe); }
 
         /* Mobile — layers stop overlapping and stack in flow */
         @media (max-width: 767px) {
@@ -456,7 +471,7 @@ export function ContactFooterPanel() {
           .cf-stage { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
           .cf-blueprint { position: relative; right: auto; width: 100%; height: 300px; }
           .cf-card-wrap { padding-top: 0; }
-          .cf-card { width: 100%; margin-right: 0; padding: 28px; min-height: 0; }
+          .cf-card { width: 100%; margin-left: 0; padding: 28px; min-height: 0; }
           .cf-contact { font-size: 18px; }
           .cf-badge { padding: 24px; margin-top: 32px; }
           .cf-badge-logo { font-size: 32px; }

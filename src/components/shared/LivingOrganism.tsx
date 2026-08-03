@@ -7,6 +7,9 @@ interface LivingOrganismProps {
   nodeCount?: number
   className?: string
   opacity?: number
+  /** Connector colour as an "r, g, b" triplet. Defaults to the void-border tone
+   *  used by the service sections; the footer overrides it with warm brown. */
+  lineRGB?: string
 }
 
 interface Node {
@@ -32,6 +35,7 @@ export function LivingOrganism({
   nodeCount = 20,
   className,
   opacity = 0.15,
+  lineRGB = '26, 28, 40',
 }: LivingOrganismProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -106,7 +110,7 @@ export function LivingOrganism({
           const dy = nodes[i].y - nodes[j].y
           const dist = Math.hypot(dx, dy)
           if (dist > LINK_DISTANCE) continue
-          ctx.strokeStyle = `rgba(26, 28, 40, ${1 - dist / LINK_DISTANCE})`
+          ctx.strokeStyle = `rgba(${lineRGB}, ${1 - dist / LINK_DISTANCE})`
           ctx.beginPath()
           ctx.moveTo(nodes[i].x, nodes[i].y)
           ctx.lineTo(nodes[j].x, nodes[j].y)
@@ -157,7 +161,7 @@ export function LivingOrganism({
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', onResize)
     }
-  }, [spread, nodeCount])
+  }, [spread, nodeCount, lineRGB])
 
   return (
     <canvas
