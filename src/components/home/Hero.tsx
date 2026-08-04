@@ -2,7 +2,6 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { TopoWaveField } from '@/components/shared/TopoWaveField'
-import { HeroOrganism } from '@/components/shared/HeroOrganism'
 import { HERO } from '@/lib/constants'
 
 const STATS = [
@@ -24,22 +23,19 @@ const HEADLINE_TONES = ['var(--zaser-rust)', 'var(--zaser-navy)', 'var(--zaser-r
 export function Hero() {
   return (
     <section data-no-clip className="hero-root">
-      {/* Faint contour field — only ever visible on the paper side */}
-      <TopoWaveField className="z-0" opacity={0.12} lineCount={10} amplitude={12} />
+      {/* Living organism — the flowing contour field, same treatment as the
+          service sections but in the light theme so it reads navy on paper.
+          The image panel is opaque, so it only ever shows on the copy side. */}
+      <TopoWaveField
+        className="z-0"
+        lineCount={22}
+        amplitude={18}
+        opacity={0.6}
+        lineWidthScale={2}
+      />
 
       {/* ── Left: brand message ── */}
       <div className="hero-inner">
-        {/* Node network drifts behind the copy on the paper side, never over the
-            illustration. Navy on cream needs a far higher base opacity than
-            white on a dark ground: the draw multipliers are 0.3 for idle nodes
-            and 0.25 for connectors, so 0.32 here rendered them at ~9% and ~8%
-            alpha — invisible on paper. 0.85 lands them near 26% and 21%. */}
-        <HeroOrganism
-          lineRGB="15, 18, 53"
-          nodeRGB="15, 18, 53"
-          color="#782000"
-          opacity={0.85}
-        />
         <motion.div
           className="hero-copy"
           initial={{ opacity: 0, y: 24 }}
