@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { TopoWaveField } from '@/components/shared/TopoWaveField'
+import { HeroOrganism } from '@/components/shared/HeroOrganism'
 import { HERO } from '@/lib/constants'
 
 const STATS = [
@@ -79,6 +80,7 @@ export function Hero() {
           decoding="async"
           alt="A consultant reviewing performance charts and financial reports at a desk, with workflow notes pinned above and a city skyline beyond the window."
         />
+        <HeroOrganism />
         {CALLOUTS.map((c) => (
           <span className="hero-callout" key={c.label} style={{ top: c.top }}>
             <span className="hero-callout-dot" />
@@ -187,12 +189,30 @@ export function Hero() {
           color: var(--zaser-grey);
         }
 
-        .hero-media { position: relative; width: 100%; aspect-ratio: 16 / 10; z-index: 1; }
+        /* Hard-clipped panel: the illustration ends exactly where the container
+           does. No mask, no gradient bleed — a cut, not a fade. */
+        .hero-media {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 10;
+          z-index: 1;
+          overflow: hidden;
+          border-top: 1px solid var(--zaser-dark-grey);
+        }
         .hero-media img {
           width: 100%; height: 100%;
           object-fit: cover;
           object-position: center right;
           display: block;
+        }
+        /* Knocks the illustration back so the organism reads on top of it. */
+        .hero-media::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgba(10, 12, 20, 0.25);
+          pointer-events: none;
+          z-index: 1;
         }
         /* Callouts are desktop-only */
         .hero-callout { display: none; }
@@ -220,47 +240,21 @@ export function Hero() {
             width: 46%;
             height: auto;
             aspect-ratio: auto;
-          }
-          /* Left edge dissolves into the paper so the panel reads as part of the
-             hero rather than an image pasted on top of it. */
-          .hero-media::before {
-            content: "";
-            position: absolute;
-            inset: 0 auto 0 0;
-            width: 28%;
-            background: linear-gradient(to right,
-              var(--zaser-paper) 0%,
-              rgba(243, 238, 229, 0.72) 42%,
-              transparent 100%);
-            z-index: 2;
-            pointer-events: none;
-          }
-          /* The navbar is transparent and its right-hand links cross over this
-             panel. Fade the top band back to paper so they stay readable
-             without the image losing its full-height bleed. */
-          .hero-media::after {
-            content: "";
-            position: absolute;
-            inset: 0 0 auto 0;
-            height: 132px;
-            background: linear-gradient(to bottom,
-              var(--zaser-paper) 0%,
-              rgba(243, 238, 229, 0.66) 46%,
-              transparent 100%);
-            z-index: 2;
-            pointer-events: none;
+            /* Vertical cut between copy and image replaces the top border */
+            border-top: 0;
+            border-left: 1px solid var(--zaser-dark-grey);
           }
         }
 
         /* ── Desktop ── */
         @media (min-width: 1024px) {
           .hero-inner {
-            width: 47%;
+            width: 45%;
             padding: 160px 40px 96px 70px;
           }
           .hero-headline { font-size: clamp(64px, 5.4vw, 92px); }
           .hero-body { font-size: 17px; }
-          .hero-media { width: 53%; }
+          .hero-media { width: 55%; }
 
           /* Dividers only once the stats sit on one row */
           .hero-stat + .hero-stat {
@@ -279,17 +273,18 @@ export function Hero() {
             font-family: var(--font-editorial-new);
             font-style: italic;
             font-size: 14px;
-            color: rgba(24, 32, 64, 0.72);
+            /* Cream now that the 25% scrim sits under them — navy would sink in */
+            color: rgba(243, 238, 229, 0.92);
             pointer-events: none;
           }
           .hero-callout-dot {
             width: 4px; height: 4px; border-radius: 50%;
-            background: var(--zaser-rust);
+            background: var(--butter-yellow);
             flex-shrink: 0;
           }
           .hero-callout-rule {
             width: 26px; height: 1px;
-            background: rgba(24, 32, 64, 0.28);
+            background: rgba(255, 255, 255, 0.38);
             flex-shrink: 0;
           }
         }
