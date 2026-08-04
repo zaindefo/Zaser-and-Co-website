@@ -29,6 +29,14 @@ export function Hero() {
 
       {/* ── Left: brand message ── */}
       <div className="hero-inner">
+        {/* Node network drifts behind the copy on the paper side, never over the
+            illustration. Navy on cream, so it needs the light-ground colours. */}
+        <HeroOrganism
+          lineRGB="15, 18, 53"
+          nodeRGB="15, 18, 53"
+          color="#782000"
+          opacity={0.32}
+        />
         <motion.div
           className="hero-copy"
           initial={{ opacity: 0, y: 24 }}
@@ -80,7 +88,6 @@ export function Hero() {
           decoding="async"
           alt="A consultant reviewing performance charts and financial reports at a desk, with workflow notes pinned above and a city skyline beyond the window."
         />
-        <HeroOrganism />
         {CALLOUTS.map((c) => (
           <span className="hero-callout" key={c.label} style={{ top: c.top }}>
             <span className="hero-callout-dot" />
@@ -105,7 +112,9 @@ export function Hero() {
           z-index: 10;
           padding: 128px 24px 48px;
         }
-        .hero-copy { max-width: 640px; }
+        /* Sits above the organism canvas, which is positioned at z-index 2 and
+           would otherwise paint over this static content. */
+        .hero-copy { max-width: 640px; position: relative; z-index: 3; }
 
         .hero-eyebrow {
           font-family: var(--font-dm-mono);
@@ -205,15 +214,9 @@ export function Hero() {
           object-position: center right;
           display: block;
         }
-        /* Knocks the illustration back so the organism reads on top of it. */
-        .hero-media::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: rgba(10, 12, 20, 0.25);
-          pointer-events: none;
-          z-index: 1;
-        }
+        /* No scrim: it existed only to lift the organism off the illustration,
+           and the organism now lives on the paper side. Dropping it also
+           restores the nav-link contrast the darkening had cost. */
         /* Callouts are desktop-only */
         .hero-callout { display: none; }
 
@@ -273,18 +276,19 @@ export function Hero() {
             font-family: var(--font-editorial-new);
             font-style: italic;
             font-size: 14px;
-            /* Cream now that the 25% scrim sits under them — navy would sink in */
-            color: rgba(243, 238, 229, 0.92);
+            /* Navy again: with the scrim gone the illustration reads light,
+               and cream text would disappear into it. */
+            color: rgba(24, 32, 64, 0.78);
             pointer-events: none;
           }
           .hero-callout-dot {
             width: 4px; height: 4px; border-radius: 50%;
-            background: var(--butter-yellow);
+            background: var(--zaser-rust);
             flex-shrink: 0;
           }
           .hero-callout-rule {
             width: 26px; height: 1px;
-            background: rgba(255, 255, 255, 0.38);
+            background: rgba(24, 32, 64, 0.3);
             flex-shrink: 0;
           }
         }

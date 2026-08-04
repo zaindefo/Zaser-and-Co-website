@@ -4,6 +4,10 @@ import { useEffect, useRef } from 'react'
 interface HeroOrganismProps {
   /** Accent colour for active nodes and pulse rings. */
   color?: string
+  /** Connector colour as an "r, g, b" triplet. Default suits a dark ground. */
+  lineRGB?: string
+  /** Idle-node colour as an "r, g, b" triplet. Default suits a dark ground. */
+  nodeRGB?: string
   nodeCount?: number
   opacity?: number
   className?: string
@@ -43,6 +47,8 @@ const MOBILE_OPACITY = 0.3
  */
 export function HeroOrganism({
   color = '#F5D547',
+  lineRGB = '255, 255, 255',
+  nodeRGB = '255, 255, 255',
   nodeCount = 20,
   opacity = 0.4,
   className,
@@ -125,7 +131,7 @@ export function HeroOrganism({
           const dy = nodes[i].y - nodes[j].y
           const dist = Math.hypot(dx, dy)
           if (dist >= LINK_DISTANCE) continue
-          ctx.strokeStyle = `rgba(255, 255, 255, ${(1 - dist / LINK_DISTANCE) * 0.25 * alpha})`
+          ctx.strokeStyle = `rgba(${lineRGB}, ${(1 - dist / LINK_DISTANCE) * 0.25 * alpha})`
           ctx.beginPath()
           ctx.moveTo(nodes[i].x, nodes[i].y)
           ctx.lineTo(nodes[j].x, nodes[j].y)
@@ -150,7 +156,7 @@ export function HeroOrganism({
         } else {
           ctx.beginPath()
           ctx.arc(n.x, n.y, r, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(255, 255, 255, ${0.3 * alpha})`
+          ctx.fillStyle = `rgba(${nodeRGB}, ${0.3 * alpha})`
           ctx.fill()
         }
       }
@@ -190,7 +196,7 @@ export function HeroOrganism({
       for (const n of nodes) {
         ctx.beginPath()
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2)
-        ctx.fillStyle = n.isActive ? accent(0.7 * alpha) : `rgba(255, 255, 255, ${0.3 * alpha})`
+        ctx.fillStyle = n.isActive ? accent(0.7 * alpha) : `rgba(${nodeRGB}, ${0.3 * alpha})`
         ctx.fill()
       }
     } else {
@@ -207,7 +213,7 @@ export function HeroOrganism({
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', onResize)
     }
-  }, [color, nodeCount, opacity])
+  }, [color, lineRGB, nodeRGB, nodeCount, opacity])
 
   return (
     <canvas
