@@ -30,12 +30,15 @@ export function Hero() {
       {/* ── Left: brand message ── */}
       <div className="hero-inner">
         {/* Node network drifts behind the copy on the paper side, never over the
-            illustration. Navy on cream, so it needs the light-ground colours. */}
+            illustration. Navy on cream needs a far higher base opacity than
+            white on a dark ground: the draw multipliers are 0.3 for idle nodes
+            and 0.25 for connectors, so 0.32 here rendered them at ~9% and ~8%
+            alpha — invisible on paper. 0.85 lands them near 26% and 21%. */}
         <HeroOrganism
           lineRGB="15, 18, 53"
           nodeRGB="15, 18, 53"
           color="#782000"
-          opacity={0.32}
+          opacity={0.85}
         />
         <motion.div
           className="hero-copy"

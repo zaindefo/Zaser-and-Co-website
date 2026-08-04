@@ -36,9 +36,11 @@ const PULSE_MAX_RADIUS = 35
 const MAX_PULSES = 10
 const EDGE_MARGIN = 20
 
-/* Mobile carries fewer nodes and sits fainter — less noise on a small panel. */
+/* Mobile carries fewer nodes and sits fainter — less noise on a small panel.
+   The opacity is a factor, not a ceiling: a flat cap would crush a light-ground
+   organism, whose base opacity has to run much higher than a dark-ground one. */
 const MOBILE_NODES = 12
-const MOBILE_OPACITY = 0.3
+const MOBILE_OPACITY_FACTOR = 0.75
 
 /**
  * Drifting node network laid over the hero illustration. Reads as a system being
@@ -92,7 +94,7 @@ export function HeroOrganism({
 
       const small = window.innerWidth < 768
       count = small ? Math.min(MOBILE_NODES, nodeCount) : nodeCount
-      alpha = small ? Math.min(MOBILE_OPACITY, opacity) : opacity
+      alpha = small ? opacity * MOBILE_OPACITY_FACTOR : opacity
     }
 
     const seed = () => {
