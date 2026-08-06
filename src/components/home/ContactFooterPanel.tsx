@@ -284,7 +284,9 @@ export function ContactFooterPanel() {
 
       <style>{`
         .cf-root {
-          background: var(--butter-yellow);
+          /* Same paper tone as the Insights section (#F6EFE4), not the
+             hero's slightly warmer --zaser-paper (#F3EEE5). */
+          background: var(--color-linen);
           position: relative;
           overflow: hidden;
           min-height: 90vh;
@@ -340,7 +342,9 @@ export function ContactFooterPanel() {
           text-decoration: none;
           transition: color 300ms ease;
         }
-        .cf-nav-link:hover { color: var(--zaser-white); }
+        /* White hover would vanish against the near-white linen ground —
+           rust is the site's standard accent on paper backgrounds. */
+        .cf-nav-link:hover { color: var(--zaser-rust); }
         .cf-rule { margin-top: 32px; border: 0; border-top: 1px solid #2E2218; }
         .cf-subtagline {
           font-family: var(--font-twk-lausanne);
@@ -361,7 +365,7 @@ export function ContactFooterPanel() {
           text-decoration: none;
           transition: color 200ms ease;
         }
-        .cf-util-link:hover { color: var(--zaser-white); }
+        .cf-util-link:hover { color: var(--zaser-rust); }
 
         /* Layers 2 + 3 */
         .cf-stage { position: relative; margin-top: 64px; }
