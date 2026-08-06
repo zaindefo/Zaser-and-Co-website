@@ -114,7 +114,7 @@ function BlueprintSchematic() {
         {/* Sample profile — 72 / 45 / 68 / 54 / 38 */}
         <polygon
           points="430,271.2 447.1,294.4 446,322 417.3,317.5 415.5,295.3"
-          fill="rgba(245, 213, 71, 0.1)"
+          fill="rgba(255, 255, 255, 0.35)"
           stroke={INK}
           strokeWidth="0.5"
         />
@@ -149,7 +149,7 @@ function BlueprintSchematic() {
           key={`${node.cx}-${node.cy}`}
           cx={node.cx} cy={node.cy} r={4}
           stroke={INK} strokeWidth="1"
-          fill={node.lit ? 'rgba(245, 213, 71, 0.12)' : 'none'}
+          fill={node.lit ? 'rgba(255, 255, 255, 0.4)' : 'none'}
         />
       ))}
     </svg>
@@ -198,7 +198,7 @@ export function ContactFooterPanel() {
         <div className="cf-top">
           <div>
             <p className="cf-wordmark">
-              <span style={{ color: 'var(--zaser-white)' }}>{wordmarkPrimary}</span>{' '}
+              <span style={{ color: 'var(--footer-espresso)' }}>{wordmarkPrimary}</span>{' '}
               <span style={{ color: '#782000' }}>{wordmarkAccent}</span>
             </p>
             <p className="cf-tagline">{tagline}</p>
@@ -237,8 +237,9 @@ export function ContactFooterPanel() {
         <div className="cf-stage">
           <div className="cf-blueprint">
             {/* Drifting node network behind the schematic — keep this, it is the
-                living background motion for the footer panel. */}
-            <LivingOrganism opacity={0.18} spread={0.7} nodeCount={16} lineRGB="74, 56, 40" />
+                living background motion for the footer panel. Nodes render
+                white now that the panel itself is butter yellow. */}
+            <LivingOrganism opacity={0.22} spread={0.7} nodeCount={16} lineRGB="74, 56, 40" nodeRGB="255, 255, 255" />
             <BlueprintSchematic />
           </div>
 
@@ -283,7 +284,7 @@ export function ContactFooterPanel() {
 
       <style>{`
         .cf-root {
-          background: var(--footer-espresso);
+          background: var(--butter-yellow);
           position: relative;
           overflow: hidden;
           min-height: 90vh;
@@ -307,7 +308,9 @@ export function ContactFooterPanel() {
         .cf-tagline {
           font-family: var(--font-dm-mono);
           font-size: 9px;
-          color: var(--footer-taupe);
+          /* Taupe reads ~3:1 on the new butter-yellow ground — fine on a dark
+             panel, not enough for AA on a light one at 9px. */
+          color: var(--footer-espresso);
           letter-spacing: 0.25em;
           text-transform: uppercase;
           margin-top: 8px;
@@ -332,12 +335,12 @@ export function ContactFooterPanel() {
           font-family: var(--font-twk-lausanne);
           font-weight: 300;
           font-size: 36px;
-          color: var(--zaser-white);
+          color: var(--footer-espresso);
           line-height: 1.4;
           text-decoration: none;
           transition: color 300ms ease;
         }
-        .cf-nav-link:hover { color: var(--butter-yellow); }
+        .cf-nav-link:hover { color: var(--zaser-white); }
         .cf-rule { margin-top: 32px; border: 0; border-top: 1px solid #2E2218; }
         .cf-subtagline {
           font-family: var(--font-twk-lausanne);
@@ -351,12 +354,14 @@ export function ContactFooterPanel() {
           font-family: var(--font-twk-lausanne);
           font-size: 15px;
           font-weight: 400;
-          color: var(--footer-sand);
+          /* Sand was a light tone for a dark panel; on butter yellow it needs
+             to be dark instead, or it disappears. */
+          color: var(--footer-espresso);
           line-height: 2.2;
           text-decoration: none;
           transition: color 200ms ease;
         }
-        .cf-util-link:hover { color: var(--butter-yellow); }
+        .cf-util-link:hover { color: var(--zaser-white); }
 
         /* Layers 2 + 3 */
         .cf-stage { position: relative; margin-top: 64px; }
@@ -368,7 +373,7 @@ export function ContactFooterPanel() {
              negative right offset bleeds it off the edge. */
           width: 68%;
           height: 100%;
-          background: var(--footer-leather);
+          background: var(--butter-yellow);
           background-image:
             repeating-linear-gradient(0deg, var(--footer-line) 0 1px, transparent 1px 80px),
             repeating-linear-gradient(90deg, var(--footer-line) 0 1px, transparent 1px 80px);
@@ -385,7 +390,7 @@ export function ContactFooterPanel() {
           padding-top: 120px;
         }
         .cf-card {
-          background: var(--butter-yellow);
+          background: var(--zaser-white);
           width: 56%;
           min-height: 350px;
           padding: 48px 48px 40px;
@@ -409,12 +414,13 @@ export function ContactFooterPanel() {
         }
         a.cf-contact:hover { color: var(--zaser-rust); }
 
-        /* White badge on the yellow card completes the tonal run:
-           espresso -> leather -> butter -> white. */
+        /* The card is now white too, so the badge needs its own edge to read as
+           a nested panel rather than disappearing into an identical ground. */
         .cf-badge {
           position: relative;
           z-index: 4;
           background: var(--zaser-white);
+          border: 1px solid rgba(28, 20, 16, 0.12);
           padding: 32px;
           margin-top: 48px;
         }

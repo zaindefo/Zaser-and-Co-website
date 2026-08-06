@@ -10,6 +10,11 @@ interface LivingOrganismProps {
   /** Connector colour as an "r, g, b" triplet. Defaults to the void-border tone
    *  used by the service sections; the footer overrides it with warm brown. */
   lineRGB?: string
+  /** Node and pulse colour as an "r, g, b" triplet. Defaults to butter yellow,
+   *  which reads on the service sections' dark ground; a light ground (the
+   *  footer's now-yellow blueprint) needs this overridden so nodes don't
+   *  disappear into a background the same colour as they are. */
+  nodeRGB?: string
 }
 
 interface Node {
@@ -36,6 +41,7 @@ export function LivingOrganism({
   className,
   opacity = 0.15,
   lineRGB = '26, 28, 40',
+  nodeRGB = '245, 213, 71',
 }: LivingOrganismProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -125,13 +131,13 @@ export function LivingOrganism({
         const alpha = n.active ? 0.5 : 0.2
 
         if (n.pulse > 0) {
-          ctx.fillStyle = `rgba(245, 213, 71, ${0.4 * Math.sin(t * Math.PI)})`
+          ctx.fillStyle = `rgba(${nodeRGB}, ${0.4 * Math.sin(t * Math.PI)})`
           ctx.beginPath()
           ctx.arc(n.x, n.y, 3 * scale * 2.2, 0, Math.PI * 2)
           ctx.fill()
         }
 
-        ctx.fillStyle = `rgba(245, 213, 71, ${alpha})`
+        ctx.fillStyle = `rgba(${nodeRGB}, ${alpha})`
         ctx.beginPath()
         ctx.arc(n.x, n.y, 3 * scale, 0, Math.PI * 2)
         ctx.fill()
@@ -161,7 +167,7 @@ export function LivingOrganism({
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', onResize)
     }
-  }, [spread, nodeCount, lineRGB])
+  }, [spread, nodeCount, lineRGB, nodeRGB])
 
   return (
     <canvas
