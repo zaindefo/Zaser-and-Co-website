@@ -114,7 +114,7 @@ function BlueprintSchematic() {
         {/* Sample profile — 72 / 45 / 68 / 54 / 38 */}
         <polygon
           points="430,271.2 447.1,294.4 446,322 417.3,317.5 415.5,295.3"
-          fill="rgba(255, 255, 255, 0.35)"
+          fill="rgba(245, 213, 71, 0.1)"
           stroke={INK}
           strokeWidth="0.5"
         />
@@ -149,7 +149,7 @@ function BlueprintSchematic() {
           key={`${node.cx}-${node.cy}`}
           cx={node.cx} cy={node.cy} r={4}
           stroke={INK} strokeWidth="1"
-          fill={node.lit ? 'rgba(255, 255, 255, 0.4)' : 'none'}
+          fill={node.lit ? 'rgba(245, 213, 71, 0.12)' : 'none'}
         />
       ))}
     </svg>
@@ -237,9 +237,9 @@ export function ContactFooterPanel() {
         <div className="cf-stage">
           <div className="cf-blueprint">
             {/* Drifting node network behind the schematic — keep this, it is the
-                living background motion for the footer panel. Nodes render
-                white now that the panel itself is butter yellow. */}
-            <LivingOrganism opacity={0.22} spread={0.7} nodeCount={16} lineRGB="74, 56, 40" nodeRGB="255, 255, 255" />
+                living background motion for the footer panel. Butter-yellow
+                nodes on the dark leather panel, per the component default. */}
+            <LivingOrganism opacity={0.18} spread={0.7} nodeCount={16} lineRGB="74, 56, 40" />
             <BlueprintSchematic />
           </div>
 
@@ -373,7 +373,7 @@ export function ContactFooterPanel() {
              negative right offset bleeds it off the edge. */
           width: 68%;
           height: 100%;
-          background: var(--butter-yellow);
+          background: var(--footer-leather);
           background-image:
             repeating-linear-gradient(0deg, var(--footer-line) 0 1px, transparent 1px 80px),
             repeating-linear-gradient(90deg, var(--footer-line) 0 1px, transparent 1px 80px);
