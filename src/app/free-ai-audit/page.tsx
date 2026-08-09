@@ -1,26 +1,7 @@
-import { AUDIT_PAGES } from '@/lib/constants'
-import { AuditPageTemplate } from '@/components/seo/AuditPageTemplate'
 import type { Metadata } from 'next'
+import { AuditPageTemplate } from '../../components/routes/AuditPageTemplate'
+import { getAudit } from '../../content/audits'
 
-const data = AUDIT_PAGES['ai-audit']
+export const metadata: Metadata = { title: 'Free AI Audit', description: 'A focused first look at AI readiness across Strategy, Data, Technology, People, and Governance.', alternates: { canonical: '/free-ai-audit' } }
 
-export const metadata: Metadata = {
-  title: data.seoTitle,
-  description: data.metaDescription,
-  alternates: { canonical: '/free-ai-audit' },
-  openGraph: {
-    title: `${data.seoTitle} | Zaser & Co`,
-    description: data.metaDescription,
-    type: 'website',
-    url: 'https://zaserandco.com/free-ai-audit',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${data.seoTitle} | Zaser & Co`,
-    description: data.metaDescription,
-  },
-}
-
-export default function FreeAiAudit() {
-  return <AuditPageTemplate data={data} />
-}
+export default function FreeAiAuditPage() { return <AuditPageTemplate audit={getAudit('free-ai-audit')!} /> }

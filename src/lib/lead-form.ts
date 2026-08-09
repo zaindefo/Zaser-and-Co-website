@@ -29,3 +29,18 @@ export function createLeadPayload(values: LeadFormValues): LeadFormValues {
     message: values.message.trim(),
   }
 }
+
+export type LeadFetch = (input: string, init?: RequestInit) => Promise<Pick<Response, 'ok'>>
+
+export async function submitLead(
+  endpoint: string,
+  values: LeadFormValues,
+  fetcher: LeadFetch = (input, init) => fetch(input, init),
+) {
+  const response = await fetcher(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(createLeadPayload(values)),
+  })
+  if (!response.ok) throw new Error('Submission failed')
+}

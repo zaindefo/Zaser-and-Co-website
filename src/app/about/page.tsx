@@ -1,95 +1,44 @@
 import type { Metadata } from 'next'
-import { ScrollReveal } from '@/components/shared/ScrollReveal'
-import { MagneticButton } from '@/components/shared/MagneticButton'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ArtifactVisual } from '../../components/editorial/ArtifactVisual'
+import { SectionLabel } from '../../components/editorial/SectionLabel'
 
 export const metadata: Metadata = {
-  title: 'About — Our Story & Approach',
-  description: 'The story behind Zaser & Co — a strategic and management consultancy that advises and builds, for SMEs that are growing. Financial clarity, AI implementation, and operational improvement.',
+  title: 'About',
+  description: 'Zaser & Co is a Dhaka-based strategic and management consultancy built around diagnosis, implementation, and client ownership.',
   alternates: { canonical: '/about' },
 }
 
+const principles = [
+  ['01', 'Fixed scope', 'The engagement is defined before work begins.'],
+  ['02', 'Evidence first', 'Findings must be traceable to the business.'],
+  ['03', 'Build where value exists', 'Technology follows the diagnosis.'],
+  ['04', 'Leave the client stronger', 'Documentation and ownership stay usable by the team.'],
+]
+
 export default function AboutPage() {
   return (
-    <main className="pt-24">
-      <section className="section-padding bg-linen border-t border-mist relative">
-        <div className="max-w-4xl mx-auto relative">
-          <ScrollReveal>
-            <h1 className="font-twk-lausanne text-4xl md:text-5xl text-obsidian-ink mb-6 tracking-tight">
-              Built by someone who studies business<br />
-              <span className="display-text">for a living — and builds it as a calling.</span>
-            </h1>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
-            <div className="space-y-6 text-sage font-twk-lausanne text-lg leading-relaxed">
-              <p>
-                Zaser &amp; Co was founded by{' '}
-                <span className="text-obsidian-ink font-medium">Syed Zain bin Noor</span> — a business,
-                accounting, and economics specialist who saw a gap nobody was filling: the online businesses
-                driving Bangladesh&apos;s digital economy had no access to affordable, intelligent, hands-on consulting.
-              </p>
-              <p>
-                Large firms serve corporates. Freelance advisors give opinions. Nobody was combining rigorous
-                financial analysis, AI-powered tooling, and hands-on implementation into a single practice
-                designed for the businesses that need it most.
-              </p>
-              <p>
-                That&apos;s what Zaser &amp; Co is. A consultancy that advises and builds. For businesses that are
-                growing and need someone who can see what they can&apos;t.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.2} className="mt-12">
-            <div className="card p-8">
-              <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">What makes us different</h2>
-              <p className="text-sage text-lg leading-relaxed font-twk-lausanne">
-                Most consultancies advise — they produce a report, present a deck, and leave.
-                Zaser &amp; Co advises AND builds. When we identify a margin problem, we install a system
-                that tracks it in real-time. When we audit your AI readiness, we build the workflows.
-                When we say your content isn&apos;t working, we generate the content that does.
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.3} className="mt-12">
-            <div className="card p-8">
-              <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">Two core services</h2>
-              <ul className="space-y-4 text-obsidian-ink font-twk-lausanne leading-relaxed">
-                <li className="flex items-start gap-3">
-                  <span className="text-voltage mt-1 flex-shrink-0">&#9670;</span>
-                  <span>
-                    <span className="text-obsidian-ink font-medium">AI Audit &amp; Implementation.</span> We assess
-                    your business across five dimensions of AI readiness, build a prioritised roadmap, and deploy one
-                    working AI system — with full handover documentation and training.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-voltage mt-1 flex-shrink-0">&#9670;</span>
-                  <span>
-                    <span className="text-obsidian-ink font-medium">Management &amp; Operations Strategy.</span> We
-                    diagnose your cost structure, map where margin is being lost, and deliver a 90-day improvement
-                    roadmap with an executive presentation deck.
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.4} className="mt-12">
-            <div className="card p-8">
-              <h2 className="font-twk-lausanne text-2xl text-obsidian-ink mb-4">The brand promise</h2>
-              <p className="text-voltage text-xl leading-relaxed font-twk-lausanne italic text-center">
-                &ldquo;We don&apos;t just tell you what&apos;s wrong.<br />
-                We build what makes it right.&rdquo;
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.5} className="mt-12 text-center">
-            <MagneticButton href="/contact" size="lg">Request a diagnostic →</MagneticButton>
-          </ScrollReveal>
+    <main>
+      <header className="about-hero" data-nav-theme="light">
+        <SectionLabel>About Zaser &amp; Co</SectionLabel>
+        <h1 className="display display--xl">Advisory that<br /><span className="authority">builds.</span></h1>
+        <p className="lede">Growth creates complexity. Complexity hides waste. Technology without strategy can add more. Zaser finds what matters, builds the system, and leaves the client with a clearer operation.</p>
+        <div className="about-hero__facts">
+          <span>Established 2026</span><span>Dhaka, Bangladesh</span><span>Small &amp; medium businesses</span><span>Two productised engagements</span>
         </div>
+      </header>
+      <section className="about-media" data-nav-theme="light">
+        <Image src="/images/editorial/complexity-path.webp" alt="A clear rust path moving through layered business systems" fill sizes="100vw" />
+        <div><SectionLabel>The operating idea</SectionLabel><h2 className="display display--lg">Make information<br /><span className="authority">useful.</span></h2></div>
+      </section>
+      <section className="about-principles section section--navy" data-nav-theme="dark">
+        <SectionLabel light>How we work</SectionLabel>
+        <div>{principles.map(([number, title, description]) => <article key={number}><span>{number}</span><h2>{title}</h2><p>{description}</p></article>)}</div>
+      </section>
+      <section className="about-method section section--paper" data-nav-theme="light">
+        <div><SectionLabel>Our role</SectionLabel><h2 className="display display--lg">Rigorous enough to challenge.<br /><span className="authority">Practical enough to use.</span></h2><p className="lede">Zaser serves operators who need a clear diagnosis and a tangible output their team can use.</p><Link className="button button--rust" href="/contact"><span>Start a conversation</span><span aria-hidden="true">↗</span></Link></div>
+        <ArtifactVisual type="process" label="Zaser engagement process from diagnosis to ownership" />
       </section>
     </main>
   )

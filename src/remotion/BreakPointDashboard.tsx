@@ -89,7 +89,7 @@ export const BreakPointDashboard: React.FC = () => {
   // Profit counter (after crossing)
   const profitValue = frame >= 210 ? Math.round(interpolate(frame, [210, 270], [0, 49000], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })) : 0
 
-  // WhatsApp notification
+  // Email notification
   const notifX = interpolate(frame, [215, 230, 255, 265], [120, 0, 0, 120], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })
 
   // Fade at end
@@ -195,7 +195,7 @@ export const BreakPointDashboard: React.FC = () => {
         </div>
       )}
 
-      {/* WhatsApp notification */}
+      {/* Email notification */}
       <div style={{
         position: 'absolute', right: 24, bottom: 40,
         background: '#1a2e1a', border: '1px solid rgba(37,211,102,0.2)',
@@ -205,7 +205,7 @@ export const BreakPointDashboard: React.FC = () => {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
           <span style={{ fontSize: 14 }}>🎯</span>
-          <span style={{ fontFamily: 'sans-serif', fontSize: 12, fontWeight: 600, color: '#25D366' }}>WhatsApp Alert</span>
+          <span style={{ fontFamily: 'sans-serif', fontSize: 12, fontWeight: 600, color: '#782000' }}>Email Alert</span>
         </div>
         <div style={{ fontFamily: 'sans-serif', fontSize: 11, color: CHROME, lineHeight: 1.5 }}>
           Zero Day reached — Day 19. You&apos;re in profit.

@@ -4,7 +4,9 @@ const nextConfig = {
     remotePatterns: [],
   },
   async headers() {
-    const isProduction = process.env.VERCEL_ENV === 'production'
+    const isProduction = process.env.VERCEL_ENV
+      ? process.env.VERCEL_ENV === 'production'
+      : process.env.NODE_ENV === 'production'
 
     return [
       {

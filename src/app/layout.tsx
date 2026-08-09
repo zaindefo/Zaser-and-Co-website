@@ -1,164 +1,67 @@
 import type { Metadata } from 'next'
+import { Bebas_Neue, DM_Mono, Instrument_Serif, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
-import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
-import { GlobalEffects } from '@/components/layout/GlobalEffects'
-import { TransitionWrapper } from '@/components/layout/TransitionWrapper'
-import { ClientLoader } from '@/components/ClientLoader'
-import { GoogleTagManager, GoogleTagManagerNoscript, GoogleAnalytics, RouteChangeTracker } from '@/components/GoogleTagManager'
+import { EditorialNav } from '../components/editorial/EditorialNav'
+import { EditorialFooter } from '../components/editorial/EditorialFooter'
+import { ReadingProgress } from '../components/editorial/ReadingProgress'
+import { GoogleAnalytics, GoogleTagManager, GoogleTagManagerNoscript, RouteChangeTracker } from '../components/GoogleTagManager'
+import { SITE } from '../content/site'
+
+const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'], variable: '--font-bebas', display: 'swap' })
+const instrument = Instrument_Serif({ weight: '400', style: ['normal', 'italic'], subsets: ['latin'], variable: '--font-instrument', display: 'swap' })
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta', display: 'swap' })
+const dmMono = DM_Mono({ weight: ['400', '500'], subsets: ['latin'], variable: '--font-dm-mono', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://zaserandco.com'),
-  title: {
-    default: 'Zaser & Co — Strategic & Management Consultancy',
-    template: '%s | Zaser & Co',
-  },
-  description:
-    'Zaser & Co is a strategic and management consultancy for small and medium businesses in Bangladesh. Financial clarity, operational intelligence, AI implementation, and management frameworks.',
-  keywords: [
-    'strategic consultancy Bangladesh',
-    'management consultancy Dhaka',
-    'business consultancy SME',
-    'business consultant Bangladesh',
-    'business consultant Dhaka',
-    'financial clarity',
-    'AI implementation',
-    'operational improvement',
-    'Zaser and Co',
-    'break-even analysis',
-    'margin improvement',
-    'business strategy Bangladesh',
-    'SME consulting Bangladesh',
-    'free business audit Bangladesh',
-  ],
-  authors: [{ name: 'Zaser & Co', url: 'https://zaserandco.com' }],
-  creator: 'Zaser & Co',
-  publisher: 'Zaser & Co',
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  alternates: {
-    canonical: 'https://zaserandco.com',
-  },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
-  },
+  title: { default: 'Zaser & Co | Advisory That Builds', template: '%s | Zaser & Co' },
+  description: SITE.description,
+  authors: [{ name: SITE.name }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  robots: { index: true, follow: true },
+  alternates: { canonical: 'https://zaserandco.com' },
   openGraph: {
-    title: 'Zaser & Co — Strategic & Management Consultancy',
-    description:
-      'Strategic and management consultancy for growing businesses. Financial clarity, operational strategy, AI implementation, and management frameworks.',
+    title: 'Zaser & Co | Advisory That Builds',
+    description: SITE.description,
     type: 'website',
     locale: 'en_US',
     url: 'https://zaserandco.com',
-    siteName: 'Zaser & Co',
-    images: [
-      {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Zaser & Co — Strategic & Management Consultancy for Growing Businesses',
-      },
-    ],
+    siteName: SITE.name,
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Zaser & Co | Advisory That Builds' }],
   },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Zaser & Co — Strategic & Management Consultancy',
-    description:
-      'Strategic and management consultancy for growing businesses. Financial clarity, operational strategy, AI implementation, and management frameworks.',
-    images: ['/opengraph-image'],
-  },
+  twitter: { card: 'summary_large_image', title: 'Zaser & Co | Advisory That Builds', description: SITE.description, images: ['/opengraph-image'] },
 }
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'Zaser & Co',
+  name: SITE.name,
   url: 'https://zaserandco.com',
-  description:
-    'Strategic and management consultancy for small and medium businesses in Bangladesh. Financial clarity, operational intelligence, AI implementation, and management frameworks.',
-  foundingDate: '2025',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Dhaka',
-    addressRegion: 'Dhaka Division',
-    addressCountry: 'BD',
-  },
-  areaServed: [
-    { '@type': 'Country', name: 'Bangladesh' },
-    { '@type': 'City', name: 'Dhaka' },
-  ],
-  serviceType: [
-    'Business Consulting',
-    'Financial Consulting',
-    'Management Consulting',
-    'AI Implementation',
-    'Operational Improvement',
-  ],
-  priceRange: 'Free initial consultation',
-  contactPoint: {
-    '@type': 'ContactPoint',
-    email: 'hello@zaserandco.com',
-    contactType: 'customer service',
-    availableLanguage: ['English', 'Bengali'],
-    url: 'https://zaserandco.com/contact',
-  },
-  sameAs: ['https://linkedin.com/company/zaserandco'],
-}
-
-const websiteJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Zaser & Co',
-  url: 'https://zaserandco.com',
-  description: 'Strategic and management consultancy for growing businesses in Bangladesh.',
-  publisher: {
-    '@type': 'ProfessionalService',
-    name: 'Zaser & Co',
-  },
+  description: SITE.description,
+  foundingDate: SITE.founded,
+  address: { '@type': 'PostalAddress', addressLocality: 'Dhaka', addressCountry: 'BD' },
+  areaServed: { '@type': 'Country', name: 'Bangladesh' },
+  serviceType: ['AI Audit and Implementation', 'Management and Operations Strategy Consulting'],
+  contactPoint: { '@type': 'ContactPoint', email: SITE.email, contactType: 'customer service', availableLanguage: ['English', 'Bengali'] },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" dir="ltr">
+    <html lang="en" className={`${bebas.variable} ${instrument.variable} ${jakarta.variable} ${dmMono.variable}`}>
       <head>
-        {/* Fonts first, and as a direct <link> rather than a CSS @import, so the
-            request starts immediately instead of waiting on globals.css.
-            Syne and Noto Serif Bengali were dropped — zero usages in the app. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300&family=Cormorant:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap"
-        />
         <GoogleTagManager />
         <GoogleAnalytics />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }} />
       </head>
-      <body className="bg-linen text-obsidian-ink font-twk-lausanne antialiased relative">
+      <body>
         <GoogleTagManagerNoscript />
         <RouteChangeTracker />
-        <ClientLoader />
-        <GlobalEffects />
-        <Navbar />
-        <div className="relative z-10">
-          <TransitionWrapper>{children}</TransitionWrapper>
-        </div>
-        <Footer />
+        <a className="skip-link" href="#main-content">Skip to content</a>
+        <ReadingProgress />
+        <EditorialNav />
+        <div id="main-content" className="site-main">{children}</div>
+        <EditorialFooter />
       </body>
     </html>
   )

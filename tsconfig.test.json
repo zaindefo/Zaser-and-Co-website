@@ -5,14 +5,20 @@
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "strict": true,
+    "jsx": "react-jsx",
     "skipLibCheck": true,
     "outDir": ".test-dist",
     "rootDir": "."
   },
   "include": [
     "tests/**/*.ts",
+    "tests/**/*.tsx",
     "src/content/**/*.ts",
     "src/lib/content-integrity.ts",
-    "src/lib/lead-form.ts"
+    "src/lib/lead-form.ts",
+    "src/components/shared/LeadForm.tsx",
+    "src/components/editorial/**/*.tsx",
+    "src/components/home/MethodStory.tsx",
+    "src/components/routes/**/*.tsx"
   ]
 }

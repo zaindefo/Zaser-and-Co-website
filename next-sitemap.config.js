@@ -16,12 +16,8 @@ module.exports = {
       '/free-business-audit': 0.95,
       '/free-ai-audit': 0.95,
       '/contact': 0.9,
-      '/services/financial-clarity': 0.9,
-      '/services/margin-operations': 0.9,
       '/services/ai-audit-implementation': 0.9,
-      '/services/content-generation': 0.85,
-      '/services/hr-ai-training': 0.85,
-      '/services/business-process-improvement': 0.85,
+      '/services/management-operations': 0.9,
       '/industries/ecommerce': 0.85,
       '/industries/education-businesses': 0.85,
       '/industries/service-businesses': 0.85,
@@ -30,7 +26,7 @@ module.exports = {
       '/business-consultant-dhaka': 0.9,
       '/about': 0.8,
       '/insights': 0.8,
-      '/breakpoint': 0.7,
+      '/policies': 0.6,
       '/stockpulse': 0.7,
     }
 

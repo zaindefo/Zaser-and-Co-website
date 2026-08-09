@@ -1,26 +1,7 @@
-import { AUDIT_PAGES } from '@/lib/constants'
-import { AuditPageTemplate } from '@/components/seo/AuditPageTemplate'
 import type { Metadata } from 'next'
+import { AuditPageTemplate } from '../../components/routes/AuditPageTemplate'
+import { getAudit } from '../../content/audits'
 
-const data = AUDIT_PAGES['business-audit']
+export const metadata: Metadata = { title: 'Free Business Audit', description: 'A focused first look at where the business is losing operational or financial clarity.', alternates: { canonical: '/free-business-audit' } }
 
-export const metadata: Metadata = {
-  title: data.seoTitle,
-  description: data.metaDescription,
-  alternates: { canonical: '/free-business-audit' },
-  openGraph: {
-    title: `${data.seoTitle} | Zaser & Co`,
-    description: data.metaDescription,
-    type: 'website',
-    url: 'https://zaserandco.com/free-business-audit',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: `${data.seoTitle} | Zaser & Co`,
-    description: data.metaDescription,
-  },
-}
-
-export default function FreeBusinessAudit() {
-  return <AuditPageTemplate data={data} />
-}
+export default function FreeBusinessAuditPage() { return <AuditPageTemplate audit={getAudit('free-business-audit')!} /> }

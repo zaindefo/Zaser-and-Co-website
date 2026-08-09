@@ -5,99 +5,16 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        linen: '#F6EFE4',
-        'obsidian-ink': '#0F1235',
-        'pure-black': '#000000',
-        bark: '#0B0E2E',
-        sage: '#6B3828',
-        mist: '#C4C0BC',
-        voltage: '#1D2464',
-        'moss-glow': '#C4866A',
-        pollen: '#EDD4C6',
+        navy: '#182040',
+        deep: '#0F1428',
+        rust: '#782000',
+        paper: '#F3EEE5',
       },
       fontFamily: {
-        'twk-lausanne': ['TWK Lausanne', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
-        'editorial-new': ['Editorial New', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
-        'pp-mondwest': ['PP Mondwest', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
-        times: ['Times', 'ui-serif', 'Georgia', 'serif'],
-      },
-      fontSize: {
-        // Caption: 11px, weight 550, line-height 1.4
-        caption: ['11px', { lineHeight: '1.4', fontWeight: '550', letterSpacing: '0.11px' }],
-        // Body Small: 14px, weight 200, line-height 1.4
-        'body-sm': ['14px', { lineHeight: '1.4', fontWeight: '200', letterSpacing: '-0.28px' }],
-        // Body Small 2: 14px, weight 350, line-height 1.1
-        'body-sm-2': ['14px', { lineHeight: '1.1', fontWeight: '350' }],
-        // Body: 16px, weight 400, line-height 1.2
-        body: ['16px', { lineHeight: '1.2', fontWeight: '400', letterSpacing: '-0.32px' }],
-        // Body 2: 16px, weight 550, line-height 1.4
-        'body-2': ['16px', { lineHeight: '1.4', fontWeight: '550' }],
-        // Body 3: 16px, weight 200, line-height 1.4
-        'body-3': ['16px', { lineHeight: '1.4', fontWeight: '200' }],
-        // Subheading: 18px, weight 200, line-height 1.0
-        lg: ['18px', { lineHeight: '1.0', fontWeight: '200', letterSpacing: '-0.36px' }],
-        // Subheading 2: 18px, weight 550, line-height 1.0
-        'lg-2': ['18px', { lineHeight: '1.0', fontWeight: '550' }],
-        // Subheading 3: 18px, weight 400, line-height 1.0
-        'lg-3': ['18px', { lineHeight: '1.0', fontWeight: '400' }],
-        // Heading Small: 60px, weight 400 (PP Mondwest)
-        '5xl': ['60px', { lineHeight: '0.9', fontWeight: '400', letterSpacing: '-1.2px' }],
-        // Heading Small 2: 60px, weight 300 (Editorial New)
-        '5xl-2': ['60px', { lineHeight: '0.9', fontWeight: '300', letterSpacing: '-1.2px' }],
-        // Heading: 72px, weight 550
-        '5xl-3': ['72px', { lineHeight: '1.1', fontWeight: '550' }],
-        // Heading 2: 72px, weight 550, line-height 1.1
-        '5xl-4': ['72px', { lineHeight: '1.1', fontWeight: '550' }],
-        // Heading Large: 96px, weight 550
-        '5xl-5': ['96px', { lineHeight: '1.0', fontWeight: '550', letterSpacing: '-1.92px' }],
-        // Heading Large 2: 96px, weight 550
-        '5xl-6': ['96px', { lineHeight: '1.0', fontWeight: '550' }],
-        // Display: 140px, weight 300 (Editorial New)
-        '5xl-7': ['140px', { lineHeight: '0.9', fontWeight: '300', letterSpacing: '-1.4px' }],
-        // Display 2: 155px, weight 550
-        '5xl-8': ['155px', { lineHeight: '1.0', fontWeight: '550' }],
-        // Display 3: 165px, weight 400 (PP Mondwest)
-        '5xl-9': ['165px', { lineHeight: '0.9', fontWeight: '400', letterSpacing: '-1.32px' }],
-        // Display Large: 240px, weight 300 (Editorial New)
-        '5xl-10': ['240px', { lineHeight: '0.9', fontWeight: '300', letterSpacing: '-4.8px' }],
-        // Display XL: 295px, weight 400 (PP Mondwest)
-        '5xl-11': ['295px', { lineHeight: '0.9', fontWeight: '400', letterSpacing: '-4.7px' }],
-      },
-      spacing: {
-        4: '4px',
-        8: '8px',
-        10: '10px',
-        15: '15px',
-        20: '20px',
-        25: '25px',
-        30: '30px',
-        32: '32px',
-        35: '35px',
-        40: '40px',
-        45: '45px',
-        50: '50px',
-        55: '55px',
-        60: '60px',
-        120: '120px',
-        190: '190px',
-      },
-      borderRadius: {
-        sm: '5px',
-        btn: '10px',
-        card: '14px',
-      },
-      fontWeight: {
-        200: '200',
-        350: '350',
-        400: '400',
-        550: '550',
-      },
-      boxShadow: {
-        'voltage-lg': 'rgba(16, 28, 120, 0.45) 1px 8px 20px 0px',
-        'voltage-lg-2': 'rgba(18, 50, 180, 0.25) 1px 8px 20px 0px',
-      },
-      maxWidth: {
-        page: '1440px',
+        display: ['var(--font-bebas)', 'Impact', 'sans-serif'],
+        authority: ['var(--font-instrument)', 'Georgia', 'serif'],
+        body: ['var(--font-jakarta)', 'Arial', 'sans-serif'],
+        data: ['var(--font-dm-mono)', 'Consolas', 'monospace'],
       },
     },
   },

@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://zaserandco.com
+
+# Sitemaps
+Sitemap: https://zaserandco.com/sitemap.xml

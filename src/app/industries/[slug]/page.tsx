@@ -1,51 +1,19 @@
-import { notFound } from 'next/navigation'
-import { INDUSTRY_PAGES } from '@/lib/constants'
-import { IndustryPageTemplate } from '@/components/seo/IndustryPageTemplate'
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import { IndustryPageTemplate } from '../../../components/routes/IndustryPageTemplate'
+import { INDUSTRIES, getIndustry } from '../../../content/industries'
 
-function getIndustry(slug: string) {
-  return INDUSTRY_PAGES.find((i) => i.slug === slug) ?? null
-}
+export function generateStaticParams() { return INDUSTRIES.map(({ slug }) => ({ slug })) }
 
-export async function generateStaticParams() {
-  return INDUSTRY_PAGES.map((i) => ({ slug: i.slug }))
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const industry = getIndustry(slug)
   if (!industry) return {}
-
-  return {
-    title: industry.seoTitle,
-    description: industry.metaDescription,
-    alternates: { canonical: `/industries/${slug}` },
-    openGraph: {
-      title: `${industry.seoTitle} | Zaser & Co`,
-      description: industry.metaDescription,
-      type: 'website',
-      url: `https://zaserandco.com/industries/${slug}`,
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${industry.seoTitle} | Zaser & Co`,
-      description: industry.metaDescription,
-    },
-  }
+  return { title: industry.title, description: industry.metaDescription, alternates: { canonical: `/industries/${slug}` }, openGraph: { title: industry.title, description: industry.metaDescription, url: `/industries/${slug}` } }
 }
 
-export default async function IndustryPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const { slug } = await params
-  const industry = getIndustry(slug)
+export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
+  const industry = getIndustry((await params).slug)
   if (!industry) notFound()
-
-  return <IndustryPageTemplate data={industry} />
+  return <IndustryPageTemplate industry={industry} />
 }
