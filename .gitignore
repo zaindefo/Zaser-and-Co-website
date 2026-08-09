@@ -22,7 +22,7 @@ Thumbs.db
 .recovery/
 .remember/
 skills-lock.json
-docs/superpowers/
+.worktrees/
 
 # Large media files
 *.mp4
