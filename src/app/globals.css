@@ -141,7 +141,7 @@ h1, h2, h3, p { margin-top: 0; }
 .cinematic-hero__eyebrow span:last-child { color: var(--z-grey-dark); }
 .cinematic-hero__stage { position: relative; min-height: 100svh; overflow: hidden; }
 .cinematic-hero__headline-wrap { position: absolute; z-index: 3; inset: 48% 0 auto; transform: translateY(-50%); pointer-events: none; }
-.cinematic-hero__headline { width: min(96vw, 1660px); margin: 0 auto; font-family: var(--font-display); font-size: clamp(86px, 12.6vw, 214px); font-weight: 400; letter-spacing: -.055em; line-height: .78; text-align: center; text-transform: uppercase; transform-origin: 50% 30%; }
+.cinematic-hero__headline { width: min(96vw, 1660px); margin: 0 auto; font-family: var(--font-display); font-size: clamp(86px, min(12.6vw, 19svh), 214px); font-weight: 400; letter-spacing: -.055em; line-height: .78; text-align: center; text-transform: uppercase; transform-origin: 50% 30%; }
 .cinematic-hero__line-mask { display: block; padding: .08em .02em; overflow: hidden; }
 .cinematic-hero__line { display: block; will-change: transform; }
 .cinematic-hero__line--two { color: var(--z-lift); }
@@ -168,7 +168,7 @@ h1, h2, h3, p { margin-top: 0; }
 .hero-matrix__mark--two { top: 48%; left: 42%; }
 .hero-matrix__mark--three { bottom: 12%; left: 19%; }
 .hero-artifact__axis { display: block; font-family: var(--font-data); font-size: 7px; text-transform: uppercase; text-align: right; }
-.hero-artifact--lens { z-index: 5; right: 7.5%; bottom: 17%; width: clamp(230px, 20vw, 330px); padding: 12px 15px; border-radius: 999px; color: var(--z-paper); background: var(--z-deep); transform: rotate(-2deg); }
+.hero-artifact--lens { z-index: 5; right: 2.5%; bottom: 17%; width: clamp(230px, 20vw, 330px); padding: 12px 15px; border-radius: 999px; color: var(--z-paper); background: var(--z-deep); transform: rotate(-2deg); }
 .hero-artifact--lens .hero-artifact__index { color: rgba(243,238,229,.55); }
 .hero-artifact--lens > div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 10px; }
 .hero-artifact--lens > div span { position: relative; padding-top: 9px; border-top: 1px solid rgba(243,238,229,.24); font-family: var(--font-data); font-size: 7px; text-transform: uppercase; }

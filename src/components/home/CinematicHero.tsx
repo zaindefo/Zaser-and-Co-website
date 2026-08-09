@@ -39,8 +39,7 @@ export function CinematicHero() {
         entrance
           .from('.cinematic-hero__eyebrow', { y: 14, autoAlpha: 0, duration: .55 })
           .from('.cinematic-hero__line', { yPercent: 110, rotate: 1.5, duration: .9, stagger: .09 }, '-=.28')
-          .from('.cinematic-hero__support', { y: 18, autoAlpha: 0, duration: .55 }, '-=.38')
-          .from('.hero-artifact', { scale: .82, rotate: 4, autoAlpha: 0, duration: .8, stagger: .08 }, '-=.62')
+          .from('.hero-artifact', { scale: .82, rotate: 4, autoAlpha: 0, duration: .8, stagger: .08 }, '-=.52')
 
         gsap.timeline({
           defaults: { ease: 'none' },
@@ -63,10 +62,10 @@ export function CinematicHero() {
           .to('.hero-artifact--matrix', { xPercent: -88, yPercent: -42, rotate: -5, scale: 1.05, duration: 1 }, 0)
           .to('.hero-artifact--lens', { xPercent: -118, yPercent: 42, rotate: 4, duration: 1 }, 0)
           .to('.hero-artifact--route', { strokeDashoffset: 0, duration: .9 }, .05)
+          .to('.cinematic-hero__support', { y: 22, autoAlpha: 0, duration: .18 }, .08)
           .to('.cinematic-hero__headline', { scale: .76, yPercent: -9, duration: .7 }, .65)
           .to('.cinematic-hero__line--one', { xPercent: -7, duration: .55 }, .72)
           .to('.cinematic-hero__line--three', { xPercent: 8, duration: .55 }, .72)
-          .to('.cinematic-hero__support', { y: 30, autoAlpha: 0, duration: .25 }, .82)
           .to('.hero-artifact', { scale: .72, autoAlpha: 0, duration: .34 }, .9)
           .to('.cinematic-hero__headline', { yPercent: -58, scale: .48, autoAlpha: .12, duration: .5 }, 1.05)
           .fromTo('.cinematic-hero__view', { clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0% 0 0 0)', duration: .75 }, 1.02)
