@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, DM_Mono, Instrument_Serif, Plus_Jakarta_Sans } from 'next/font/google'
+import { Anton, DM_Mono, Instrument_Serif, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { EditorialNav } from '../components/editorial/EditorialNav'
 import { EditorialFooter } from '../components/editorial/EditorialFooter'
@@ -7,7 +7,7 @@ import { ReadingProgress } from '../components/editorial/ReadingProgress'
 import { GoogleAnalytics, GoogleTagManager, GoogleTagManagerNoscript, RouteChangeTracker } from '../components/GoogleTagManager'
 import { SITE } from '../content/site'
 
-const bebas = Bebas_Neue({ weight: '400', subsets: ['latin'], variable: '--font-bebas', display: 'swap' })
+const anton = Anton({ weight: '400', subsets: ['latin'], variable: '--font-anton', display: 'swap' })
 const instrument = Instrument_Serif({ weight: '400', style: ['normal', 'italic'], subsets: ['latin'], variable: '--font-instrument', display: 'swap' })
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta', display: 'swap' })
 const dmMono = DM_Mono({ weight: ['400', '500'], subsets: ['latin'], variable: '--font-dm-mono', display: 'swap' })
@@ -48,7 +48,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bebas.variable} ${instrument.variable} ${jakarta.variable} ${dmMono.variable}`}>
+    <html lang="en" className={`${anton.variable} ${instrument.variable} ${jakarta.variable} ${dmMono.variable}`}>
       <head>
         <GoogleTagManager />
         <GoogleAnalytics />

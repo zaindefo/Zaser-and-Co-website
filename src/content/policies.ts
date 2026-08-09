@@ -55,7 +55,7 @@ export const POLICIES: Policy[] = [
   {
     id: 'deliverables', number: '07', title: 'Deliverable Standards', summary: 'Every deliverable is accurate, complete, reviewed, and usable.',
     paragraphs: [
-      'Deliverables follow the Zaser brand system: approved colors, Bebas Neue, Instrument Serif, Plus Jakarta Sans, DM Mono, and correct logo use.',
+      'Deliverables follow the Zaser brand system: approved colors, Anton, Instrument Serif, Plus Jakarta Sans, DM Mono, and correct logo use.',
       'At least one team member other than the author reviews every deliverable before delivery. Data, calculations, charts, and figures are verified against source data; estimates are clearly labeled.',
       'Deliverables include an executive summary, clear structure, and actionable recommendations. Reports are normally delivered as PDF, while working models and dashboards are delivered in their native format with client access.',
     ],

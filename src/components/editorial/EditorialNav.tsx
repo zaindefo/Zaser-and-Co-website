@@ -24,10 +24,12 @@ export function EditorialNav() {
     update()
     window.addEventListener('scroll', update, { passive: true })
     window.addEventListener('resize', update)
+    window.addEventListener('zaser:nav-theme-change', update)
     return () => {
       observer.disconnect()
       window.removeEventListener('scroll', update)
       window.removeEventListener('resize', update)
+      window.removeEventListener('zaser:nav-theme-change', update)
     }
   }, [])
 

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArtifactVisual } from '../components/editorial/ArtifactVisual'
 import { Reveal } from '../components/editorial/Reveal'
 import { SectionLabel } from '../components/editorial/SectionLabel'
+import { CinematicHero } from '../components/home/CinematicHero'
 import { MethodStory } from '../components/home/MethodStory'
 import { LeadForm } from '../components/shared/LeadForm'
 import { ENGAGEMENT_OUTPUTS } from '../content/outputs'
@@ -20,38 +21,7 @@ const artifactLabels = [
 export default function HomePage() {
   return (
     <main>
-      <section className="home-hero" data-nav-theme="light">
-        <div className="home-hero__copy">
-          <span className="eyebrow">Strategic &amp; management consultancy</span>
-          <h1 className="display display--hero">
-            <span className="home-hero__rust">Your business</span>
-            <span>deserves</span>
-            <span className="home-hero__rust">a sharper</span>
-            <span>strategy.</span>
-          </h1>
-          <p>Zaser &amp; Co helps small and medium businesses create financial clarity, operational intelligence, and practical AI systems around the business they actually run.</p>
-          <div className="home-hero__actions">
-            <Link className="button button--rust" href="/contact"><span>Request your free session</span><span aria-hidden="true">↗</span></Link>
-            <a className="text-link" href="#services">See how it works <span aria-hidden="true">↓</span></a>
-          </div>
-        </div>
-        <div className="home-hero__media">
-          <Image src="/images/editorial/hero-strategist.webp" alt="A strategist reviewing financial charts and a workflow map at a desk" fill priority sizes="(max-width: 800px) 100vw, 58vw" />
-          <span className="media-callout media-callout--one">Financial intelligence</span>
-          <span className="media-callout media-callout--two">Operational clarity</span>
-          <span className="media-callout media-callout--three">AI-powered systems</span>
-        </div>
-      </section>
-
-      <section className="view-chapter" data-nav-theme="light">
-        <Image src="/images/editorial/complexity-path.webp" alt="An editorial map showing a clear rust path moving through layered operational complexity" fill sizes="100vw" />
-        <div className="view-chapter__shade" />
-        <div className="view-chapter__copy">
-          <SectionLabel>The Zaser view</SectionLabel>
-          <h2 className="display display--xl">Growth should translate into <span className="authority">performance.</span></h2>
-          <p>More revenue does not automatically create a stronger operation. More tools do not automatically create a smarter one. We find the gaps between strategy, systems, and execution.</p>
-        </div>
-      </section>
+      <CinematicHero />
 
       <section id="services" className="services-chapter section section--paper" data-nav-theme="light">
         <Reveal className="services-chapter__intro">
