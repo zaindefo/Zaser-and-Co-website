@@ -11,4 +11,10 @@ export {
   InterventionPriorityRegister,
   NinetyDayRoadmap,
 } from './operations-artifacts'
+export {
+  IndustryDiagnosticMap,
+  AuditAssessmentSheet,
+  OperatingConstraintMap,
+  EngagementMethodSheet,
+} from './context-artifacts'
 export type { ArtifactBaseProps, DocumentTone } from './types'
