@@ -18,6 +18,7 @@
     "src/lib/lead-form.ts",
     "src/components/shared/LeadForm.tsx",
     "src/components/editorial/**/*.tsx",
+    "src/components/consulting-artifacts/**/*.tsx",
     "src/components/home/MethodStory.tsx",
     "src/components/routes/**/*.tsx"
   ]
