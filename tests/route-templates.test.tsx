@@ -35,3 +35,21 @@ test('insight routes label fictional material as a worked example', () => {
   assert.match(html, /Worked example/)
   assert.match(html, /not a client result/)
 })
+
+test('route templates select purpose-built documents by content purpose', () => {
+  const ai = renderToStaticMarkup(<ServicePageTemplate service={SERVICES[0]} />)
+  const operations = renderToStaticMarkup(<ServicePageTemplate service={SERVICES[1]} />)
+  const industry = renderToStaticMarkup(<IndustryPageTemplate industry={INDUSTRIES[0]} />)
+  const audit = renderToStaticMarkup(<AuditPageTemplate audit={AUDITS[0]} />)
+  const insight = renderToStaticMarkup(<InsightArticleTemplate insight={INSIGHTS[2]} />)
+
+  for (const id of ['ai-readiness', 'opportunity-priority', 'implementation-workflow', 'implementation-handover']) {
+    assert.match(ai, new RegExp(`data-artifact="${id}"`))
+  }
+  for (const id of ['cost-leakage', 'cost-structure', 'intervention-priority', 'ninety-day-roadmap']) {
+    assert.match(operations, new RegExp(`data-artifact="${id}"`))
+  }
+  assert.match(industry, /data-artifact="industry-diagnostic"/)
+  assert.match(audit, /data-artifact="audit-assessment"/)
+  assert.match(insight, /data-artifact="ai-opportunity-example"/)
+})

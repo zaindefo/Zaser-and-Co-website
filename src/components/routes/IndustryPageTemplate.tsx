@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { IndustryPage } from '../../content/types'
-import { ArtifactVisual } from '../editorial/ArtifactVisual'
+import { IndustryDiagnosticMap } from '../consulting-artifacts'
 import { SectionLabel } from '../editorial/SectionLabel'
 import { SERVICES } from '../../content/services'
 
@@ -20,7 +20,7 @@ export function IndustryPageTemplate({ industry }: { industry: IndustryPage }) {
       </section>
       <section className="industry-diagnostic section section--paper" data-nav-theme="light">
         <div><SectionLabel>Diagnostic view</SectionLabel><h2 className="display display--lg">Make the operation <span className="authority">legible.</span></h2><ol>{industry.diagnostic.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span>{item}</li>)}</ol></div>
-        <ArtifactVisual type="diagnostic" label={`Diagnostic map for ${industry.title}`} />
+        <IndustryDiagnosticMap industry={industry} />
       </section>
       <section className="industry-services section section--white" data-nav-theme="light">
         <SectionLabel>Relevant engagements</SectionLabel>
