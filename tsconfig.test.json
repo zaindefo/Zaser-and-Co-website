@@ -20,6 +20,7 @@
     "src/components/editorial/**/*.tsx",
     "src/components/consulting-artifacts/**/*.tsx",
     "src/components/home/MethodStory.tsx",
-    "src/components/routes/**/*.tsx"
+    "src/components/routes/**/*.tsx",
+    "src/app/page.tsx"
   ]
 }

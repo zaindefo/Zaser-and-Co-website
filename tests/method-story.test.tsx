@@ -1,15 +1,19 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { MethodStory } from '../src/components/home/MethodStory'
 
-test('method story exposes both service lanes and the complete initial sequence', () => {
+test('method story renders two static dossiers and all eight stages', () => {
   const html = renderToStaticMarkup(<MethodStory />)
-  assert.match(html, /aria-label="Select method lane"/)
+  const source = readFileSync('src/components/home/MethodStory.tsx', 'utf8')
+
   assert.match(html, /AI Audit &amp; Implementation/)
-  assert.match(html, /Management &amp; Operations/)
-  assert.match(html, />Assess</)
-  assert.match(html, />Prioritise</)
-  assert.match(html, />Build</)
-  assert.match(html, />Hand over</)
+  assert.match(html, /Management &amp; Operations Strategy/)
+  for (const label of ['Assess', 'Build', 'Hand over', 'Diagnose', 'Map', 'Roadmap']) {
+    assert.match(html, new RegExp(`>${label}<`))
+  }
+  assert.equal((html.match(/<section class="method-stage">/g) ?? []).length, 8)
+  assert.doesNotMatch(html, /button|aria-live|aria-pressed/)
+  assert.doesNotMatch(source, /use client|useEffect|useState|addEventListener/)
 })

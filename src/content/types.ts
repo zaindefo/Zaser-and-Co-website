@@ -60,5 +60,11 @@ export interface EngagementOutput {
   label: string
   title: string
   description: string
-  artifact: 'scorecard' | 'matrix' | 'system' | 'diagnostic' | 'cost-map' | 'roadmap'
+  artifact:
+    | 'ai-readiness'
+    | 'opportunity-priority'
+    | 'implementation-workflow'
+    | 'cost-leakage'
+    | 'cost-structure'
+    | 'ninety-day-roadmap'
 }
