@@ -9,7 +9,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const service = getService(slug)
   if (!service) return {}
-  return { title: service.title, description: service.description, alternates: { canonical: `/services/${slug}` }, openGraph: { title: service.title, description: service.description, url: `/services/${slug}` } }
+  return {
+    title: service.title,
+    description: service.description,
+    alternates: { canonical: `/services/${slug}` },
+    openGraph: {
+      title: service.title,
+      description: service.description,
+      url: `/services/${slug}`,
+      images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: `${service.title} | Zaser & Co` }],
+    },
+  }
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
