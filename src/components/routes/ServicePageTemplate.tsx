@@ -1,15 +1,27 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import type { ComponentType } from 'react'
 import type { Service } from '../../content/types'
-import { ArtifactVisual } from '../editorial/ArtifactVisual'
+import {
+  AIReadinessSheet,
+  CostLeakageScan,
+  CostStructureMap,
+  ImplementationHandoverSheet,
+  ImplementationWorkflowMap,
+  InterventionPriorityRegister,
+  NinetyDayRoadmap,
+  OpportunityPriorityMatrix,
+  type ArtifactBaseProps,
+} from '../consulting-artifacts'
 import { SectionLabel } from '../editorial/SectionLabel'
 
-const phaseTypes = ['scorecard', 'matrix', 'system', 'roadmap'] as const
-const operationsTypes = ['diagnostic', 'cost-map', 'matrix', 'roadmap'] as const
+const serviceArtefacts = {
+  'ai-audit-implementation': [AIReadinessSheet, OpportunityPriorityMatrix, ImplementationWorkflowMap, ImplementationHandoverSheet],
+  'management-operations': [CostLeakageScan, CostStructureMap, InterventionPriorityRegister, NinetyDayRoadmap],
+} satisfies Record<Service['slug'], ReadonlyArray<ComponentType<ArtifactBaseProps>>>
 
 export function ServicePageTemplate({ service }: { service: Service }) {
   const isAI = service.slug === 'ai-audit-implementation'
-  const types = isAI ? phaseTypes : operationsTypes
 
   return (
     <main>
@@ -42,16 +54,19 @@ export function ServicePageTemplate({ service }: { service: Service }) {
           <h2 className="display display--lg">We don’t stop at the <span className="authority">recommendation.</span></h2>
         </div>
         <div className="service-process__steps">
-          {service.phases.map((phase, index) => (
-            <article className="service-process__step" key={phase.label}>
-              <div className="service-process__copy">
-                <span>{String(index + 1).padStart(2, '0')} / {phase.label}</span>
-                <h3>{phase.title}</h3>
-                <p>{phase.description}</p>
-              </div>
-              <ArtifactVisual type={types[index]} label={`${phase.label}: ${phase.title}`} dark />
-            </article>
-          ))}
+          {service.phases.map((phase, index) => {
+            const Artefact = serviceArtefacts[service.slug][index]
+            return (
+              <article className="service-process__step" key={phase.label}>
+                <div className="service-process__copy">
+                  <span>{String(index + 1).padStart(2, '0')} / {phase.label}</span>
+                  <h3>{phase.title}</h3>
+                  <p>{phase.description}</p>
+                </div>
+                <Artefact tone="navy" />
+              </article>
+            )
+          })}
         </div>
       </section>
 

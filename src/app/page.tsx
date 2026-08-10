@@ -1,6 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArtifactVisual } from '../components/editorial/ArtifactVisual'
+import type { ComponentType } from 'react'
+import {
+  AIReadinessSheet,
+  CostLeakageScan,
+  CostStructureMap,
+  ImplementationWorkflowMap,
+  NinetyDayRoadmap,
+  OpportunityPriorityMatrix,
+  ValueStreamExample,
+  type ArtifactBaseProps,
+} from '../components/consulting-artifacts'
 import { Reveal } from '../components/editorial/Reveal'
 import { SectionLabel } from '../components/editorial/SectionLabel'
 import { CinematicHero } from '../components/home/CinematicHero'
@@ -9,14 +19,24 @@ import { LeadForm } from '../components/shared/LeadForm'
 import { ENGAGEMENT_OUTPUTS } from '../content/outputs'
 import { INSIGHTS } from '../content/insights'
 import { SERVICES } from '../content/services'
+import type { EngagementOutput } from '../content/types'
 
-const artifactLabels = [
-  ['scorecard', 'AI readiness scorecard'],
-  ['matrix', 'Opportunity priority matrix'],
-  ['cost-map', 'Cost structure map'],
-  ['process', 'Value-stream process map'],
-  ['roadmap', '90-day improvement roadmap'],
+const proofDocuments = [
+  { label: 'AI readiness scorecard', document: <AIReadinessSheet /> },
+  { label: 'Opportunity priority matrix', document: <OpportunityPriorityMatrix /> },
+  { label: 'Cost structure map', document: <CostStructureMap /> },
+  { label: 'Value-stream process map', document: <ValueStreamExample example={INSIGHTS[1].example} /> },
+  { label: '90-day improvement roadmap', document: <NinetyDayRoadmap /> },
 ] as const
+
+const outputDocuments: Record<EngagementOutput['artifact'], ComponentType<ArtifactBaseProps>> = {
+  'ai-readiness': AIReadinessSheet,
+  'opportunity-priority': OpportunityPriorityMatrix,
+  'implementation-workflow': ImplementationWorkflowMap,
+  'cost-leakage': CostLeakageScan,
+  'cost-structure': CostStructureMap,
+  'ninety-day-roadmap': NinetyDayRoadmap,
+}
 
 export default function HomePage() {
   return (
@@ -52,12 +72,12 @@ export default function HomePage() {
           <SectionLabel>What the work produces</SectionLabel>
           <h2 className="display display--lg">Clarity you can use<br /><span className="authority">Monday morning.</span></h2>
         </div>
-        <div className="artifact-field">
-          {artifactLabels.map(([type, label], index) => (
-            <div key={type} className={`artifact-field__item artifact-field__item--${index + 1}`}>
-              <span>{String(index + 1).padStart(2, '0')} / {label}</span>
-              <ArtifactVisual type={type} label={label} />
-            </div>
+        <div className="proof-documents">
+          {proofDocuments.map((item, index) => (
+            <article key={item.label} className="proof-document">
+              <span>{String(index + 1).padStart(2, '0')} / {item.label}</span>
+              {item.document}
+            </article>
           ))}
         </div>
         <div className="principles">
@@ -75,15 +95,18 @@ export default function HomePage() {
       <section className="outputs-chapter section section--paper" data-nav-theme="light">
         <SectionLabel>Inside an engagement</SectionLabel>
         <h2 className="display display--lg">See what <span className="authority">advisory that builds</span> actually means.</h2>
-        <div className="output-rail">
-          {ENGAGEMENT_OUTPUTS.map((output, index) => (
-            <article className="output-card" key={output.title}>
-              <ArtifactVisual type={output.artifact} label={output.title} />
-              <span className="eyebrow">{String(index + 1).padStart(2, '0')} / {output.label}</span>
-              <h3>{output.title}</h3>
-              <p>{output.description}</p>
-            </article>
-          ))}
+        <div className="output-dossier-list">
+          {ENGAGEMENT_OUTPUTS.map((output, index) => {
+            const OutputDocument = outputDocuments[output.artifact]
+            return (
+              <article className="output-dossier" key={output.title}>
+                <OutputDocument />
+                <span className="eyebrow">{String(index + 1).padStart(2, '0')} / {output.label}</span>
+                <h3>{output.title}</h3>
+                <p>{output.description}</p>
+              </article>
+            )
+          })}
         </div>
       </section>
 
