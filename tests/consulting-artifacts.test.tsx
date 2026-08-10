@@ -3,8 +3,10 @@ import assert from 'node:assert/strict'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { AUDITS } from '../src/content/audits'
 import { INDUSTRIES } from '../src/content/industries'
+import { INSIGHTS } from '../src/content/insights'
 import {
   AIReadinessSheet,
+  AIOpportunityExample,
   AuditAssessmentSheet,
   CostLeakageScan,
   CostStructureMap,
@@ -14,9 +16,12 @@ import {
   ImplementationHandoverSheet,
   ImplementationWorkflowMap,
   InterventionPriorityRegister,
+  MarginBridgeExample,
   NinetyDayRoadmap,
   OperatingConstraintMap,
   OpportunityPriorityMatrix,
+  StockPulseEvidenceSheet,
+  ValueStreamExample,
 } from '../src/components/consulting-artifacts'
 
 test('document frame exposes a named and described consulting artefact', () => {
@@ -37,6 +42,24 @@ test('document frame exposes a named and described consulting artefact', () => {
   assert.match(html, /aria-labelledby=/)
   assert.match(html, /aria-describedby=/)
   assert.match(html, />Selectable evidence</)
+})
+
+test('worked examples and StockPulse retain explicit illustrative disclosures', () => {
+  const examples = [
+    <MarginBridgeExample key="margin" example={INSIGHTS[0].example} />,
+    <ValueStreamExample key="stream" example={INSIGHTS[1].example} />,
+    <AIOpportunityExample key="ai" example={INSIGHTS[2].example} />,
+  ].map((node) => renderToStaticMarkup(node)).join('')
+  const stock = renderToStaticMarkup(<StockPulseEvidenceSheet tone="navy" />)
+
+  assert.match(examples, /not a client result|not presented as client proof|does not claim a client outcome/)
+  assert.match(examples, /Direct cost/)
+  assert.match(examples, /Exception/)
+  assert.match(examples, /Feasibility/)
+  for (const label of ['SKU velocity', 'Reorder threshold', 'Dead-stock flag', 'Stock coverage', 'Supplier action']) {
+    assert.match(stock, new RegExp(label))
+  }
+  assert.match(stock, /Example data/)
 })
 
 test('context documents render source content without inventing a completed result', () => {

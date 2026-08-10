@@ -17,4 +17,10 @@ export {
   OperatingConstraintMap,
   EngagementMethodSheet,
 } from './context-artifacts'
+export {
+  MarginBridgeExample,
+  ValueStreamExample,
+  AIOpportunityExample,
+  StockPulseEvidenceSheet,
+} from './example-artifacts'
 export type { ArtifactBaseProps, DocumentTone } from './types'
