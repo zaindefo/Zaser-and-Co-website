@@ -5,4 +5,10 @@ export {
   ImplementationWorkflowMap,
   ImplementationHandoverSheet,
 } from './ai-artifacts'
+export {
+  CostLeakageScan,
+  CostStructureMap,
+  InterventionPriorityRegister,
+  NinetyDayRoadmap,
+} from './operations-artifacts'
 export type { ArtifactBaseProps, DocumentTone } from './types'
