@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArtifactVisual } from '../../components/editorial/ArtifactVisual'
+import { EngagementMethodSheet } from '../../components/consulting-artifacts'
 import { SectionLabel } from '../../components/editorial/SectionLabel'
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function AboutPage() {
       </section>
       <section className="about-method section section--paper" data-nav-theme="light">
         <div><SectionLabel>Our role</SectionLabel><h2 className="display display--lg">Rigorous enough to challenge.<br /><span className="authority">Practical enough to use.</span></h2><p className="lede">Zaser serves operators who need a clear diagnosis and a tangible output their team can use.</p><Link className="button button--rust" href="/contact"><span>Start a conversation</span><span aria-hidden="true">↗</span></Link></div>
-        <ArtifactVisual type="process" label="Zaser engagement process from diagnosis to ownership" />
+        <EngagementMethodSheet />
       </section>
     </main>
   )

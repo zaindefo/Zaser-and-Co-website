@@ -21,6 +21,10 @@
     "src/components/consulting-artifacts/**/*.tsx",
     "src/components/home/MethodStory.tsx",
     "src/components/routes/**/*.tsx",
-    "src/app/page.tsx"
+    "src/app/page.tsx",
+    "src/app/about/page.tsx",
+    "src/app/business-consultant-dhaka/page.tsx",
+    "src/app/business-consultancy-bangladesh/page.tsx",
+    "src/app/stockpulse/page.tsx"
   ]
 }
