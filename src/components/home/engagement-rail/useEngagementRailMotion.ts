@@ -78,7 +78,7 @@ export function useEngagementRailMotion({
         const labels = Array.from(svg.querySelectorAll<SVGTextElement>('[data-label]'))
         const status = svg.querySelector<SVGTextElement>('[data-status]')
 
-        timeline.from([...objects, ...markers, ...labels], {
+        timeline.from([...markers, ...labels], {
           opacity: 0,
           duration: 0.72,
           ease: 'power3.out',

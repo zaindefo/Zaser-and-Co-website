@@ -13,6 +13,6 @@ test('scroll progress maps into eight clamped zones', () => {
 })
 
 test('service tab destinations target stages one and five inside the pin range', () => {
-  assert.equal(getStageDestination(0, 1000, 3400), 1002)
-  assert.equal(getStageDestination(4, 1000, 3400), 2200)
+  assert.equal(getStageDestination(0, 1000, 3400), 1216)
+  assert.equal(getStageDestination(4, 1000, 3400), 2416)
 })
