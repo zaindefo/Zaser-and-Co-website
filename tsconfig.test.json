@@ -20,6 +20,8 @@
     "src/components/editorial/**/*.tsx",
     "src/components/consulting-artifacts/**/*.tsx",
     "src/components/home/MethodStory.tsx",
+    "src/components/home/engagement-rail/**/*.ts",
+    "src/components/home/engagement-rail/**/*.tsx",
     "src/components/routes/**/*.tsx",
     "src/app/page.tsx",
     "src/app/about/page.tsx",
