@@ -1,10 +1,13 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import type { KeyboardEvent } from 'react'
 import { EngagementCanvas } from './EngagementCanvas'
 import { ENGAGEMENT_SERVICES, ENGAGEMENT_STAGES } from './stages'
 import { MobileStageRail } from './MobileStageRail'
 import { useEngagementRailMotion } from './useEngagementRailMotion'
+import { applyVisualState } from './visual-state-dom'
+import { VISUAL_STATES } from './visual-states'
 
 type RailMode = 'desktop' | 'mobile' | 'reduced'
 
@@ -16,6 +19,7 @@ export function EngagementRail() {
   const svgRef = useRef<SVGSVGElement>(null)
   const mobileRailRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<Array<HTMLElement | null>>([])
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([])
   const activeStage = ENGAGEMENT_STAGES[activeIndex]
   const activeService = ENGAGEMENT_SERVICES.find(({ id }) => id === activeStage.service) ?? ENGAGEMENT_SERVICES[0]
 
@@ -40,10 +44,46 @@ export function EngagementRail() {
     onStageChange: setActiveIndex,
   })
 
+  useEffect(() => {
+    if (railMode !== 'mobile') return
+    const rail = mobileRailRef.current
+    const svg = svgRef.current
+    if (!rail || !svg) return
+
+    const observer = new IntersectionObserver((entries) => {
+      const centered = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+      const index = Number((centered?.target as HTMLElement | undefined)?.dataset.stageIndex)
+      if (!Number.isInteger(index)) return
+      setActiveIndex(index)
+      applyVisualState(svg, VISUAL_STATES[ENGAGEMENT_STAGES[index].visualState])
+    }, { root: rail, threshold: [0.55, 0.7, 0.85] })
+
+    cardRefs.current.forEach((card) => { if (card) observer.observe(card) })
+    applyVisualState(svg, VISUAL_STATES[ENGAGEMENT_STAGES[activeIndex].visualState])
+    return () => observer.disconnect()
+  }, [railMode])
+
+  useEffect(() => {
+    if (railMode !== 'mobile' && railMode !== 'reduced') return
+    const svg = svgRef.current
+    if (!svg) return
+    applyVisualState(svg, VISUAL_STATES[ENGAGEMENT_STAGES[activeIndex].visualState])
+  }, [activeIndex, railMode])
+
   const jumpToStage = (index: number) => {
     if (railMode === 'desktop' && jumpToDesktopStage(index)) return
     setActiveIndex(index)
     cardRefs.current[index]?.scrollIntoView({ behavior: railMode === 'reduced' ? 'auto' : 'smooth', block: 'nearest', inline: 'start' })
+  }
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, serviceIndex: number) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+    event.preventDefault()
+    const next = event.key === 'ArrowRight' ? Math.min(1, serviceIndex + 1) : Math.max(0, serviceIndex - 1)
+    jumpToStage(ENGAGEMENT_SERVICES[next].startIndex)
+    tabRefs.current[next]?.focus()
   }
 
   return (
@@ -54,14 +94,16 @@ export function EngagementRail() {
           <h2 id="engagement-rail-title">One operating system becoming clear.</h2>
         </div>
         <div className="engagement-rail__tabs" role="tablist" aria-label="Consulting engagements">
-          {ENGAGEMENT_SERVICES.map((service) => (
+          {ENGAGEMENT_SERVICES.map((service, serviceIndex) => (
             <button
+              ref={(node) => { tabRefs.current[serviceIndex] = node }}
               type="button"
               role="tab"
               aria-selected={service.id === activeStage.service}
               aria-controls="engagement-stage-panel"
               tabIndex={service.id === activeStage.service ? 0 : -1}
               onClick={() => jumpToStage(service.startIndex)}
+              onKeyDown={(event) => handleTabKeyDown(event, serviceIndex)}
               key={service.id}
             >
               {service.title}
@@ -86,9 +128,7 @@ export function EngagementRail() {
             </span>
           ))}
         </div>
-        <div ref={mobileRailRef}>
-          <MobileStageRail activeIndex={activeIndex} cardRefs={cardRefs} />
-        </div>
+        <MobileStageRail activeIndex={activeIndex} cardRefs={cardRefs} railRef={mobileRailRef} />
         <ol className="engagement-rail__accessible-stages">
           {ENGAGEMENT_STAGES.map((stage) => (
             <li key={stage.id}>

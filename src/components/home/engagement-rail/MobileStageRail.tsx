@@ -1,14 +1,15 @@
-import type { MutableRefObject } from 'react'
+import type { MutableRefObject, RefObject } from 'react'
 import { ENGAGEMENT_STAGES } from './stages'
 
 interface MobileStageRailProps {
   activeIndex: number
   cardRefs: MutableRefObject<Array<HTMLElement | null>>
+  railRef: RefObject<HTMLDivElement>
 }
 
-export function MobileStageRail({ activeIndex, cardRefs }: MobileStageRailProps) {
+export function MobileStageRail({ activeIndex, cardRefs, railRef }: MobileStageRailProps) {
   return (
-    <div className="engagement-mobile-rail" aria-label="Eight engagement stages">
+    <div ref={railRef} className="engagement-mobile-rail" aria-label="Eight engagement stages">
       {ENGAGEMENT_STAGES.map((stage, index) => (
         <article
           ref={(node) => { cardRefs.current[index] = node }}
