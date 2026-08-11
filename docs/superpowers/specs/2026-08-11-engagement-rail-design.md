@@ -121,6 +121,8 @@ Each stage may show up to five readable labels, five major objects, and one rust
 
 White marks active structure. Grey marks context. Rust marks the selected opportunity, risk, bottleneck, or action. The design excludes shadows, browser chrome, cards, gauges, dashboard controls, glow treatments, and fake application furniture.
 
+The root layout loads Bebas Neue through `next/font` as `--font-bebas`. Engagement Rail section titles and stage names use that scoped variable. Existing display typography elsewhere on the site remains unchanged.
+
 ## Stage Content and Visual States
 
 ### 01 AI Assess
