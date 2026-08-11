@@ -1,6 +1,7 @@
 # Engagement Rail Design Specification
 
-Date: 2026-08-11  
+Date: 2026-08-11
+
 Status: Approved for implementation
 
 ## Objective
@@ -124,8 +125,10 @@ White marks active structure. Grey marks context. Rust marks the selected opport
 
 ### 01 AI Assess
 
-Title: Assess  
-Strategic line: Read the business before choosing the technology.  
+Title: Assess
+
+Strategic line: Read the business before choosing the technology.
+
 Body: Strategy, Data, Technology, People, and Governance reveal where AI can create credible value.
 
 The SVG shows five horizontal diagnostic rows labeled Strategy, Data, Technology, People, and Governance. Each row receives one score marker. One rust opportunity node marks the highest-value area.
@@ -134,56 +137,70 @@ Rows draw in sequence. Labels enter with a restrained opacity change. Markers sl
 
 ### 02 AI Prioritise
 
-Title: Prioritise  
-Strategic line: Not every automation deserves to be built.  
+Title: Prioritise
+
+Strategic line: Not every automation deserves to be built.
+
 Body: Opportunities are ranked by business impact, feasibility, cost, and operational fit.
 
 The five rows collapse into two matrix axes. Their score markers become five opportunity dots. Low-value dots dim. One selected rust dot grows by a small amount and receives the label `SELECTED USE CASE`.
 
 ### 03 AI Build
 
-Title: Build  
-Strategic line: Make one system work inside the operation.  
+Title: Build
+
+Strategic line: Make one system work inside the operation.
+
 Body: The highest-value use case becomes a practical workflow connected to how the team already works.
 
 The selected matrix dot expands into the Input block. Decision, AI Support, and Output unfold from left to right. One rust route joins the blocks. The final block receives the label `SYSTEM BUILT` after the route reaches it.
 
 ### 04 AI Hand Over
 
-Title: Hand Over  
-Strategic line: Leave ownership with the team.  
+Title: Hand Over
+
+Strategic line: Leave ownership with the team.
+
 Body: Documentation, operating instructions, and training make the implemented system usable after delivery.
 
 The four workflow blocks align into checklist rows. The route settles into a completion spine. Rows show Documentation, Owner assigned, Training complete, and Operating instructions. Check marks appear in sequence. A low-opacity `READY` status closes the engagement.
 
 ### 05 Operations Diagnose
 
-Title: Diagnose  
-Strategic line: See cost, flow, and margin as one system.  
+Title: Diagnose
+
+Strategic line: See cost, flow, and margin as one system.
+
 Body: We identify where money, time, and capacity are leaking before changing the structure.
 
 The AI completion spine settles into four cost rows. Two leakage markers appear, followed by one rust risk indicator and the label `LEAKAGE DETECTED`. The leakage marks pulse once and then remain still.
 
 ### 06 Operations Map
 
-Title: Map  
-Strategic line: Make the hidden structure visible.  
+Title: Map
+
+Strategic line: Make the hidden structure visible.
+
 Body: Cost behaviour is mapped alongside process steps, ownership, and operational friction.
 
 The cost rows reorganize into five nodes labeled Sales, Purchasing, Fulfilment, Finance, and Reporting. One route connects the nodes. A rust outline identifies the bottleneck.
 
 ### 07 Operations Prioritise
 
-Title: Prioritise  
-Strategic line: Separate consequential change from noise.  
+Title: Prioritise
+
+Strategic line: Separate consequential change from noise.
+
 Body: The highest-impact fixes are ranked before the roadmap is built.
 
 The operating nodes compress into three intervention rows. The rows use the headings Issue, Impact, and Effort. Secondary rows reduce in opacity while the first row moves forward by a small distance.
 
 ### 08 Operations Roadmap
 
-Title: Roadmap  
-Strategic line: Sequence the next 90 days.  
+Title: Roadmap
+
+Strategic line: Sequence the next 90 days.
+
 Body: Actions receive an owner, a measure, and a deadline.
 
 The ranked rows stretch into Month 1, Month 2, and Month 3 lanes. Each lane receives one action and one milestone point. A single route connects the milestones. The final label reads `ROADMAP SET`.
