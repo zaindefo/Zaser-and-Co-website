@@ -95,7 +95,7 @@ The canvas uses one SVG element with a `0 0 960 640` viewBox. The SVG renders a 
 - Two route paths
 - Two axis paths
 - Four workflow blocks
-- Four status marks
+- Five reusable marker slots
 - Five reusable text labels
 - One rust emphasis marker
 
