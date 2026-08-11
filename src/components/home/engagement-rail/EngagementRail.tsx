@@ -1,12 +1,16 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { EngagementCanvas } from './EngagementCanvas'
 import { ENGAGEMENT_SERVICES, ENGAGEMENT_STAGES } from './stages'
 import { MobileStageRail } from './MobileStageRail'
+import { useEngagementRailMotion } from './useEngagementRailMotion'
+
+type RailMode = 'desktop' | 'mobile' | 'reduced'
 
 export function EngagementRail() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [railMode, setRailMode] = useState<RailMode>('reduced')
   const rootRef = useRef<HTMLElement>(null)
   const pinRef = useRef<HTMLDivElement>(null)
   const svgRef = useRef<SVGSVGElement>(null)
@@ -15,9 +19,31 @@ export function EngagementRail() {
   const activeStage = ENGAGEMENT_STAGES[activeIndex]
   const activeService = ENGAGEMENT_SERVICES.find(({ id }) => id === activeStage.service) ?? ENGAGEMENT_SERVICES[0]
 
+  useEffect(() => {
+    const mobile = window.matchMedia('(max-width: 900px)')
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const syncMode = () => setRailMode(reduced.matches ? 'reduced' : mobile.matches ? 'mobile' : 'desktop')
+    syncMode()
+    mobile.addEventListener('change', syncMode)
+    reduced.addEventListener('change', syncMode)
+    return () => {
+      mobile.removeEventListener('change', syncMode)
+      reduced.removeEventListener('change', syncMode)
+    }
+  }, [])
+
+  const { jumpToDesktopStage } = useEngagementRailMotion({
+    enabled: railMode === 'desktop',
+    rootRef,
+    pinRef,
+    svgRef,
+    onStageChange: setActiveIndex,
+  })
+
   const jumpToStage = (index: number) => {
+    if (railMode === 'desktop' && jumpToDesktopStage(index)) return
     setActiveIndex(index)
-    cardRefs.current[index]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' })
+    cardRefs.current[index]?.scrollIntoView({ behavior: railMode === 'reduced' ? 'auto' : 'smooth', block: 'nearest', inline: 'start' })
   }
 
   return (
