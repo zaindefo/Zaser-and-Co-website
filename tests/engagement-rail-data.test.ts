@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { ENGAGEMENT_SERVICES, ENGAGEMENT_STAGES } from '../src/components/home/engagement-rail/stages'
+import { VISUAL_STATES } from '../src/components/home/engagement-rail/visual-states'
 
 test('engagement rail exposes the two approved services and eight stages in order', () => {
   assert.deepEqual(ENGAGEMENT_SERVICES.map(({ id, title, startIndex }) => ({ id, title, startIndex })), [
@@ -29,5 +30,18 @@ test('each stage contains final copy and a matching visual state id', () => {
     assert.ok(stage.title.length > 2)
     assert.ok(stage.strategicLine.endsWith('.'))
     assert.ok(stage.body.endsWith('.'))
+  }
+})
+
+test('every visual state targets the same stable primitive inventory', () => {
+  assert.deepEqual(Object.keys(VISUAL_STATES), ENGAGEMENT_STAGES.map(({ id }) => id))
+  for (const stage of ENGAGEMENT_STAGES) {
+    const state = VISUAL_STATES[stage.visualState]
+    assert.equal(state.objects.length, 5)
+    assert.equal(state.axes.length, 2)
+    assert.equal(state.routes.length, 2)
+    assert.equal(state.markers.length, 5)
+    assert.equal(state.labels.length, 5)
+    assert.match(state.accentId, /^(object-[0-4]|axis-[0-1]|route-[0-1]|marker-[0-4]|status)$/)
   }
 })
