@@ -4,6 +4,7 @@ import { ENGAGEMENT_STAGES } from './stages'
 import { VISUAL_STATES } from './visual-states'
 import { applyVisualState } from './visual-state-dom'
 import { getStageDestination, getStageIndex } from './motion-math'
+import { createEngagementLifecycle } from './engagement-lifecycle'
 
 interface EngagementRailMotionOptions {
   enabled: boolean
@@ -42,7 +43,8 @@ export function useEngagementRailMotion({
 
     let cancelled = false
     let currentIndex = 0
-    let cleanup = () => {}
+    const engagement = createEngagementLifecycle(root)
+    let cleanup = engagement.cleanup
     root.dataset.motion = 'loading'
 
     Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([gsapModule, scrollModule]) => {
@@ -62,6 +64,9 @@ export function useEngagementRailMotion({
             pin,
             anticipatePin: 1,
             invalidateOnRefresh: true,
+            onEnter: engagement.onEnter,
+            onEnterBack: engagement.onEnterBack,
+            onLeaveBack: engagement.onLeaveBack,
             onUpdate: (self) => {
               const next = getStageIndex(self.progress)
               if (next === currentIndex) return
@@ -142,8 +147,10 @@ export function useEngagementRailMotion({
         triggerRef.current?.kill()
         triggerRef.current = null
         context.revert()
+        engagement.cleanup()
       }
     }).catch(() => {
+      engagement.cleanup()
       delete root.dataset.motion
       applyVisualState(svg, VISUAL_STATES[ENGAGEMENT_STAGES[currentIndex].visualState])
     })
