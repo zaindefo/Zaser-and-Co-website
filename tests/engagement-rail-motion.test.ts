@@ -1,18 +1,30 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { getStageDestination, getStageIndex } from '../src/components/home/engagement-rail/motion-math'
+import {
+  ENGAGEMENT_LEAD_IN_PROGRESS,
+  getEngagementProgress,
+  getStageDestination,
+  getStageIndex,
+} from '../src/components/home/engagement-rail/motion-math'
+
+test('desktop engagement motion holds Assess before normalized stage progress begins', () => {
+  assert.equal(getEngagementProgress(0), 0)
+  assert.equal(getEngagementProgress(ENGAGEMENT_LEAD_IN_PROGRESS), 0)
+  assert.equal(getStageIndex(ENGAGEMENT_LEAD_IN_PROGRESS), 0)
+  assert.equal(getEngagementProgress(1), 1)
+})
 
 test('scroll progress maps into eight clamped zones', () => {
   assert.equal(getStageIndex(-1), 0)
   assert.equal(getStageIndex(0), 0)
-  assert.equal(getStageIndex(0.124), 0)
-  assert.equal(getStageIndex(0.125), 1)
-  assert.equal(getStageIndex(0.5), 4)
+  assert.equal(getStageIndex(0.194), 0)
+  assert.equal(getStageIndex(0.195), 1)
+  assert.equal(getStageIndex(0.54), 4)
   assert.equal(getStageIndex(0.999), 7)
   assert.equal(getStageIndex(2), 7)
 })
 
-test('service tab destinations target stages one and five inside the pin range', () => {
-  assert.equal(getStageDestination(0, 1000, 3400), 1216)
-  assert.equal(getStageDestination(4, 1000, 3400), 2416)
+test('service tab destinations reserve the lead-in and target completed stages', () => {
+  assert.equal(getStageDestination(0, 1000, 3400), 1391)
+  assert.equal(getStageDestination(4, 1000, 3400), 2495)
 })
