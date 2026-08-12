@@ -14,6 +14,13 @@ export function getStageIndex(rawProgress: number) {
   return Math.floor(progress * STAGE_COUNT)
 }
 
+export function getEngagementMotionState(rawProgress: number) {
+  return {
+    progress: getEngagementProgress(rawProgress),
+    stageIndex: getStageIndex(rawProgress),
+  }
+}
+
 export function getStageDestination(index: number, start: number, end: number) {
   const clampedIndex = Math.min(7, Math.max(0, index))
   const completedStatePosition = clampedIndex + 0.72

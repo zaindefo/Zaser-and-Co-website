@@ -3,7 +3,11 @@ import type { RefObject } from 'react'
 import { ENGAGEMENT_STAGES } from './stages'
 import { VISUAL_STATES } from './visual-states'
 import { applyVisualState } from './visual-state-dom'
-import { getStageDestination, getStageIndex } from './motion-math'
+import {
+  ENGAGEMENT_NAV_OFFSET_PX,
+  getEngagementMotionState,
+  getStageDestination,
+} from './motion-math'
 import { createEngagementLifecycle } from './engagement-lifecycle'
 
 interface EngagementRailMotionOptions {
@@ -55,26 +59,7 @@ export function useEngagementRailMotion({
       applyVisualState(svg, VISUAL_STATES['ai-assess'])
 
       const context = gsap.context(() => {
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: root,
-            start: 'top top',
-            end: '+=240%',
-            scrub: 0.8,
-            pin,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-            onEnter: engagement.onEnter,
-            onEnterBack: engagement.onEnterBack,
-            onLeaveBack: engagement.onLeaveBack,
-            onUpdate: (self) => {
-              const next = getStageIndex(self.progress)
-              if (next === currentIndex) return
-              currentIndex = next
-              onStageChange(next)
-            },
-          },
-        })
+        const timeline = gsap.timeline({ paused: true })
 
         const objects = Array.from(svg.querySelectorAll<SVGRectElement>('[data-object]'))
         const axes = Array.from(svg.querySelectorAll<SVGPathElement>('[data-axis]'))
@@ -138,8 +123,26 @@ export function useEngagementRailMotion({
         })
 
         timeline.to({}, { duration: 0.28 }, 7.72)
-        const trigger = timeline.scrollTrigger
-        if (trigger) triggerRef.current = trigger
+        const trigger = ScrollTrigger.create({
+          trigger: root,
+          start: `top ${ENGAGEMENT_NAV_OFFSET_PX}px`,
+          end: '+=240%',
+          pin,
+          pinSpacing: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onEnter: engagement.onEnter,
+          onEnterBack: engagement.onEnterBack,
+          onLeaveBack: engagement.onLeaveBack,
+          onUpdate: (self) => {
+            const motion = getEngagementMotionState(self.progress)
+            timeline.progress(motion.progress)
+            if (motion.stageIndex === currentIndex) return
+            currentIndex = motion.stageIndex
+            onStageChange(motion.stageIndex)
+          },
+        })
+        triggerRef.current = trigger
       }, root)
 
       root.dataset.motion = 'ready'

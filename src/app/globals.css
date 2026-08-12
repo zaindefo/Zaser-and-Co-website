@@ -247,6 +247,7 @@ h1, h2, h3, p { margin-top: 0; }
 .engagement-rail { position: relative; color: var(--z-paper); background: var(--z-deep); }
 .engagement-rail__pin { min-height: 100svh; display: grid; grid-template-rows: auto auto minmax(0,1fr) auto; gap: 22px; padding: 112px var(--page-gutter) 28px; overflow: hidden; }
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .engagement-rail[data-motion] .engagement-rail__pin { height: calc(100svh - 72px); min-height: calc(100svh - 72px); padding-top: 40px; }
   .engagement-rail[data-motion]:not([data-engaged="true"]) .engagement-rail__pin { opacity: 0; visibility: hidden; pointer-events: none; }
   .engagement-rail[data-motion][data-engaged="true"] .engagement-rail__pin { opacity: 1; visibility: visible; transition: opacity .18s ease-out; }
 }
